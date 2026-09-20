@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-page text-ink;
+  background-image: radial-gradient(
+      circle at top right,
+      rgba(118, 159, 26, 0.12),
+      transparent 32rem
+    ),
+    linear-gradient(135deg, #fbfaf7 0%, #f7f4ef 50%, #eef4e4 100%);
+  min-height: 100vh;
+}
+
+h1 {
+  @apply text-coffee text-[2rem] leading-tight;
+}
+
+h2 {
+  @apply text-coffee text-[1.1rem];
+}
+
+h3 {
+  @apply text-coffee text-[0.98rem];
+}
+
+.eyebrow {
+  @apply text-green text-[0.78rem] font-extrabold uppercase tracking-wide mb-1.5;
+}
