@@ -30,7 +30,7 @@ function Signup() {
   };
 
   return (
-    <PlantillaAuth titulo="Crear Cuenta" subtitulo="Completa tus datos para comenzar con CoffeeTech">
+    <PlantillaAuth titulo="Crear Cuenta" subtitulo="Completa tus datos para comenzar con Coffe+visión">
       <form onSubmit={enviar} className="grid gap-4">
         {CAMPOS.map((campo) => (
           <label key={campo.id} className="grid gap-1.5 text-sm font-semibold text-coffee">
