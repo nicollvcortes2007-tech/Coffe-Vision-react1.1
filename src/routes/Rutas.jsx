@@ -7,7 +7,8 @@ import Signup from "@/pages/Signup";
 
 // Páginas del caficultor
 import DashboardCaficultor from "@/pages/DashboardCaficultor";
-
+import Estadisticas from "@/pages/Estadisticas";
+import Cultivos from '@/pages/Cultivos';
 // Páginas del administrador
 
 
@@ -21,6 +22,8 @@ function Rutas() {
 
       {/* Caficultor */}
       <Route path="/dashboard/caficultor" element={<DashboardCaficultor />} />
+      <Route path="/caficultor/estadisticas" element={<Estadisticas />} />
+      <Route path="/caficultor/cultivos" element={<Cultivos />} />
 
     </Routes>
   );
