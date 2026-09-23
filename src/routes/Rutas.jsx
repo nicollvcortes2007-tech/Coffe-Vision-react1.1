@@ -23,7 +23,8 @@ function Rutas() {
       {/* Caficultor */}
       <Route path="/dashboard/caficultor" element={<DashboardCaficultor />} />
       <Route path="/caficultor/estadisticas" element={<Estadisticas />} />
-      <Route path="/caficultor/cultivos" element={<Cultivos />} />
+      <Route path="/caficultor/cultivos" element={<Cultivos />}
+/>
 
     </Routes>
   );

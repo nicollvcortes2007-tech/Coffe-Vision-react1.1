@@ -1,7 +1,7 @@
 import React from "react";
 import PlantillaPrincipal from "@/plantillas/PlantillaPrincipal";
 import Topbar from "@/components/navegacion/Topbar";
-import "@/Css/estadisticas.css";
+import "@/estilos/estadisticascultivo.css";
 
 const Estadisticas = () => {
 
