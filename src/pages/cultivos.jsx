@@ -3,6 +3,7 @@ import Topbar from '@/components/navegacion/Topbar';
 import caficultor from '@/assets/imagenes/caficultor.jpg';
 import broca from '@/assets/imagenes/Broca.jpg';
 import cultivo from '@/assets/imagenes/cultivo.jpg';
+import cultivo from "@/assets/imagenes/cosecha.webp";
 
 const tarjetas = [
   {

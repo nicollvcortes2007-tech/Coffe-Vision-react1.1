@@ -8,7 +8,7 @@ import Signup from "@/pages/Signup";
 // Páginas del caficultor
 import DashboardCaficultor from "@/pages/DashboardCaficultor";
 import Estadisticas from "@/pages/Estadisticascultivo";
-import Cultivos from '@/pages/Cultivos';
+import Cultivos from "@/pages/cultivos";
 // Páginas del administrador
 
 
