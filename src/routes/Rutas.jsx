@@ -9,7 +9,7 @@ import Signup from "@/pages/Signup";
 import DashboardCaficultor from "@/pages/DashboardCaficultor";
 
 // Páginas del administrador
-
+import Dashboardadministrador from "@/pages/Dashboardadministrador";
 
 function Rutas() {
   return (
@@ -22,6 +22,8 @@ function Rutas() {
       {/* Caficultor */}
       <Route path="/dashboard/caficultor" element={<DashboardCaficultor />} />
 
+      {/* Administrador */}
+      <Route path="/dashboard/administrador" element={<Dashboardadministrador />} />
     </Routes>
   );
 }
