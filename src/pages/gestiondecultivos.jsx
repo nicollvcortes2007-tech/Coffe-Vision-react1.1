@@ -1,4 +1,4 @@
-import Sidebar from "@/plantillas/Sidebar"; 
+import Sidebar from "@/components/navegacion/Sidebar";
 import Topbar from "@/components/navegacion/Topbar";
 import caficultor from "@/assets/imagenes/caficultor.jpg";
 

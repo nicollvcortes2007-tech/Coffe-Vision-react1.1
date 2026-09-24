@@ -6,6 +6,7 @@ import AsistenteFlotante from '@/components/chatbot/AsistenteFlotante';
 //Iconos de la sidebar
 import logo from '@/assets/imagenes/logo2.png';
 import caficultor from '@/assets/imagenes/caficultor.jpg';
+import avatar from '@/assets/imagenes/image.png';
 import chatIA from '@/assets/iconos/chatIA.png';
 import plagas from '@/assets/iconos/plagas.png';
 import cosecha from '@/assets/iconos/cosecha.png';

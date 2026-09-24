@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Sidebar from "@/plantillas/Sidebar";
+import Sidebar from "@/components/navegacion/Sidebar";
 import Topbar from "@/components/navegacion/Topbar";
 
 export default function GestionPlagas() {
