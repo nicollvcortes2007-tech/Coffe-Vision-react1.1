@@ -29,7 +29,7 @@ function Inicio() {
                 rol="Finca El Paraíso"
             />
 
-            <main className="mx-auto w-full max-w-[800px] rounded-xl bg-white p-7 shadow-[0_4px_10px_rgba(0,0,0,0.05)]">
+            <main className="w-full rounded-xl border border-line bg-white p-6 shadow-panel sm:p-8">
                 {/* Header */}
                 <header className="mb-5.5 flex items-center justify-between text-[#601818]">
                     <h2 className="font-calibri text-2xl font-bold">Información de perfil</h2>
@@ -38,7 +38,7 @@ function Inicio() {
 
                 {/* Foto y nombre */}
                 <section className="mb-5 flex items-center gap-3.5">
-                    <img src={caficultor} alt="Foto caficultor" className="h-15 w-15 rounded-full object-cover" />
+                    <img src={caficultor} alt="Foto caficultor" className="h-16 w-16 rounded-full border-2 border-green-soft object-cover" />
                     <h3 className="text-lg font-semibold text-[#111]">José Caesar Martinez Gutierrez</h3>
                 </section>
 
@@ -48,7 +48,7 @@ function Inicio() {
                 <section className="mb-7">
                     <h4 className="mb-5 text-lg font-semibold text-[#111]">Datos personales</h4>
 
-                    <form className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                        <form className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                         {datos_personales.map((campo) => (
                             <section key={campo.id} className="flex flex-col gap-2">
                                 <label htmlFor={campo.id} className="font-calibri">{campo.label}</label>
@@ -56,7 +56,7 @@ function Inicio() {
                                     id={campo.id}
                                     type={campo.id === "gmail" ? "email" : "text"}
                                     defaultValue={campo.valor}
-                                    className="rounded-lg border border-[#c5e7eb] bg-white p-3 text-sm text-[#333]"
+                                    className="rounded-lg border border-line bg-white p-3 text-sm text-ink outline-none focus:border-green focus:ring-2 focus:ring-green/20"
                                 />
                             </section>
                         ))}
@@ -67,7 +67,7 @@ function Inicio() {
                 <section className="mt-2">
                     <h4 className="mb-5 text-lg font-semibold text-[#111]">Datos Finca</h4>
 
-                    <form className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                        <form className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                         {datos_finca.map((campo) => (
                             <section key={campo.id} className="flex flex-col gap-2">
                                 <label htmlFor={campo.id} className="font-calibri">{campo.label}</label>
@@ -75,7 +75,7 @@ function Inicio() {
                                     id={campo.id}
                                     type="text"
                                     defaultValue={campo.valor}
-                                    className="rounded-lg border border-[#c5e7eb] bg-white p-3 text-sm text-[#333]"
+                                    className="rounded-lg border border-line bg-white p-3 text-sm text-ink outline-none focus:border-green focus:ring-2 focus:ring-green/20"
                                 />
                             </section>
                         ))}

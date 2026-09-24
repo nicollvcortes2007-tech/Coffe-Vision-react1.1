@@ -15,9 +15,9 @@ import Sidebar from "@/components/navegacion/Sidebar";
  */
 function PlantillaPrincipal({ role = "caficultor", children }) {
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen w-full">
       <Sidebar role={role} />
-      <main className="grid flex-1 gap-6 p-6 sm:p-8">{children}</main>
+      <main className="grid min-w-0 w-full flex-1 gap-6 p-6 sm:p-8">{children}</main>
     </div>
   );
 }

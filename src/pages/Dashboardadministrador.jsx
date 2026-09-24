@@ -1,16 +1,30 @@
 import React, { useState } from 'react';
-import Sidebar from '../components/Dashboardadministrador/Sidebar';
-import Topbar from '../components/Dashboardadministrador/Topbar';
-import KpiCard from '../components/comunes/KpiCard';
-import FincaCard from '../components/comunes/FincaCard';
-import ProgressBar from '../components/comunes/ProgressBar';
-import { UserPlus, ShieldAlert } from 'lucide-react';
+import PlantillaPrincipal from '@/plantillas/PlantillaPrincipal';
+import Topbar from '@/components/Dashboardadministrador/Topbar';
 import { 
   kpisData, 
   usuariosIniciales, 
   estadisticasGenerales, 
   estadisticasPlagas 
 } from '../datos/dashboardDatos';
+import '@/estilos/dashboardadministrador.css';
+
+function KpiCard({ titulo, valor, subtitulo }) {
+  return <article className="card-panel"><p>{titulo}</p><strong>{valor}</strong><small>{subtitulo}</small></article>;
+}
+
+function FincaCard() {
+  return <p>Hay fincas registradas para seguimiento y monitoreo.</p>;
+}
+
+function ProgressBar({ etiqueta, porcentaje }) {
+  return (
+    <div className="progress-item">
+      <dt>{etiqueta}</dt>
+      <dd><span style={{ width: `${porcentaje}%` }} /> {porcentaje}%</dd>
+    </div>
+  );
+}
 
 export default function Dashboardadministrador() {
   const [usuarios, setUsuarios] = useState(usuariosIniciales);
@@ -37,13 +51,11 @@ export default function Dashboardadministrador() {
   };
 
   return (
-    <>
-      <Sidebar />
-
-      <main className="main-content">
+    <PlantillaPrincipal role="administrador">
         <Topbar />
 
         {/* METRICAS / KPIs */}
+        <section className="admin-main-content">
         <section className="kpi-grid">
           {kpisData.map((kpi, idx) => (
             <KpiCard key={idx} {...kpi} />
@@ -53,7 +65,7 @@ export default function Dashboardadministrador() {
         {/* FORMULARIO AGREGAR USUARIO */}
         <section id="usuarios" className="card-panel">
           <h2 className="section-title">
-            <UserPlus size={20} style={{ marginRight: 8 }} /> Agregar usuario
+            <i className="fa-solid fa-user-plus" style={{ marginRight: 8 }} aria-hidden="true" /> Agregar usuario
           </h2>
           <form className="user-form" onSubmit={handleAgregarUsuario}>
             <input
@@ -131,7 +143,7 @@ export default function Dashboardadministrador() {
 
           <article className="card-panel">
             <h2 className="section-title">
-              <ShieldAlert size={20} style={{ marginRight: 8 }} /> Estadísticas de Plagas
+              <i className="fa-solid fa-shield-halved" style={{ marginRight: 8 }} aria-hidden="true" /> Estadísticas de Plagas
             </h2>
             <dl className="progress-group">
               {estadisticasPlagas.map((item, idx) => (
@@ -140,7 +152,7 @@ export default function Dashboardadministrador() {
             </dl>
           </article>
         </section>
-      </main>
-    </>
+        </section>
+    </PlantillaPrincipal>
   );
 }

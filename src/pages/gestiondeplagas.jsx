@@ -59,23 +59,19 @@ export default function GestionPlagas() {
   };
 
   return (
-    <main className="flex min-h-screen bg-page font-sans text-ink">
+    <main className="flex min-h-screen w-full bg-page font-sans text-ink">
       
       {/* Barra lateral unificada */}
       <Sidebar role="administrador" />
 
       {/* Contenido Principal */}
-      <section className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-6 px-10 py-8">
+      <section className="flex min-w-0 w-full flex-1 flex-col gap-6 px-6 py-8 lg:px-10">
         
         {/* Cabecera Superior compartida */}
         <Topbar
+          admin
           eyebrow="PLATAFORMA DE ENTRENAMIENTO IA"
           title="Gestión técnica de patógenos y plagas"
-          notifTo="#notificaciones"
-          perfilTo="#perfil"
-          avatar="https://ui-avatars.com/api/?name=Yordi+Fernández&background=4e2a15&color=fff"
-          nombre="Yordi Fernández"
-          rol="Administrador"
         />
 
         {/* Barra de Estado */}

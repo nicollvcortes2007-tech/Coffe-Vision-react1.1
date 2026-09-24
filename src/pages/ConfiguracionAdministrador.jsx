@@ -1,6 +1,5 @@
 import PlantillaPrincipal from '@/plantillas/PlantillaPrincipal';
 import Topbar from '@/components/navegacion/Topbar';
-import caficultor from '@/assets/imagenes/caficultor.jpg';
 
 const pestanas = ["Datos del administrador", "Seguridad", "Métricas del chat bot"];
 
@@ -15,13 +14,9 @@ function ConfiguracionAdministrador() {
     return (
         <PlantillaPrincipal role="administrador">
             <Topbar
+                admin
                 eyebrow="Configuración"
                 title="Configuración del administrador"
-                notiflo="/admin/notificaciones"
-                perfilto="/admin/perfil"
-                caficultor={caficultor}
-                nombre="Administrador"
-                rol="Administrador"
             />
             <main className="min-h-screen bg-[#f7f3ea] p-7 pr-10 text-[#333]">
                 <h1 className="mb-5 text-[45px] font-bold text-[#7a1f1f]">Configuración</h1>

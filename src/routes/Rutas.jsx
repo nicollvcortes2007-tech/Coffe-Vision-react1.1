@@ -6,8 +6,8 @@ import Signup from "@/pages/Signup";
 
 import DashboardCaficultor from "@/pages/DashboardCaficultor";
 import Inicio from "@/pages/Inicio";
-import Cultivos from "@/pages/cultivos";
 import GestionDeCultivos from "@/pages/gestiondecultivos";
+import RegistrarLabor from "@/pages/RegistrarLabor";
 import Estadisticas from "@/pages/estadisticascultivo";
 import Guias from "@/pages/Guias";
 import Notificaciones from "@/pages/Notificaciones";
@@ -45,7 +45,9 @@ export default function Rutas() {
       {/* Área del caficultor */}
       <Route path="/dashboard/caficultor" element={<DashboardCaficultor />} />
       <Route path="/inicio" element={<Inicio />} />
-      <Route path="/cultivos" element={<Cultivos />} />
+      <Route path="/perfil" element={<Inicio />} />
+      <Route path="/registrar-labor" element={<RegistrarLabor />} />
+      <Route path="/cultivos" element={<GestionDeCultivos />} />
       <Route path="/cultivos/gestion" element={<GestionDeCultivos />} />
       <Route path="/estadisticas" element={<Estadisticas />} />
       <Route path="/guias" element={<Guias />} />
@@ -59,7 +61,7 @@ export default function Rutas() {
       <Route path="/admin/perfil" element={<PerfilAdministrador />} />
       <Route path="/admin/configuracion" element={<ConfiguracionAdministrador />} />
 
-      <Route path="/admin/notificaciones" element={<Navigate to="/notificaciones" replace />} />
+      <Route path="/admin/notificaciones" element={<Notificaciones />} />
       <Route path="*" element={<NoEncontrada />} />
     </Routes>
   );

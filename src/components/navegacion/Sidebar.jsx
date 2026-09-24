@@ -12,9 +12,9 @@ function Sidebar({ role = "caficultor" }) {
   const homeRoute = role === "administrador" ? "/dashboard/administrador" : "/dashboard/caficultor";
 
   return (
-    <aside className="sticky top-0 flex h-screen w-[280px] flex-none flex-col gap-6 overflow-y-auto border-r border-line bg-white/95 p-5 backdrop-blur-md">
+    <aside className="relative flex min-h-screen w-[280px] flex-none flex-col gap-6 border-r border-line bg-white/95 p-5 backdrop-blur-md">
       <NavLink to={homeRoute} className="flex items-center justify-center">
-        <img src={logo} alt="Coffee+visión" className="h-[70px] w-auto object-contain" />
+        <img src={logo} alt="Coffee+visión" className="h-[112px] w-auto max-w-full object-contain" />
       </NavLink>
 
       <nav className="grid gap-2" aria-label={`Menu ${role}`}>

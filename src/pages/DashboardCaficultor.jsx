@@ -1,9 +1,9 @@
 import PlantillaPrincipal from "@/plantillas/PlantillaPrincipal";
+import { Link } from "react-router-dom";
 import Topbar from "@/components/navegacion/Topbar";
 import MetricCard from "@/components/comunes/MetricCard";
 import Panel from "@/components/comunes/Panel";
 import StatusBadge from "@/components/comunes/StatusBadge";
-import AsistenteFlotante from "@/components/chatbot/AsistenteFlotante";
 import avatar from "@/assets/imagenes/image.png";
 import fondoFinca from "@/assets/imagenes/Cafe.webp";
 
@@ -62,9 +62,9 @@ function DashboardCaficultor() {
             Gestiona tus cultivos, revisa recomendaciones y consulta el asistente inteligente para tomar
             mejores decisiones en tu produccion cafetera.
           </p>
-          <button className="mt-6 inline-flex items-center gap-2 rounded-lg border border-white/35 bg-white/15 px-4 py-2.5 font-extrabold">
+          <Link to="/registrar-labor" className="mt-6 inline-flex items-center gap-2 rounded-lg border border-white/35 bg-white/15 px-4 py-2.5 font-extrabold">
             <i className="fa-solid fa-plus"></i> Registrar labor
-          </button>
+          </Link>
         </section>
 
         <section className="relative z-10 grid w-full max-w-[210px] gap-2.5 rounded-lg border border-white/25 bg-white/15 p-5 backdrop-blur">
@@ -172,7 +172,6 @@ function DashboardCaficultor() {
         </Panel>
       </section>
 
-      <AsistenteFlotante />
     </PlantillaPrincipal>
   );
 }

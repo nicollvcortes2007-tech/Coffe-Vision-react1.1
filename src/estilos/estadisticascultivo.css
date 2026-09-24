@@ -9,52 +9,7 @@
     --border-color: #e0e0e0;
 }
 
-/* Estilos Generales  */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-
-body{
-
-    background-image:
-    linear-gradient#FBF9F2,
-    #FBF9F2,
-    url("imagenes/cafetal.jpg");
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-
-/* HEADER */
-
-/* HEADER */
-header{
-    
-    color: rgb(245, 241, 241);
-   
-}
-
-.content-header h1{
-    font-size:20px;
-}
-
-.subtitle{
-    margin-bottom:25px;
-}
-
-body {
-
-    display: flex;
-    min-height: 100vh;
-    background-color: var(--bg-main);
-    color: var(--text-dark);
-}
+/* Los estilos base viven en index.css; este archivo solo da formato a vistas */
 
 /*  Barra Lateral (Sidebar) */
 .sidebar {
@@ -69,6 +24,15 @@ body {
 .brand {
     text-align: center;
     padding-bottom: 30px;
+}
+
+.brand-logo {
+    display: block;
+    width: 176px;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    object-fit: contain;
 }
 
 .logo {
@@ -157,7 +121,7 @@ body {
     gap: 20px;
 }
 
-.card {
+.main-content .card {
     background: var(--white);
     padding: 24px;
     border-radius: 10px;
@@ -165,13 +129,13 @@ body {
     border: 1px solid rgba(0,0,0,0.05);
 }
 
-.card h3 {
+.main-content .card h3 {
     font-size: 14px;
     color: var(--text-muted);
     margin-bottom: 10px;
 }
 
-.card .metric {
+.main-content .card .metric {
     font-size: 28px;
     font-weight: bold;
     color: var(--sidebar-bg);
@@ -230,24 +194,24 @@ progress {
 }
 
 /*  Tablas Estilizadas  */
-table {
+.main-content table {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
     font-size: 14px;
 }
 
-th, td {
+.main-content th, .main-content td {
     padding: 12px;
     border-bottom: 1px solid var(--border-color);
 }
 
-th {
+.main-content th {
     color: var(--text-muted);
     font-weight: 600;
 }
 
-mark {
+.main-content mark {
     padding: 4px 8px;
     border-radius: 4px;
     font-size: 12px;

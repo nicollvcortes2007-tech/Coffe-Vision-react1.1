@@ -4,22 +4,22 @@ import caficultor from "@/assets/imagenes/caficultor.jpg";
 
 export default function GestionDeCultivos() {
   return (
-    <main className="flex min-h-screen bg-page font-sans text-ink">
+    <main className="flex min-h-screen w-full bg-page font-sans text-ink">
       
       {/* Barra lateral unificada */}
-      <Sidebar role="administrador" />
+      <Sidebar role="caficultor" />
 
       {/* Contenido Principal */}
-      <section className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-8 px-10 py-8">
+      <section className="flex min-w-0 w-full flex-1 flex-col gap-8 px-6 py-8 lg:px-10">
         
         <Topbar 
           eyebrow="REGISTRO AGRÍCOLA" 
           title="Gestión de Cultivos" 
-          notifTo="#notificaciones"
-          perfilTo="#perfil"
-          avatar="https://ui-avatars.com/api/?name=Yordi+Fernández&background=4e2a15&color=fff"
-          nombre="Yordi Fernández"
-          rol="Administrador"
+          notifTo="/notificaciones"
+          perfilTo="/perfil"
+          avatar={caficultor}
+          nombre="Caficultor"
+          rol="Finca El Paraíso"
         />
 
         {/* Tarjeta del Formulario */}
@@ -37,8 +37,8 @@ export default function GestionDeCultivos() {
 
             <label className="flex flex-col gap-2 text-sm font-semibold">
               Tipo de Actividad
-              <select required className="rounded-lg border border-line bg-surface p-3 font-normal text-ink outline-none transition-colors focus:border-green">
-                <option value="" disabled selected>Selecciona una opción...</option>
+              <select required defaultValue="" className="rounded-lg border border-line bg-surface p-3 font-normal text-ink outline-none transition-colors focus:border-green">
+                <option value="" disabled>Selecciona una opción...</option>
                 <option value="Siembra">Siembra</option>
                 <option value="Fertilización">Fertilización</option>
                 <option value="Control de Plagas">Control de Plagas (Broca/Roya)</option>

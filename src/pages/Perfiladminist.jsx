@@ -2,7 +2,7 @@ import { useState } from "react";
 import PlantillaPrincipal from "@/plantillas/PlantillaPrincipal";
 import Topbar from "@/components/navegacion/Topbar";
 import persona from "@/assets/imagenes/persona.jpg";
-import logo from "@/assets/imagenes/logo2.png";
+import "@/estilos/perfil.css";
 
 const tarjetas = [
   {
@@ -171,61 +171,14 @@ export default function PerfilAdministrador() {
     `${formulario.nombres} ${formulario.apellidos}`.trim();
 
   return (
-    <PlantillaPrincipal>
-      <Topbar />
+    <PlantillaPrincipal role="administrador">
+      <Topbar
+        admin
+        eyebrow="Cuenta de administrador"
+        title="Mi perfil"
+      />
 
       <main className="main-content">
-
-        {/* ENCABEZADO SUPERIOR */}
-        <header className="top-header">
-
-          <div>
-            <h1>Administrador</h1>
-            <p>Panel de Administración</p>
-          </div>
-
-          <section className="user-status">
-
-            <button
-              type="button"
-              className="notif-bell"
-              aria-label="Notificaciones"
-            >
-              🔔
-              <mark className="badge-top">12</mark>
-            </button>
-
-            <button
-              type="button"
-              className="user-menu-btn"
-            >
-              <img
-                src={fotoPerfil}
-                alt="Foto de perfil de Administrador"
-              />
-
-              <span className="user-info-text">
-                <strong>{nombreCompleto}</strong>
-                <small>admin@coffeetech.com</small>
-              </span>
-
-              <span className="arrow-down">▼</span>
-            </button>
-
-          </section>
-        </header>
-
-        <hr />
-
-        {/* TÍTULO DE LA SECCIÓN */}
-        <header className="section-header">
-          <h2>Mi perfil</h2>
-
-          <p>
-            Gestiona tu información personal y configuración de la cuenta.
-          </p>
-        </header>
-
         {/* CONTENIDO DEL PERFIL */}
         <section className="profile-grid">
 
@@ -234,8 +187,8 @@ export default function PerfilAdministrador() {
 
             <figure className="summary-logo">
               <img
-                src={logo}
-                alt="Logotipo Coffee + Visión"
+                src={fotoPerfil}
+                alt="Foto de perfil de administrador"
               />
             </figure>
 
