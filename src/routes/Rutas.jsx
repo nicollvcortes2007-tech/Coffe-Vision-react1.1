@@ -7,9 +7,10 @@ import Signup from "@/pages/Signup";
 
 // Páginas del caficultor
 import DashboardCaficultor from "@/pages/DashboardCaficultor";
+import Notificaciones from "@/pages/Notificaciones";
 
 // Páginas del administrador
-
+import Perfiladminist from "@/pages/Perfiladminist";
 
 function Rutas() {
   return (
