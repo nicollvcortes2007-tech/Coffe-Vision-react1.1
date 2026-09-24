@@ -1,72 +1,66 @@
-import { Routes, Route } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
-// Páginas públicas
 import Home from "@/pages/Home";
 import Login from "@/pages/Login";
 import Signup from "@/pages/Signup";
 
-// Páginas del caficultor
 import DashboardCaficultor from "@/pages/DashboardCaficultor";
-
+import Inicio from "@/pages/Inicio";
+import Cultivos from "@/pages/cultivos";
+import GestionDeCultivos from "@/pages/gestiondecultivos";
+import Estadisticas from "@/pages/estadisticascultivo";
+import Guias from "@/pages/Guias";
+import Notificaciones from "@/pages/Notificaciones";
 import ChatBot from "@/pages/ChatBot";
-import Guias from "@/pages/Guias";
+import Recomendaciones from "@/pages/Recomendaciones";
 
-import Inicio from '@/pages/Inicio';
-import Recomendaciones from '@/pages/Recomendaciones';
-
-
-// Páginas del administrador
+import DashboardAdministrador from "@/pages/Dashboardadministrador";
+import GestionDePlagas from "@/pages/gestiondeplagas";
+import PerfilAdministrador from "@/pages/Perfiladminist";
 import ConfiguracionAdministrador from "@/pages/ConfiguracionAdministrador";
-import { Routes, Route } from "react-router-dom";
 
-// Páginas públicas
-import Home from "@/pages/Home";
-import Login from "@/pages/Login";
-import Signup from "@/pages/Signup";
+function NoEncontrada() {
+  return (
+    <main className="grid min-h-screen place-items-center bg-page p-6 text-center">
+      <section>
+        <p className="eyebrow">Error 404</p>
+        <h1 className="mt-2">No encontramos esa página</h1>
+        <p className="mt-2 text-muted">Revisa la dirección o vuelve al inicio.</p>
+        <a className="mt-5 inline-block font-bold text-green" href="/">
+          Volver al inicio
+        </a>
+      </section>
+    </main>
+  );
+}
 
-// Páginas del caficultor
-import DashboardCaficultor from "@/pages/DashboardCaficultor";
-import Cultivos from "@/pages/Cultivos";
-import RegistrarLabor from "@/pages/RegistrarLabor";
-import Estadisticas from "@/pages/Estadisticas";
-import Guias from "@/pages/Guias";
-import NotificacionesCaficultor from "@/pages/NotificacionesCaficultor";
-import Chatbot from "@/pages/Chatbot";
-import PerfilCaficultor from "@/pages/PerfilCaficultor";
-import ConfiguracionCaficultor from "@/pages/ConfiguracionCaficultor";
-
-// Páginas del administrador
-import DashboardAdmin from "@/pages/DashboardAdmin";
-import GestionPlagas from "@/pages/GestionPlagas";
-import NotificacionesAdmin from "@/pages/NotificacionesAdmin";
-import PerfilAdmin from "@/pages/PerfilAdmin";
-
-function Rutas() {
+export default function Rutas() {
   return (
     <Routes>
-      {/* Públicas */}
+      {/* Acceso público */}
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/registro" element={<Signup />} />
 
-      {/* Caficultor */}
+      {/* Área del caficultor */}
       <Route path="/dashboard/caficultor" element={<DashboardCaficultor />} />
+      <Route path="/inicio" element={<Inicio />} />
       <Route path="/cultivos" element={<Cultivos />} />
-      <Route path="/registrar-labor" element={<RegistrarLabor />} />
+      <Route path="/cultivos/gestion" element={<GestionDeCultivos />} />
       <Route path="/estadisticas" element={<Estadisticas />} />
       <Route path="/guias" element={<Guias />} />
-      <Route path="/notificaciones" element={<NotificacionesCaficultor />} />
-      <Route path="/chatbot" element={<Chatbot />} />
-      <Route path="/perfil" element={<PerfilCaficultor />} />
-      <Route path="/configuracion" element={<ConfiguracionCaficultor />} />
+      <Route path="/notificaciones" element={<Notificaciones />} />
+      <Route path="/chatbot" element={<ChatBot />} />
+      <Route path="/recomendaciones" element={<Recomendaciones />} />
 
-      {/* Administrador */}
-      <Route path="/dashboard/administrador" element={<DashboardAdmin />} />
-      <Route path="/admin/plagas" element={<GestionPlagas />} />
-      <Route path="/admin/notificaciones" element={<NotificacionesAdmin />} />
-      <Route path="/admin/perfil" element={<PerfilAdmin />} />
+      {/* Área del administrador */}
+      <Route path="/dashboard/administrador" element={<DashboardAdministrador />} />
+      <Route path="/admin/plagas" element={<GestionDePlagas />} />
+      <Route path="/admin/perfil" element={<PerfilAdministrador />} />
+      <Route path="/admin/configuracion" element={<ConfiguracionAdministrador />} />
+
+      <Route path="/admin/notificaciones" element={<Navigate to="/notificaciones" replace />} />
+      <Route path="*" element={<NoEncontrada />} />
     </Routes>
   );
 }
-
-export default Rutas;
