@@ -4,16 +4,28 @@ import PlantillaAuth from "@/plantillas/PlantillaAuth";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ email: "", password: "", rol: "" });
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
 
   const actualizar = (campo) => (e) => setForm({ ...form, [campo]: e.target.value });
 
   const enviar = (e) => {
     e.preventDefault();
-    if (form.rol === "administrador") {
+    const esAdministrador =
+      form.email.trim().toLowerCase() === "coffee+vision12@gmail.com" &&
+      form.password === "Coffee.com";
+
+    if (esAdministrador) {
       navigate("/dashboard/administrador");
       return;
     }
+
+    if (form.email.trim().toLowerCase() === "coffee+vision12@gmail.com") {
+      setError("La contraseña del administrador no es correcta.");
+      return;
+    }
+
+    setError("");
     navigate("/dashboard/caficultor");
   };
 
@@ -44,26 +56,14 @@ export default function Login() {
           />
         </label>
 
-        <label className="grid gap-1.5 text-sm font-semibold text-coffee">
-          Tipo de usuario
-          <select
-            required
-            value={form.rol}
-            onChange={actualizar("rol")}
-            className="min-h-[46px] rounded-lg border border-line px-3 font-normal text-ink focus:border-green focus:outline-none focus:ring-2 focus:ring-green/20"
-          >
-            <option value="" disabled>Selecciona tu rol</option>
-            <option value="caficultor">Caficultor</option>
-            <option value="administrador">Administrador</option>
-          </select>
-        </label>
-
         <fieldset className="flex items-center justify-between text-sm border-0 p-0 m-0">
           <label className="flex items-center gap-2 text-muted cursor-pointer">
             <input type="checkbox" className="h-4 w-4" /> Recordarme
           </label>
           <Link to="#" className="font-semibold text-green hover:text-green-deep">¿Olvidaste tu contraseña?</Link>
         </fieldset>
+
+        {error && <p role="alert" className="text-sm font-semibold text-danger">{error}</p>}
 
         <button type="submit" className="mt-1 min-h-[46px] rounded-lg bg-green font-bold text-white hover:bg-green-deep">
           Iniciar sesión

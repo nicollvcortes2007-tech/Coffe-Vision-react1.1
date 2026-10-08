@@ -22,10 +22,6 @@ function Signup() {
       return;
     }
     setError("");
-    if (form.rol === "administrador") {
-      navigate("/dashboard/administrador");
-      return;
-    }
     navigate("/dashboard/caficultor");
   };
 
@@ -45,20 +41,6 @@ function Signup() {
             />
           </label>
         ))}
-
-        <label className="grid gap-1.5 text-sm font-semibold text-coffee">
-          Tipo de Usuario
-          <select
-            required
-            value={form.rol || ""}
-            onChange={actualizar("rol")}
-            className="min-h-[46px] rounded-lg border border-line px-3 font-normal text-ink focus:border-green focus:outline-none focus:ring-2 focus:ring-green/20"
-          >
-            <option value="" disabled>Selecciona una opción</option>
-            <option value="caficultor">Caficultor</option>
-            <option value="administrador">Administrador</option>
-          </select>
-        </label>
 
         <label className="grid gap-1.5 text-sm font-semibold text-coffee">
           Nombre de la Finca
