@@ -2,7 +2,7 @@ import PlantillaPrincipal from '@/plantillas/PlantillaPrincipal';
 import Topbar from '@/components/navegacion/Topbar';
 import caficultor from '@/assets/imagenes/caficultor.jpg';
 import broca from '@/assets/imagenes/Broca.jpg';
-import cultivo from '@/assets/imagenes/cultivo.jpg';
+import cultivo from '@/assets/imagenes/cafecito.webp';
 
 const tarjetas = [
     { titulo: "Cultivos activos", dato: "4 Lotes", descripcion: "Variedad Castillo y Colombia", ancho: "85%", eficiencia: "85%" },
