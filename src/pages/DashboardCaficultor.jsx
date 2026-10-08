@@ -34,7 +34,7 @@ const LABORES = [
   ["Registro de cosecha", "Lote 1", "2 junio", <StatusBadge tipo="ok">Lista</StatusBadge>],
 ];
 
-function DashboardCaficultor() {
+export default function DashboardCaficultor() {
   return (
     <PlantillaPrincipal role="caficultor">
       <Topbar
@@ -80,16 +80,16 @@ function DashboardCaficultor() {
         ))}
       </section>
 
-      <section className="grid gap-4 lg:grid-cols-[1.35fr_1fr]">
+      <main className="grid gap-4 lg:grid-cols-[1.35fr_1fr]">
         <Panel
           eyebrow="Estadisticas"
           title="Resumen semanal y mensual"
           className="lg:col-span-2"
           action={
-            <div className="flex gap-2 rounded-lg bg-[#fbfaf7] p-1">
-              <button className="rounded-md bg-white px-3 py-1.5 text-sm font-bold text-coffee shadow-sm">Semanal</button>
-              <button className="px-3 py-1.5 text-sm font-bold text-muted">Mensual</button>
-            </div>
+            <nav aria-label="Filtro de periodo" className="flex gap-2 rounded-lg bg-[#fbfaf7] p-1">
+              <button type="button" className="rounded-md bg-white px-3 py-1.5 text-sm font-bold text-coffee shadow-sm">Semanal</button>
+              <button type="button" className="px-3 py-1.5 text-sm font-bold text-muted">Mensual</button>
+            </nav>
           }
         >
           <section className="mb-4 grid gap-3 sm:grid-cols-3">
@@ -106,7 +106,7 @@ function DashboardCaficultor() {
             ))}
           </section>
 
-          <div className="grid h-[210px] grid-cols-7 items-end gap-3 rounded-lg border border-line bg-gradient-to-b from-[#fbfaf7] to-[#f0eadf] p-4">
+          <figure className="grid h-[210px] grid-cols-7 items-end gap-3 rounded-lg border border-line bg-gradient-to-b from-[#fbfaf7] to-[#f0eadf] p-4 m-0">
             {BARRAS.map((alto, i) => (
               <span
                 key={i}
@@ -114,14 +114,14 @@ function DashboardCaficultor() {
                 style={{ height: `${alto}%` }}
               ></span>
             ))}
-          </div>
+          </figure>
         </Panel>
 
         <Panel eyebrow="Recomendaciones" title="Acciones sugeridas">
           <ul className="grid gap-3">
             {RECOMENDACIONES.map((r) => (
               <li key={r.titulo} className="flex items-start gap-3 rounded-lg border border-line bg-[#fbfaf7] p-3">
-                <i className={`fa-solid ${r.icon} mt-1 text-green`}></i>
+                <i className={`fa-solid ${r.icon} mt-1 text-green`} aria-hidden="true"></i>
                 <span>
                   <strong className="block text-coffee">{r.titulo}</strong>
                   <small className="text-muted">{r.detalle}</small>
@@ -135,7 +135,7 @@ function DashboardCaficultor() {
           <section className="grid gap-3">
             {GUIAS.map((g) => (
               <article key={g.titulo} className="flex items-start gap-3 rounded-lg border border-line bg-[#fbfaf7] p-3">
-                <i className={`fa-solid ${g.icon} mt-1 text-green`}></i>
+                <i className={`fa-solid ${g.icon} mt-1 text-green`} aria-hidden="true"></i>
                 <div>
                   <h3>{g.titulo}</h3>
                   <p className="mt-1 text-sm text-muted">{g.detalle}</p>
@@ -149,7 +149,7 @@ function DashboardCaficultor() {
           eyebrow="Agenda"
           title="Labores proximas de la finca"
           className="lg:col-span-2"
-          action={<button className="text-sm font-bold text-green hover:text-green-deep">Agregar labor</button>}
+          action={<button type="button" className="text-sm font-bold text-green hover:text-green-deep">Agregar labor</button>}
         >
           <table className="w-full border-collapse">
             <thead>
@@ -170,10 +170,7 @@ function DashboardCaficultor() {
             </tbody>
           </table>
         </Panel>
-      </section>
-
+      </main>
     </PlantillaPrincipal>
   );
 }
-
-export default DashboardCaficultor;

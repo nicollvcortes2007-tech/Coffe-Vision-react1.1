@@ -37,18 +37,32 @@ export default function Notificaciones() {
   return (
     <PlantillaPrincipal role={esAdmin ? "administrador" : "caficultor"}>
       <Topbar admin={esAdmin} eyebrow={esAdmin ? "Panel de administración" : "Centro de alertas"} title="Notificaciones" />
+      
       <section className="grid w-full min-w-0 gap-6">
         <header className="flex flex-wrap items-end justify-between gap-3">
-          <div>
+          <hgroup>
             <h2 className="text-2xl font-bold">Alertas recientes</h2>
             <p className="mt-1 text-muted">Tienes {noLeidas} notificaciones sin leer.</p>
-          </div>
-          {noLeidas > 0 && <button type="button" onClick={() => setItems((actuales) => actuales.map((item) => ({ ...item, leida: true })))} className="rounded-lg border border-line bg-white px-4 py-2.5 font-semibold text-coffee hover:bg-green-soft">Marcar todas como leídas</button>}
+          </hgroup>
+          {noLeidas > 0 && (
+            <button 
+              type="button" 
+              onClick={() => setItems((actuales) => actuales.map((item) => ({ ...item, leida: true })))} 
+              className="rounded-lg border border-line bg-white px-4 py-2.5 font-semibold text-coffee hover:bg-green-soft"
+            >
+              Marcar todas como leídas
+            </button>
+          )}
         </header>
 
         <nav className="flex flex-wrap gap-2 border-b border-line pb-3" aria-label="Filtrar notificaciones">
           {FILTROS.map((opcion) => (
-            <button key={opcion} type="button" onClick={() => setFiltro(opcion)} className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${filtro === opcion ? "bg-green text-white" : "bg-white text-muted hover:bg-green-soft hover:text-coffee"}`}>
+            <button 
+              key={opcion} 
+              type="button" 
+              onClick={() => setFiltro(opcion)} 
+              className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors ${filtro === opcion ? "bg-green text-white" : "bg-white text-muted hover:bg-green-soft hover:text-coffee"}`}
+            >
               {opcion}{opcion === "No leídas" ? ` (${noLeidas})` : ""}
             </button>
           ))}
@@ -56,22 +70,40 @@ export default function Notificaciones() {
 
         <ul className="grid gap-3">
           {visibles.map((item) => (
-            <li key={item.id} className={`flex flex-col gap-4 rounded-xl border bg-white p-5 shadow-panel sm:flex-row sm:items-center ${item.leida ? "border-line" : "border-green/40"}`}>
+            <li 
+              key={item.id} 
+              className={`flex flex-col gap-4 rounded-xl border bg-white p-5 shadow-panel sm:flex-row sm:items-center ${item.leida ? "border-line" : "border-green/40"}`}
+            >
               <span className={`grid h-11 w-11 flex-none place-items-center rounded-full ${item.tipo === "critica" ? "bg-red-50 text-danger" : "bg-green-soft text-green-deep"}`}>
                 <i className={`fa-solid ${item.tipo === "critica" ? "fa-triangle-exclamation" : item.tipo === "clima" ? "fa-cloud-rain" : "fa-leaf"}`} aria-hidden="true"></i>
               </span>
+              
               <article className="min-w-0 flex-1">
-                <div className="flex flex-wrap items-center gap-2">
+                <header className="flex flex-wrap items-center gap-2">
                   <h3 className="font-bold">{item.titulo}</h3>
                   {!item.leida && <span className="rounded-full bg-green-soft px-2.5 py-1 text-xs font-bold text-green-deep">Nueva</span>}
-                </div>
+                </header>
                 <p className="mt-1 text-sm leading-relaxed text-muted">{item.descripcion}</p>
                 <time className="mt-2 block text-xs text-muted">{item.tiempo}</time>
               </article>
-              {!item.leida && <button type="button" onClick={() => marcarLeida(item.id)} className="self-start rounded-lg border border-line px-3 py-2 text-sm font-semibold text-coffee hover:bg-green-soft sm:self-center">Marcar leída</button>}
+
+              {!item.leida && (
+                <button 
+                  type="button" 
+                  onClick={() => marcarLeida(item.id)} 
+                  className="self-start rounded-lg border border-line px-3 py-2 text-sm font-semibold text-coffee hover:bg-green-soft sm:self-center"
+                >
+                  Marcar leída
+                </button>
+              )}
             </li>
           ))}
-          {visibles.length === 0 && <li className="rounded-xl border border-line bg-white p-10 text-center text-muted">No hay notificaciones en esta categoría.</li>}
+
+          {visibles.length === 0 && (
+            <li className="rounded-xl border border-line bg-white p-10 text-center text-muted">
+              No hay notificaciones en esta categoría.
+            </li>
+          )}
         </ul>
       </section>
     </PlantillaPrincipal>

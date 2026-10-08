@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PlantillaAuth from "@/plantillas/PlantillaAuth";
 
-function Login() {
+export default function Login() {
   const navigate = useNavigate();
   const [form, setForm] = useState({ email: "", password: "", rol: "" });
 
@@ -58,12 +58,12 @@ function Login() {
           </select>
         </label>
 
-        <div className="flex items-center justify-between text-sm">
-          <label className="flex items-center gap-2 text-muted">
+        <fieldset className="flex items-center justify-between text-sm border-0 p-0 m-0">
+          <label className="flex items-center gap-2 text-muted cursor-pointer">
             <input type="checkbox" className="h-4 w-4" /> Recordarme
           </label>
           <Link to="#" className="font-semibold text-green hover:text-green-deep">¿Olvidaste tu contraseña?</Link>
-        </div>
+        </fieldset>
 
         <button type="submit" className="mt-1 min-h-[46px] rounded-lg bg-green font-bold text-white hover:bg-green-deep">
           Iniciar sesión
@@ -76,5 +76,3 @@ function Login() {
     </PlantillaAuth>
   );
 }
-
-export default Login;
