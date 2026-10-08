@@ -20,9 +20,9 @@ const BENEFICIOS = [
   { titulo: "Gestión Sostenible", texto: "Implementa prácticas agrícolas responsables con el medio ambiente." },
 ];
 
-function Home() {
+export default function Home() {
   return (
-    <div className="font-sans text-ink" style={{ fontFamily: "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
+    <>
       <header className="sticky top-0 z-30 flex w-full flex-wrap items-center justify-between gap-3 border-b border-line/80 bg-white/90 px-4 py-1 shadow-sm backdrop-blur-xl sm:px-6">
         <a href="#inicio" className="flex items-center">
           <img src={logo} alt="Coffee+visión Logo" className="h-20 w-auto object-contain" />
@@ -59,17 +59,17 @@ function Home() {
               Monitorea cultivos de café, registra plagas y optimiza tu producción mediante herramientas
               digitales avanzadas diseñadas para el campo.
             </p>
-            <div className="mt-9 flex flex-wrap gap-3">
+            <section className="mt-9 flex flex-wrap gap-3">
               <Link to="/login" className="inline-flex items-center gap-2 rounded-xl bg-green px-6 py-3.5 font-bold text-white shadow-md transition hover:-translate-y-0.5 hover:bg-green-deep hover:shadow-lg">
                 Comenzar →
               </Link>
               <a href="#servicios" className="inline-flex items-center gap-2 rounded-xl border border-line bg-white px-6 py-3.5 font-bold text-coffee transition hover:border-green hover:bg-green-soft/50">
                 Explorar
               </a>
-            </div>
+            </section>
           </article>
 
-          <figure className="relative overflow-hidden rounded-[2rem] border-8 border-white shadow-2xl ring-1 ring-coffee/5">
+          <figure className="relative overflow-hidden rounded-[2rem] border-8 border-white shadow-2xl ring-1 ring-coffee/5 m-0">
             <img src={cafe} alt="Cultivo de café" className="aspect-[4/3] h-full w-full object-cover transition duration-700 hover:scale-[1.03]" />
           </figure>
         </section>
@@ -85,8 +85,8 @@ function Home() {
 
           <section className="mx-auto grid max-w-7xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {FUNCIONALIDADES.map((f) => (
-              <article key={f.titulo} className="group rounded-2xl border border-line bg-[#fffefa] p-6 transition duration-300 hover:-translate-y-1 hover:border-green/40 hover:shadow-hero sm:p-7">
-                <figure className="mb-5 grid h-12 w-12 place-items-center rounded-xl bg-green-soft text-xl text-green transition group-hover:bg-green group-hover:text-white">
+              <article key={f.titulo} className="group/card rounded-2xl border border-line bg-[#fffefa] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-grey/40 hover:shadow-xl sm:p-7">
+                <figure className="mb-5 grid h-12 w-12 place-items-center rounded-xl bg-green-soft text-xl text-black transition-colors duration-300 group-hover/card:bg-green group-hover/card:text-black m-0">
                   <i className={`fa-solid ${f.icon}`}></i>
                 </figure>
                 <h3 className="text-lg font-bold tracking-tight">{f.titulo}</h3>
@@ -97,7 +97,7 @@ function Home() {
         </section>
 
         <section className="mx-auto grid max-w-7xl items-center gap-12 px-6 py-20 sm:px-10 lg:grid-cols-2 lg:gap-16 lg:py-24">
-          <figure className="overflow-hidden rounded-[2rem] shadow-hero ring-1 ring-coffee/10">
+          <figure className="overflow-hidden rounded-[2rem] shadow-hero ring-1 ring-coffee/10 m-0">
             <img src={cosecha} alt="Optimiza tu Producción Cafetera" className="aspect-[4/3] h-full w-full object-cover" />
           </figure>
 
@@ -108,7 +108,7 @@ function Home() {
               modernas y eficientes mediante tecnología de punta.
             </p>
 
-            <ul className="mt-8 grid gap-5">
+            <ul className="mt-8 grid gap-5 list-none p-0">
               {BENEFICIOS.map((b) => (
                 <li key={b.titulo} className="flex gap-3.5">
                   <i className="fa-solid fa-circle-check mt-1 text-lg text-green"></i>
@@ -137,7 +137,7 @@ function Home() {
               para el pequeño productor.
             </p>
 
-            <ul className="mt-8 grid gap-5">
+            <ul className="mt-8 grid gap-5 list-none p-0">
               <li className="flex gap-3">
                 <i className="fa-solid fa-graduation-cap mt-1 text-green"></i>
                 <span>
@@ -155,24 +155,9 @@ function Home() {
             </ul>
           </article>
 
-          <figure className="overflow-hidden rounded-[2rem] shadow-hero ring-1 ring-coffee/10">
+          <figure className="overflow-hidden rounded-[2rem] shadow-hero ring-1 ring-coffee/10 m-0">
             <img src={cafecito} alt="Desarrollo tecnológico SENA" className="aspect-[4/3] h-full w-full object-cover" />
           </figure>
-        </section>
-
-        <section className="px-6 py-20 sm:px-10 lg:py-24">
-          <article className="mx-auto max-w-4xl rounded-[2rem] bg-gradient-to-br from-coffee to-coffee-soft p-8 text-center text-white shadow-hero sm:p-12">
-            <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">Comienza a Optimizar tu Producción Hoy</h2>
-            <p className="mt-3 text-lg text-white/85">
-              Únete a cientos de caficultores que ya están mejorando sus cultivos con CoffeeTech
-            </p>
-            <Link
-              to="/registro"
-              className="mt-7 inline-block rounded-xl bg-white px-6 py-3.5 font-bold text-coffee shadow-sm transition hover:-translate-y-0.5 hover:bg-[#f6f2e9]"
-            >
-              Comenzar Gratis
-            </Link>
-          </article>
         </section>
       </main>
 
@@ -193,7 +178,7 @@ function Home() {
 
           <nav>
             <h3 className="mb-3 font-bold text-white">Plataforma</h3>
-            <ul className="grid gap-2 text-sm">
+            <ul className="grid gap-2 text-sm list-none p-0">
               <li><a href="#" className="hover:text-white">Dashboard</a></li>
               <li><a href="#" className="hover:text-white">Gestión de Cultivos</a></li>
               <li><a href="#" className="hover:text-white">Control de Plagas</a></li>
@@ -203,7 +188,7 @@ function Home() {
 
           <nav>
             <h3 className="mb-3 font-bold text-white">Recursos</h3>
-            <ul className="grid gap-2 text-sm">
+            <ul className="grid gap-2 text-sm list-none p-0">
               <li><a href="#" className="hover:text-white">Documentación</a></li>
               <li><a href="#" className="hover:text-white">Tutoriales</a></li>
               <li><a href="#" className="hover:text-white">Blog</a></li>
@@ -224,8 +209,6 @@ function Home() {
           <p>&copy; 2026 CoffeeTech. Todos los derechos reservados. Diseñado con tecnología para el café colombiano.</p>
         </aside>
       </footer>
-    </div>
+    </>
   );
 }
-
-export default Home;
