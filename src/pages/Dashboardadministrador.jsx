@@ -32,8 +32,21 @@ export default function Dashboardadministrador() {
     setNuevoNombre('');
   };
 
-  const handleEliminarUsuario = (id) => {
-    setUsuarios(usuarios.filter((u) => u.id !== id));
+  const handleEliminarUsuario = (id, nombre) => {
+    // Primera confirmación
+    const c1 = window.confirm(`¿Estás seguro de que deseas eliminar al usuario ${nombre}?`);
+    if (!c1) return;
+
+    // Segunda confirmación
+    const c2 = window.confirm(`¡ADVERTENCIA! Esta acción no se puede deshacer. ¿Deseas continuar eliminando a ${nombre}?`);
+    if (!c2) return;
+
+    // Tercera confirmación
+    const c3 = window.confirm(`Confirmación final: ¿Realmente quieres proceder a eliminar a ${nombre}?`);
+    if (!c3) return;
+
+    // Bloqueo final de eliminación
+    alert(`Acción denegada: No tienes permisos para eliminar al usuario ${nombre}.`);
   };
 
   return (
@@ -98,9 +111,10 @@ export default function Dashboardadministrador() {
                     <td>{usr.rol}</td>
                     <td><span className="badge badge-success">{usr.estado}</span></td>
                     <td className="text-right">
+                      {/* AQUÍ ESTÁ EL CAMBIO: Se pasa usr.id y usr.nombre a la función */}
                       <button
                         className="btn-danger-soft"
-                        onClick={() => handleEliminarUsuario(usr.id)}
+                        onClick={() => handleEliminarUsuario(usr.id, usr.nombre)}
                       >
                         Eliminar
                       </button>
@@ -143,4 +157,4 @@ export default function Dashboardadministrador() {
       </main>
     </>
   );
-}
+} 
