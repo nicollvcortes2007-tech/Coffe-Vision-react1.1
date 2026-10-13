@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Sidebar from '../components/Dashboardadministrador/Sidebar';
 import Topbar from '../components/Dashboardadministrador/Topbar';
-import KpiCard from '../components/comunes/KpiCard';
-import FincaCard from '../components/comunes/FincaCard';
-import ProgressBar from '../components/comunes/ProgressBar';
+import KpiCard from '../components/Dashboardadministrador/KpiCard';
+import FincaCard from '../components/Dashboardadministrador/FincaCard';
+import ProgressBar from '../components/Dashboardadministrador/ProgressBar';
 import { UserPlus, ShieldAlert } from 'lucide-react';
 import { 
   kpisData, 
@@ -111,7 +111,6 @@ export default function Dashboardadministrador() {
                     <td>{usr.rol}</td>
                     <td><span className="badge badge-success">{usr.estado}</span></td>
                     <td className="text-right">
-                      {/* AQUÍ ESTÁ EL CAMBIO: Se pasa usr.id y usr.nombre a la función */}
                       <button
                         className="btn-danger-soft"
                         onClick={() => handleEliminarUsuario(usr.id, usr.nombre)}
@@ -157,4 +156,4 @@ export default function Dashboardadministrador() {
       </main>
     </>
   );
-} 
+}
