@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import Sidebar from '../components/Dashboardadministrador/Sidebar';
 import Topbar from '../components/Dashboardadministrador/Topbar';
-import KpiCard from '../components/Dashboardadministrador/KpiCard';
-import FincaCard from '../components/Dashboardadministrador/FincaCard';
-import ProgressBar from '../components/Dashboardadministrador/ProgressBar';
+import KpiCard from '../components/comunes/KpiCard';
+import FincaCard from '../components/comunes/FincaCard';
+import ProgressBar from '../components/comunes/ProgressBar';
 import { UserPlus, ShieldAlert } from 'lucide-react';
 import { 
   kpisData, 
