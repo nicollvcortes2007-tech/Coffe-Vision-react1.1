@@ -7,7 +7,7 @@ import Signup from "@/pages/Signup";
 
 // Páginas del caficultor
 import DashboardCaficultor from "@/pages/DashboardCaficultor";
-import Estadisticas from "@/pages/Estadisticascultivo";
+import Estadisticas from "@/pages/estadisticascultivo";
 import Cultivos from "@/pages/cultivos";
 // Páginas del administrador
 
@@ -31,3 +31,4 @@ function Rutas() {
 }
 
 export default Rutas;
+
