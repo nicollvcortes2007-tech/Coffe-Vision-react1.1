@@ -1,25 +1,415 @@
+
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PlantillaPrincipal from '@/plantillas/PlantillaPrincipal';
-import cafe from '@/assets/imagenes/Cafe.webp';
-import cosecha from '@/assets/imagenes/cosecha.webp';
 
-const lotes=[
- {lote:'El Paraíso',variedad:'Castillo',ha:8.5,cargas:440,monitoreos:12,alertas:1,estado:'En observación'},
- {lote:'La Esperanza',variedad:'Castillo',ha:7.2,cargas:365,monitoreos:10,alertas:1,estado:'En observación'},
- {lote:'Lote Central',variedad:'Castillo',ha:5.8,cargas:285,monitoreos:9,alertas:0,estado:'Sin alertas'},
- {lote:'El Roble',variedad:'Castillo',ha:3,cargas:145,monitoreos:7,alertas:0,estado:'Sin alertas'},
+const lotes = [
+  {
+    lote: 'El Paraíso',
+    variedad: 'Castillo',
+    ha: 8.5,
+    cargas: 440,
+    monitoreos: 12,
+    alertas: 1,
+    estado: 'En observación',
+  },
+  {
+    lote: 'La Esperanza',
+    variedad: 'Castillo',
+    ha: 7.2,
+    cargas: 365,
+    monitoreos: 10,
+    alertas: 1,
+    estado: 'En observación',
+  },
+  {
+    lote: 'Lote Central',
+    variedad: 'Castillo',
+    ha: 5.8,
+    cargas: 285,
+    monitoreos: 9,
+    alertas: 0,
+    estado: 'Sin alertas',
+  },
+  {
+    lote: 'El Roble',
+    variedad: 'Castillo',
+    ha: 3,
+    cargas: 145,
+    monitoreos: 7,
+    alertas: 0,
+    estado: 'Sin alertas',
+  },
 ];
-const meses12=[['Nov',72],['Dic',81],['Ene',76],['Feb',88],['Mar',92],['Abr',84],['May',96],['Jun',89],['Jul',103],['Ago',98],['Sep',110],['Oct',116]];
-const meses3=[['Ago',98],['Sep',110],['Oct',116]];
-export default function Estadisticas(){
- const [periodo,setPeriodo]=useState('12'); const totalHa=lotes.reduce((s,l)=>s+l.ha,0); const totalCargas=lotes.reduce((s,l)=>s+l.cargas,0); const monitoreos=lotes.reduce((s,l)=>s+l.monitoreos,0); const alertas=lotes.reduce((s,l)=>s+l.alertas,0); const datos=periodo==='12'?meses12:meses3; const max=Math.max(...datos.map(d=>d[1])); const rendimiento=useMemo(()=> (totalCargas/totalHa).toFixed(1),[totalCargas,totalHa]);
- return <PlantillaPrincipal><main className="cv-stats"><section className="cv-stats-hero"><div className="cv-stats-hero-image"><img src={cosecha} alt="Cosecha de café"/></div><div className="cv-stats-hero-copy"><span className="cv-eyebrow">COFFEE+VISION · DATOS PARA DECIDIR</span><h1>Tu cosecha,<br/><em>vista con claridad.</em></h1><p>Indicadores de producción y seguimiento sanitario con periodos y fuentes identificadas.</p><Link to="/caficultor/cultivos">← Volver a mis cultivos</Link></div><img className="cv-stats-coffee" src={cafe} alt="Café tostado"/></section>
- <section className="cv-period-banner"><div><strong>Periodo de producción</strong><span>Las cifras de producción se presentan para 12 meses; el gráfico permite comparar con los últimos 3 meses.</span></div><div className="cv-period-toggle"><button className={periodo==='12'?'active':''} onClick={()=>setPeriodo('12')}>12 meses</button><button className={periodo==='3'?'active':''} onClick={()=>setPeriodo('3')}>3 meses</button></div></section>
- <section className="cv-stats-kpis"><article className="cv-stat-green"><span>🌿</span><small>Área total registrada</small><strong>{totalHa.toFixed(1)} ha</strong><p>4 lotes de café</p></article><article className="cv-stat-gold"><span>🧺</span><small>Producción estimada anual</small><strong>{totalCargas.toLocaleString('es-CO')} cargas</strong><p>Estimación para 12 meses</p></article><article className="cv-stat-purple"><span>📈</span><small>Rendimiento medio</small><strong>{rendimiento}</strong><p>Cargas por hectárea al año</p></article><article className="cv-stat-coral"><span>🩺</span><small>Monitoreos registrados</small><strong>{monitoreos}</strong><p>{alertas} alertas registradas por lote</p></article></section>
- <section className="cv-stats-main-grid"><article className="cv-stats-card cv-chart-card"><div className="cv-card-title"><div><span className="cv-eyebrow">PRODUCCIÓN</span><h2>Comportamiento mensual</h2><p>Estimación mensual ilustrativa · unidad: cargas</p></div><span className="cv-unit">Cargas</span></div><div className="cv-chart-area"><div className="cv-chart-y"><span>{max}</span><span>{Math.round(max*.66)}</span><span>{Math.round(max*.33)}</span><span>0</span></div><div className="cv-chart-bars">{datos.map(([mes,val])=><div className="cv-chart-column" key={mes}><b>{val}</b><div className="cv-chart-track"><i style={{height:`${val/max*100}%`}}/></div><small>{mes}</small></div>)}</div></div><p className="cv-chart-foot">Nota: los valores mensuales de esta gráfica son ilustrativos y deben reemplazarse por datos reales de cosecha para representar la producción medida.</p></article>
- <article className="cv-stats-card cv-health-card"><div className="cv-card-title"><div><span className="cv-eyebrow">SEGUIMIENTO</span><h2>Estado sanitario</h2><p>Basado en alertas y monitoreos</p></div><span className="cv-health-icon">✚</span></div><div className="cv-health-summary"><div className="cv-health-number"><strong>{monitoreos}</strong><span>monitoreos</span></div><div className="cv-health-number warning"><strong>{alertas}</strong><span>alertas</span></div></div><div className="cv-health-lots">{lotes.map(l=><div key={l.lote}><span>{l.lote}</span><b className={l.alertas?'warning':'ok'}>{l.alertas?`${l.alertas} alerta`:'Sin alertas'}</b></div>)}</div><p className="cv-source-note">Este resumen no es un diagnóstico automático: refleja únicamente los registros cargados para cada lote.</p></article></section>
- <section className="cv-stats-card cv-production-table"><div className="cv-card-title"><div><span className="cv-eyebrow">DESGLOSE POR LOTE</span><h2>Producción estimada anual</h2><p>Periodo de referencia: 12 meses · variedad registrada: Castillo.</p></div><a href="./Estadisticas_CoffeeVision.xlsx" download className="cv-excel-link">▦ Descargar Excel</a></div><div className="cv-table-wrap"><table><thead><tr><th>Lote</th><th>Variedad</th><th>Área</th><th>Producción anual</th><th>Rendimiento</th><th>Estado sanitario</th></tr></thead><tbody>{lotes.map(l=><tr key={l.lote}><td><strong>{l.lote}</strong></td><td><span className="cv-variety-pill">{l.variedad}</span></td><td>{l.ha} ha</td><td><strong>{l.cargas} cargas</strong></td><td>{(l.cargas/l.ha).toFixed(1)} cargas/ha</td><td><span className={`cv-health-pill ${l.alertas?'warning':'ok'}`}>{l.alertas?`${l.alertas} alerta`:'Sin alertas'}</span></td></tr>)}</tbody></table></div></section>
- <section className="cv-methodology"><div className="cv-method-icon">💡</div><div><h3>¿De dónde salen estos indicadores?</h3><p><b>Producción:</b> suma de la estimación anual definida para cada lote; no equivale a cosecha real confirmada. <b>Estado sanitario:</b> recuento de monitoreos y alertas registrados. Para un diagnóstico agronómico se requiere observación de campo y validación técnica. <b>Importante:</b> las cifras incluidas son datos demostrativos de la interfaz, no registros reales de tu finca.</p></div></section>
- </main></PlantillaPrincipal>
+
+const meses12 = [
+  ['Nov', 72],
+  ['Dic', 81],
+  ['Ene', 76],
+  ['Feb', 88],
+  ['Mar', 92],
+  ['Abr', 84],
+  ['May', 96],
+  ['Jun', 89],
+  ['Jul', 103],
+  ['Ago', 98],
+  ['Sep', 110],
+  ['Oct', 116],
+];
+
+const meses3 = [
+  ['Ago', 98],
+  ['Sep', 110],
+  ['Oct', 116],
+];
+
+export default function Estadisticas() {
+  const [periodo, setPeriodo] = useState('12');
+
+  const totalHa = lotes.reduce((s, l) => s + l.ha, 0);
+  const totalCargas = lotes.reduce((s, l) => s + l.cargas, 0);
+  const monitoreos = lotes.reduce((s, l) => s + l.monitoreos, 0);
+  const alertas = lotes.reduce((s, l) => s + l.alertas, 0);
+
+  const datos = periodo === '12' ? meses12 : meses3;
+  const max = Math.max(...datos.map(d => d[1]));
+
+  const rendimiento = useMemo(
+    () => (totalCargas / totalHa).toFixed(1),
+    [totalCargas, totalHa]
+  );
+
+  return (
+    <PlantillaPrincipal>
+      {/* Corrección visual del encabezado y fondo general */}
+      <style>{`
+        .cv-stats {
+          background-color: #f7f7f1 !important;
+          min-height: 100%;
+        }
+
+        .cv-stats .cv-stats-hero {
+          background: #f7f7f1 !important;
+          background-image: none !important;
+          border: none !important;
+          border-radius: 0 !important;
+          box-shadow: none !important;
+          color: #293728 !important;
+          padding: 24px 12px 40px !important;
+        }
+
+        .cv-stats .cv-stats-hero::before,
+        .cv-stats .cv-stats-hero::after {
+          content: none !important;
+          display: none !important;
+          background: none !important;
+          background-image: none !important;
+          box-shadow: none !important;
+        }
+
+        .cv-stats .cv-stats-hero .cv-eyebrow {
+          color: #689b35 !important;
+        }
+
+        .cv-stats .cv-stats-hero h1 {
+          color: #293728 !important;
+        }
+
+        .cv-stats .cv-stats-hero h1 em {
+          color: #80ad45 !important;
+        }
+
+        .cv-stats .cv-stats-hero p {
+          color: #526174 !important;
+        }
+
+        .cv-stats .cv-stats-hero a {
+          color: #397d19 !important;
+        }
+      `}</style>
+
+      <main className="cv-stats">
+
+        {/* ENCABEZADO SIN FONDO CAFÉ */}
+        <section
+          className="cv-stats-hero"
+          style={{
+            background: '#f7f7f1',
+            backgroundImage: 'none',
+            boxShadow: 'none',
+            color: '#293728',
+          }}
+        >
+          <div className="cv-stats-hero-copy">
+            <span className="cv-eyebrow">
+              COFFEE+VISION · DATOS PARA DECIDIR
+            </span>
+
+            <h1>
+              Tu cosecha,
+              <br />
+              <em>vista con claridad.</em>
+            </h1>
+
+            <p>
+              Indicadores de producción y seguimiento sanitario
+              con periodos y fuentes identificadas.
+            </p>
+
+            <Link to="/caficultor/cultivos">
+              ← Volver a mis cultivos
+            </Link>
+          </div>
+        </section>
+
+        {/* PERIODO DE PRODUCCIÓN */}
+        <section className="cv-period-banner">
+          <div>
+            <strong>Periodo de producción</strong>
+            <span>
+              Las cifras de producción se presentan para 12 meses;
+              el gráfico permite comparar con los últimos 3 meses.
+            </span>
+          </div>
+
+          <div className="cv-period-toggle">
+            <button
+              className={periodo === '12' ? 'active' : ''}
+              onClick={() => setPeriodo('12')}
+            >
+              12 meses
+            </button>
+
+            <button
+              className={periodo === '3' ? 'active' : ''}
+              onClick={() => setPeriodo('3')}
+            >
+              3 meses
+            </button>
+          </div>
+        </section>
+
+        {/* INDICADORES */}
+        <section className="cv-stats-kpis">
+          <article className="cv-stat-green">
+            <span>🌿</span>
+            <small>Área total registrada</small>
+            <strong>{totalHa.toFixed(1)} ha</strong>
+            <p>4 lotes de café</p>
+          </article>
+
+          <article className="cv-stat-gold">
+            <span>🧺</span>
+            <small>Producción estimada anual</small>
+            <strong>
+              {totalCargas.toLocaleString('es-CO')} cargas
+            </strong>
+            <p>Estimación para 12 meses</p>
+          </article>
+
+          <article className="cv-stat-purple">
+            <span>📈</span>
+            <small>Rendimiento medio</small>
+            <strong>{rendimiento}</strong>
+            <p>Cargas por hectárea al año</p>
+          </article>
+
+          <article className="cv-stat-coral">
+            <span>🩺</span>
+            <small>Monitoreos registrados</small>
+            <strong>{monitoreos}</strong>
+            <p>{alertas} alertas registradas por lote</p>
+          </article>
+        </section>
+
+        {/* GRÁFICA Y ESTADO SANITARIO */}
+        <section className="cv-stats-main-grid">
+
+          <article className="cv-stats-card cv-chart-card">
+            <div className="cv-card-title">
+              <div>
+                <span className="cv-eyebrow">PRODUCCIÓN</span>
+                <h2>Comportamiento mensual</h2>
+                <p>Estimación mensual ilustrativa · unidad: cargas</p>
+              </div>
+
+              <span className="cv-unit">Cargas</span>
+            </div>
+
+            <div className="cv-chart-area">
+              <div className="cv-chart-y">
+                <span>{max}</span>
+                <span>{Math.round(max * 0.66)}</span>
+                <span>{Math.round(max * 0.33)}</span>
+                <span>0</span>
+              </div>
+
+              <div className="cv-chart-bars">
+                {datos.map(([mes, val]) => (
+                  <div className="cv-chart-column" key={mes}>
+                    <b>{val}</b>
+
+                    <div className="cv-chart-track">
+                      <i
+                        style={{
+                          height: `${(val / max) * 100}%`,
+                        }}
+                      />
+                    </div>
+
+                    <small>{mes}</small>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <p className="cv-chart-foot">
+              Nota: los valores mensuales de esta gráfica son ilustrativos
+              y deben reemplazarse por datos reales de cosecha para
+              representar la producción medida.
+            </p>
+          </article>
+
+          <article className="cv-stats-card cv-health-card">
+            <div className="cv-card-title">
+              <div>
+                <span className="cv-eyebrow">SEGUIMIENTO</span>
+                <h2>Estado sanitario</h2>
+                <p>Basado en alertas y monitoreos</p>
+              </div>
+
+              <span className="cv-health-icon">✚</span>
+            </div>
+
+            <div className="cv-health-summary">
+              <div className="cv-health-number">
+                <strong>{monitoreos}</strong>
+                <span>monitoreos</span>
+              </div>
+
+              <div className="cv-health-number warning">
+                <strong>{alertas}</strong>
+                <span>alertas</span>
+              </div>
+            </div>
+
+            <div className="cv-health-lots">
+              {lotes.map(l => (
+                <div key={l.lote}>
+                  <span>{l.lote}</span>
+
+                  <b className={l.alertas ? 'warning' : 'ok'}>
+                    {l.alertas
+                      ? `${l.alertas} alerta`
+                      : 'Sin alertas'}
+                  </b>
+                </div>
+              ))}
+            </div>
+
+            <p className="cv-source-note">
+              Este resumen no es un diagnóstico automático: refleja
+              únicamente los registros cargados para cada lote.
+            </p>
+          </article>
+        </section>
+
+        {/* TABLA DE PRODUCCIÓN */}
+        <section className="cv-stats-card cv-production-table">
+          <div className="cv-card-title">
+            <div>
+              <span className="cv-eyebrow">DESGLOSE POR LOTE</span>
+              <h2>Producción estimada anual</h2>
+              <p>
+                Periodo de referencia: 12 meses · variedad registrada: Castillo.
+              </p>
+            </div>
+
+            <a
+              href="/Estadisticas_CoffeeVision.xlsx"
+              download
+              className="cv-excel-link"
+            >
+              ▦ Descargar Excel
+            </a>
+          </div>
+
+          <div className="cv-table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Lote</th>
+                  <th>Variedad</th>
+                  <th>Área</th>
+                  <th>Producción anual</th>
+                  <th>Rendimiento</th>
+                  <th>Estado sanitario</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {lotes.map(l => (
+                  <tr key={l.lote}>
+                    <td>
+                      <strong>{l.lote}</strong>
+                    </td>
+
+                    <td>
+                      <span className="cv-variety-pill">
+                        {l.variedad}
+                      </span>
+                    </td>
+
+                    <td>{l.ha} ha</td>
+
+                    <td>
+                      <strong>{l.cargas} cargas</strong>
+                    </td>
+
+                    <td>
+                      {(l.cargas / l.ha).toFixed(1)} cargas/ha
+                    </td>
+
+                    <td>
+                      <span
+                        className={`cv-health-pill ${
+                          l.alertas ? 'warning' : 'ok'
+                        }`}
+                      >
+                        {l.alertas
+                          ? `${l.alertas} alerta`
+                          : 'Sin alertas'}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        {/* METODOLOGÍA */}
+        <section className="cv-methodology">
+          <div className="cv-method-icon">💡</div>
+
+          <div>
+            <h3>¿De dónde salen estos indicadores?</h3>
+
+            <p>
+              <b>Producción:</b> suma de la estimación anual definida
+              para cada lote; no equivale a cosecha real confirmada.
+              {' '}
+              <b>Estado sanitario:</b> recuento de monitoreos y alertas
+              registrados. Para un diagnóstico agronómico se requiere
+              observación de campo y validación técnica.
+              {' '}
+              <b>Importante:</b> las cifras incluidas son datos
+              demostrativos de la interfaz, no registros reales de tu finca.
+            </p>
+          </div>
+        </section>
+
+      </main>
+    </PlantillaPrincipal>
+  );
 }
