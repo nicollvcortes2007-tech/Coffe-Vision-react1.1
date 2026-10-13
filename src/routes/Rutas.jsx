@@ -22,7 +22,10 @@ function Rutas() {
 
       {/* Caficultor */}
       <Route path="/dashboard/caficultor" element={<DashboardCaficultor />} />
+      <Route path="/notificaciones" element={<Notificaciones />} />
 
+      {/* Administrador */}
+      <Route path="/perfil/admin" element={<Perfiladminist />} />
     </Routes>
   );
 }

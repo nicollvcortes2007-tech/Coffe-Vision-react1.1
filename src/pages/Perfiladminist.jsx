@@ -2,29 +2,6 @@ import { useState } from "react";
 import PlantillaPrincipal from "@/plantillas/PlantillaPrincipal";
 import Topbar from "@/components/navegacion/Topbar";
 import persona from "@/assets/imagenes/persona.jpg";
-import logo from "@/assets/imagenes/logo2.png";
-
-const tarjetas = [
-  {
-    titulo: "Administrador",
-    dato: "Administrador del Sistema",
-    descripcion: "Usuario administrador de Coffee + Visión",
-  },
-];
-
-const barras = [
-  {
-    alto: "100%",
-    clase: "bg-[#769f1a]",
-  },
-];
-
-const recomendaciones = [
-  "Gestiona tu información personal",
-  "Actualiza tus datos de contacto",
-  "Mantén segura tu cuenta",
-  "Actualiza tu foto de perfil",
-];
 
 const filtros = [
   "Información personal",
@@ -33,72 +10,35 @@ const filtros = [
   "Actividad reciente",
 ];
 
-const registros = [
-  {
-    titulo: "Nombres",
-    valor: "Administrador",
-  },
-  {
-    titulo: "Apellidos",
-    valor: "Sistema",
-  },
-  {
-    titulo: "Correo electrónico",
-    valor: "admin@coffeetech.com",
-  },
-  {
-    titulo: "Rol",
-    valor: "Administrador",
-  },
-  {
-    titulo: "Teléfono",
-    valor: "+57 300 123 4567",
-  },
-  {
-    titulo: "Dirección",
-    valor: "Calle 5 #12-45, Centro",
-  },
-  {
-    titulo: "Municipio",
-    valor: "Popayán",
-  },
-  {
-    titulo: "Departamento",
-    valor: "Cauca",
-  },
-];
+const formularioInicial = {
+  nombres: "Administrador",
+  apellidos: "Sistema",
+  correo: "admin@coffeetech.com",
+  rol: "admin",
+  telefono: "+57 300 123 4567",
+  direccion: "Calle 5 #12-45, Centro",
+  municipio: "Popayán",
+  departamento: "cauca",
+};
 
 export default function PerfilAdministrador() {
   const [fotoPerfil, setFotoPerfil] = useState(persona);
-
-  const [formulario, setFormulario] = useState({
-    nombres: "Administrador",
-    apellidos: "Sistema",
-    correo: "admin@coffeetech.com",
-    rol: "admin",
-    telefono: "+57 300 123 4567",
-    direccion: "Calle 5 #12-45, Centro",
-    municipio: "Popayán",
-    departamento: "cauca",
-  });
-
+  const [formulario, setFormulario] = useState(formularioInicial);
   const [pestanaActiva, setPestanaActiva] = useState(
     "Información personal"
   );
-
-  const [menuActivo, setMenuActivo] = useState("Notificaciones");
-
   const [errores, setErrores] = useState({});
+
+  const nombreCompleto =
+    `${formulario.nombres} ${formulario.apellidos}`.trim();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    let nuevoValor = value;
-
-    // Solo números, + y espacios para teléfono
-    if (name === "telefono") {
-      nuevoValor = value.replace(/[^0-9+ ]/g, "");
-    }
+    const nuevoValor =
+      name === "telefono"
+        ? value.replace(/[^0-9+ ]/g, "")
+        : value;
 
     setFormulario((prev) => ({
       ...prev,
@@ -127,7 +67,7 @@ export default function PerfilAdministrador() {
     setErrores(nuevosErrores);
 
     if (Object.keys(nuevosErrores).length > 0) {
-      alert("¡Todos los campos de esta sección son obligatorios!");
+      alert("¡Todos los campos son obligatorios!");
       return;
     }
 
@@ -135,24 +75,26 @@ export default function PerfilAdministrador() {
   };
 
   const cancelarCambios = () => {
-    setFormulario({
-      nombres: "Administrador",
-      apellidos: "Sistema",
-      correo: "admin@coffeetech.com",
-      rol: "admin",
-      telefono: "+57 300 123 4567",
-      direccion: "Calle 5 #12-45, Centro",
-      municipio: "Popayán",
-      departamento: "cauca",
-    });
-
+    setFormulario({ ...formularioInicial });
     setErrores({});
   };
 
   const seleccionarImagen = (e) => {
-    const archivo = e.target.files[0];
+    const archivo = e.target.files?.[0];
 
     if (!archivo) return;
+
+    if (!["image/jpeg", "image/png", "image/webp"].includes(archivo.type)) {
+      alert("Selecciona una imagen JPG, PNG o WEBP.");
+      e.target.value = "";
+      return;
+    }
+
+    if (archivo.size > 5 * 1024 * 1024) {
+      alert("La imagen no puede superar los 5 MB.");
+      e.target.value = "";
+      return;
+    }
 
     const lector = new FileReader();
 
@@ -161,336 +103,359 @@ export default function PerfilAdministrador() {
     };
 
     lector.readAsDataURL(archivo);
+    e.target.value = "";
   };
 
   const eliminarFoto = () => {
     setFotoPerfil(persona);
   };
 
-  const nombreCompleto =
-    `${formulario.nombres} ${formulario.apellidos}`.trim();
+  const campoClase = (campo) =>
+    `w-full min-w-0 rounded-lg border ${
+      errores[campo] ? "border-red-500" : "border-line"
+    } bg-white px-3 py-2.5 text-sm text-ink outline-none focus:border-green focus:ring-2 focus:ring-green/20`;
 
   return (
     <PlantillaPrincipal>
       <Topbar />
 
-      <main className="main-content">
+      <main className="box-border min-w-0 w-full flex-1 bg-page p-4 sm:p-5 lg:p-6">
+        <div className="mx-auto w-full max-w-[1600px] space-y-4">
 
-        {/* ENCABEZADO SUPERIOR */}
-        <header className="top-header">
+          {/* ENCABEZADO SUPERIOR */}
+          <header className="border-b border-line pb-3">
+            <h1 className="text-2xl font-bold text-coffee">
+              Administrador
+            </h1>
 
-          <div>
-            <h1>Administrador</h1>
-            <p>Panel de Administración</p>
+            <p className="mt-1 text-sm text-muted">
+              Panel de Administración
+            </p>
+          </header>
+
+          {/* TÍTULO DEL PERFIL */}
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 className="text-xl font-bold text-ink">
+                Mi perfil
+              </h2>
+
+              <p className="mt-1 text-sm text-muted">
+                Gestiona tu información personal y configuración de la cuenta.
+              </p>
+            </div>
           </div>
 
-          <section className="user-status">
+          {/* TRES COLUMNAS ALINEADAS Y BALANCEADAS EN ALTURA */}
+          <section className="grid min-w-0 grid-cols-1 items-stretch gap-5 xl:grid-cols-[280px_minmax(0,1fr)_300px]">
 
-            <button
-              type="button"
-              className="notif-bell"
-              aria-label="Notificaciones"
-            >
-              🔔
-              <mark className="badge-top">12</mark>
-            </button>
+            {/* COLUMNA IZQUIERDA: PERFIL Y FOTO */}
+            <article className="flex flex-col justify-between h-full min-w-0 overflow-hidden rounded-xl border border-line bg-surface shadow-panel">
+              <div>
+                <div className="flex flex-col items-center border-b border-line p-4">
+                  <img
+                    src={fotoPerfil}
+                    alt="Foto del administrador"
+                    className="h-16 w-16 rounded-full border-2 border-white object-cover shadow-sm"
+                  />
 
-            <button
-              type="button"
-              className="user-menu-btn"
-            >
-              <img
-                src={fotoPerfil}
-                alt="Foto de perfil de Administrador"
-              />
+                  <h3 className="mt-2 text-center text-sm font-bold text-coffee">
+                    {nombreCompleto}
+                  </h3>
 
-              <span className="user-info-text">
-                <strong>{nombreCompleto}</strong>
-                <small>admin@coffeetech.com</small>
-              </span>
+                  <p className="mt-2 rounded-full bg-green-soft px-3 py-1 text-center text-xs font-semibold text-green-deep">
+                    Administrador del Sistema
+                  </p>
 
-              <span className="arrow-down">▼</span>
-            </button>
+                  <p className="mt-2 break-all text-center text-xs text-muted">
+                    {formulario.correo}
+                  </p>
+                </div>
 
-          </section>
-        </header>
+                {/* CAMBIAR FOTO */}
+                <div className="space-y-2 border-b border-line p-4">
+                  <h3 className="text-sm font-bold text-ink">
+                    Foto del administrador
+                  </h3>
 
-        <hr />
+                  <p className="text-xs leading-relaxed text-muted">
+                    Formatos JPG, PNG y WEBP. Máximo 5 MB.
+                  </p>
 
-        {/* TÍTULO DE LA SECCIÓN */}
-        <header className="section-header">
-          <h2>Mi perfil</h2>
-
-          <p>
-            Gestiona tu información personal y configuración de la cuenta.
-          </p>
-        </header>
-
-        {/* CONTENIDO DEL PERFIL */}
-        <section className="profile-grid">
-
-          {/* TARJETA RESUMEN */}
-          <article className="card profile-summary">
-
-            <figure className="summary-logo">
-              <img
-                src={logo}
-                alt="Logotipo Coffee + Visión"
-              />
-            </figure>
-
-            <h3>{nombreCompleto}</h3>
-
-            <p className="role-tag">
-              Administrador del Sistema
-            </p>
-
-            <address className="contact-info">
-              <ul>
-
-                <li>
-                  <span className="icon"></span>
-                  admin@coffeetech.com
-                </li>
-
-                <li>
-                  <span className="icon"></span>
-                  +57 300 123 4567
-                </li>
-
-                <li>
-                  <span className="icon"></span>
-                  Popayán, Cauca, Colombia
-                </li>
-
-              </ul>
-            </address>
-
-            <footer className="member-since">
-              <time dateTime="2024-01-15">
-                <span className="icon"></span>
-                Miembro desde: 15/01/2024
-              </time>
-            </footer>
-
-          </article>
-
-          {/* FORMULARIO */}
-          <form
-            className="card profile-form"
-            onSubmit={guardarCambios}
-          >
-
-            {/* PESTAÑAS */}
-            <nav className="form-tabs">
-              <ul>
-
-                {filtros.map((filtro) => (
-                  <li key={filtro}>
-
-                    <a
-                      href="#"
-                      className={
-                        pestanaActiva === filtro
-                          ? "active-tab"
-                          : ""
-                      }
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setPestanaActiva(filtro);
-                      }}
-                    >
-                      {filtro}
-                    </a>
-
-                  </li>
-                ))}
-
-              </ul>
-            </nav>
-
-            {/* INFORMACIÓN PERSONAL */}
-            {pestanaActiva === "Información personal" && (
-              <>
-
-                <fieldset className="form-grid">
-
-                  <legend className="visually-hidden">
-                    Datos Personales
-                  </legend>
-
-                  {/* NOMBRES */}
-                  <p>
-                    <label htmlFor="nombres">
-                      Nombres
-                    </label>
-
+                  <label className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg bg-green px-2 py-2 text-center text-xs font-semibold text-white transition hover:bg-green-deep">
+                    ↑ Seleccionar imagen
                     <input
-                      type="text"
-                      id="nombres"
-                      name="nombres"
-                      value={formulario.nombres}
-                      onChange={handleChange}
-                      style={{
-                        borderColor: errores.nombres
-                          ? "#e53e3e"
-                          : undefined,
-                      }}
+                      type="file"
+                      accept="image/jpeg,image/png,image/webp"
+                      className="sr-only"
+                      onChange={seleccionarImagen}
                     />
-                  </p>
-
-                  {/* APELLIDOS */}
-                  <p>
-                    <label htmlFor="apellidos">
-                      Apellidos
-                    </label>
-
-                    <input
-                      type="text"
-                      id="apellidos"
-                      name="apellidos"
-                      value={formulario.apellidos}
-                      onChange={handleChange}
-                      style={{
-                        borderColor: errores.apellidos
-                          ? "#e53e3e"
-                          : undefined,
-                      }}
-                    />
-                  </p>
-
-                  {/* CORREO */}
-                  <p>
-                    <label htmlFor="correo">
-                      Correo electrónico
-                    </label>
-
-                    <input
-                      type="email"
-                      id="correo"
-                      name="correo"
-                      value={formulario.correo}
-                      onChange={handleChange}
-                      style={{
-                        borderColor: errores.correo
-                          ? "#e53e3e"
-                          : undefined,
-                      }}
-                    />
-                  </p>
-
-                  {/* ROL */}
-                  <p className="select-wrapper">
-                    <label htmlFor="rol">
-                      Rol
-                    </label>
-
-                    <select
-                      id="rol"
-                      name="rol"
-                      value={formulario.rol}
-                      onChange={handleChange}
-                    >
-                      <option value="admin">
-                        Administrador
-                      </option>
-
-                      <option value="editor">
-                        Editor
-                      </option>
-                    </select>
-                  </p>
-
-                  {/* TELÉFONO */}
-                  <p>
-                    <label htmlFor="telefono">
-                      Teléfono
-                    </label>
-
-                    <input
-                      type="tel"
-                      id="telefono"
-                      name="telefono"
-                      value={formulario.telefono}
-                      onChange={handleChange}
-                      style={{
-                        borderColor: errores.telefono
-                          ? "#e53e3e"
-                          : undefined,
-                      }}
-                    />
-                  </p>
-
-                  {/* DIRECCIÓN */}
-                  <p>
-                    <label htmlFor="direccion">
-                      Dirección
-                    </label>
-
-                    <input
-                      type="text"
-                      id="direccion"
-                      name="direccion"
-                      value={formulario.direccion}
-                      onChange={handleChange}
-                      style={{
-                        borderColor: errores.direccion
-                          ? "#e53e3e"
-                          : undefined,
-                      }}
-                    />
-                  </p>
-
-                  {/* MUNICIPIO */}
-                  <p>
-                    <label htmlFor="municipio">
-                      Municipio
-                    </label>
-
-                    <input
-                      type="text"
-                      id="municipio"
-                      name="municipio"
-                      value={formulario.municipio}
-                      onChange={handleChange}
-                      style={{
-                        borderColor: errores.municipio
-                          ? "#e53e3e"
-                          : undefined,
-                      }}
-                    />
-                  </p>
-
-                  {/* DEPARTAMENTO */}
-                  <p className="select-wrapper">
-                    <label htmlFor="departamento">
-                      Departamento
-                    </label>
-
-                    <select
-                      id="departamento"
-                      name="departamento"
-                      value={formulario.departamento}
-                      onChange={handleChange}
-                    >
-                      <option value="cauca">
-                        Cauca
-                      </option>
-
-                      <option value="valle">
-                        Valle del Cauca
-                      </option>
-                    </select>
-                  </p>
-
-                </fieldset>
-
-                {/* BOTONES */}
-                <footer className="form-actions">
+                  </label>
 
                   <button
                     type="button"
-                    className="btn-cancel"
+                    className="w-full rounded-lg border border-line px-2 py-2 text-xs font-semibold text-danger transition hover:bg-red-50"
+                    onClick={eliminarFoto}
+                  >
+                    Eliminar foto
+                  </button>
+                </div>
+              </div>
+
+              {/* CONTACTO */}
+              <div className="space-y-2.5 p-4 bg-page/30">
+                <div className="flex items-start gap-2 text-xs text-muted">
+                  <span>📞</span>
+                  <span className="break-words">
+                    {formulario.telefono}
+                  </span>
+                </div>
+
+                <div className="flex items-start gap-2 text-xs text-muted">
+                  <span>📍</span>
+                  <span>
+                    {formulario.municipio},{" "}
+                    {formulario.departamento === "cauca"
+                      ? "Cauca"
+                      : "Valle del Cauca"}, Colombia
+                  </span>
+                </div>
+
+                <div className="border-t border-line pt-2.5 text-xs text-muted">
+                  📅 Miembro desde: 15/01/2024
+                </div>
+              </div>
+            </article>
+
+            {/* COLUMNA CENTRAL: FORMULARIO */}
+            <div className="flex flex-col h-full min-w-0 overflow-hidden rounded-xl border border-line bg-surface shadow-panel">
+              <form onSubmit={guardarCambios} className="flex h-full flex-col justify-between">
+
+                <div>
+                  {/* PESTAÑAS */}
+                  <nav className="border-b border-line bg-white px-3 sm:px-4">
+                    <ul className="flex flex-wrap gap-x-1">
+                      {filtros.map((filtro) => (
+                        <li key={filtro}>
+                          <button
+                            type="button"
+                            className={`border-b-2 px-3 py-3 text-xs font-medium transition-colors sm:text-sm ${
+                              pestanaActiva === filtro
+                                ? "border-green text-green-deep font-semibold"
+                                : "border-transparent text-muted hover:text-ink"
+                            }`}
+                            onClick={() => setPestanaActiva(filtro)}
+                          >
+                            {filtro}
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </nav>
+
+                  {/* INFORMACIÓN PERSONAL */}
+                  {pestanaActiva === "Información personal" && (
+                    <fieldset className="grid min-w-0 grid-cols-1 gap-x-4 gap-y-4 p-4 sm:grid-cols-2 sm:p-5">
+                      <legend className="sr-only">
+                        Datos personales
+                      </legend>
+
+                      <div className="min-w-0 space-y-1.5">
+                        <label htmlFor="nombres" className="block text-sm font-semibold text-ink">
+                          Nombres
+                        </label>
+                        <input
+                          className={campoClase("nombres")}
+                          id="nombres"
+                          name="nombres"
+                          type="text"
+                          value={formulario.nombres}
+                          onChange={handleChange}
+                          aria-invalid={Boolean(errores.nombres)}
+                        />
+                      </div>
+
+                      <div className="min-w-0 space-y-1.5">
+                        <label htmlFor="apellidos" className="block text-sm font-semibold text-ink">
+                          Apellidos
+                        </label>
+                        <input
+                          className={campoClase("apellidos")}
+                          id="apellidos"
+                          name="apellidos"
+                          type="text"
+                          value={formulario.apellidos}
+                          onChange={handleChange}
+                          aria-invalid={Boolean(errores.apellidos)}
+                        />
+                      </div>
+
+                      <div className="min-w-0 space-y-1.5">
+                        <label htmlFor="correo" className="block text-sm font-semibold text-ink">
+                          Correo electrónico
+                        </label>
+                        <input
+                          className={campoClase("correo")}
+                          id="correo"
+                          name="correo"
+                          type="email"
+                          value={formulario.correo}
+                          onChange={handleChange}
+                          aria-invalid={Boolean(errores.correo)}
+                        />
+                      </div>
+
+                      <div className="min-w-0 space-y-1.5">
+                        <label htmlFor="rol" className="block text-sm font-semibold text-ink">
+                          Rol
+                        </label>
+                        <select
+                          className={campoClase("rol")}
+                          id="rol"
+                          name="rol"
+                          value={formulario.rol}
+                          onChange={handleChange}
+                        >
+                          <option value="admin">Administrador</option>
+                          <option value="editor">Editor</option>
+                        </select>
+                      </div>
+
+                      <div className="min-w-0 space-y-1.5">
+                        <label htmlFor="telefono" className="block text-sm font-semibold text-ink">
+                          Teléfono
+                        </label>
+                        <input
+                          className={campoClase("telefono")}
+                          id="telefono"
+                          name="telefono"
+                          type="tel"
+                          value={formulario.telefono}
+                          onChange={handleChange}
+                          aria-invalid={Boolean(errores.telefono)}
+                        />
+                      </div>
+
+                      <div className="min-w-0 space-y-1.5">
+                        <label htmlFor="direccion" className="block text-sm font-semibold text-ink">
+                          Dirección
+                        </label>
+                        <input
+                          className={campoClase("direccion")}
+                          id="direccion"
+                          name="direccion"
+                          type="text"
+                          value={formulario.direccion}
+                          onChange={handleChange}
+                          aria-invalid={Boolean(errores.direccion)}
+                        />
+                      </div>
+
+                      <div className="min-w-0 space-y-1.5">
+                        <label htmlFor="municipio" className="block text-sm font-semibold text-ink">
+                          Municipio
+                        </label>
+                        <input
+                          className={campoClase("municipio")}
+                          id="municipio"
+                          name="municipio"
+                          type="text"
+                          value={formulario.municipio}
+                          onChange={handleChange}
+                          aria-invalid={Boolean(errores.municipio)}
+                        />
+                      </div>
+
+                      <div className="min-w-0 space-y-1.5">
+                        <label htmlFor="departamento" className="block text-sm font-semibold text-ink">
+                          Departamento
+                        </label>
+                        <select
+                          className={campoClase("departamento")}
+                          id="departamento"
+                          name="departamento"
+                          value={formulario.departamento}
+                          onChange={handleChange}
+                        >
+                          <option value="cauca">Cauca</option>
+                          <option value="valle">Valle del Cauca</option>
+                        </select>
+                      </div>
+                    </fieldset>
+                  )}
+
+                  {pestanaActiva === "Seguridad" && (
+                    <section className="p-5">
+                      <h3 className="font-semibold text-ink">
+                        Seguridad de la cuenta
+                      </h3>
+                      <p className="mt-2 text-sm text-muted">
+                        Administra la seguridad y protección de tu cuenta.
+                      </p>
+                      <div className="mt-4 rounded-lg border border-line p-4">
+                        <p className="text-sm font-semibold text-ink">
+                          Protección de la cuenta
+                        </p>
+                        <p className="mt-1 text-sm text-muted">
+                          Mantén tus datos de acceso seguros y actualizados.
+                        </p>
+                      </div>
+                    </section>
+                  )}
+
+                  {pestanaActiva === "Notificaciones" && (
+                    <section className="p-5">
+                      <h3 className="font-semibold text-ink">
+                        Notificaciones
+                      </h3>
+                      <p className="mt-2 text-sm text-muted">
+                        Configuración de las notificaciones de la cuenta.
+                      </p>
+                      <div className="mt-4 rounded-lg border border-line p-4">
+                        <p className="text-sm font-semibold text-ink">
+                          Alertas del sistema
+                        </p>
+                        <p className="mt-1 text-sm text-muted">
+                          Consulta las novedades y mantente al tanto de la actividad de la plataforma.
+                        </p>
+                      </div>
+                    </section>
+                  )}
+
+                  {pestanaActiva === "Actividad reciente" && (
+                    <section className="p-5">
+                      <h3 className="font-semibold text-ink">
+                        Actividad reciente
+                      </h3>
+                      <p className="mt-2 text-sm text-muted">
+                        Consulta la información general de la actividad de tu cuenta.
+                      </p>
+                      <div className="mt-4 space-y-3">
+                        <div className="rounded-lg border border-line p-3">
+                          <p className="text-sm font-semibold text-ink">
+                            Perfil consultado
+                          </p>
+                          <p className="mt-1 text-xs text-muted">
+                            Información del administrador.
+                          </p>
+                        </div>
+                        <div className="rounded-lg border border-line p-3">
+                          <p className="text-sm font-semibold text-ink">
+                            Cuenta activa
+                          </p>
+                          <p className="mt-1 text-xs text-muted">
+                            El perfil está disponible para su administración.
+                          </p>
+                        </div>
+                      </div>
+                    </section>
+                  )}
+                </div>
+
+                <footer className="flex flex-wrap justify-end gap-3 border-t border-line bg-page/60 p-4">
+                  <button
+                    type="button"
+                    className="rounded-lg border border-line bg-white px-4 py-2.5 text-sm font-semibold text-ink transition hover:bg-page"
                     onClick={cancelarCambios}
                   >
                     Cancelar
@@ -498,109 +463,118 @@ export default function PerfilAdministrador() {
 
                   <button
                     type="submit"
-                    className="btn-save"
+                    className="rounded-lg bg-green px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-green-deep"
                   >
-                    <svg
-                      className="save-icon"
-                      viewBox="0 0 24 24"
-                      width="18"
-                      height="18"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"
-                      />
-                    </svg>
-
-                    Guardar cambios
+                    ✓ Guardar cambios
                   </button>
-
                 </footer>
+              </form>
+            </div>
 
-              </>
-            )}
+            {/* COLUMNA DERECHA: RESUMEN */}
+            <aside className="flex flex-col h-full min-w-0">
+              <article className="flex flex-col justify-between h-full rounded-xl border border-line bg-surface p-4 shadow-panel">
+                <div>
+                  <div className="flex items-center gap-3 border-b border-line pb-3">
+                    <img
+                      src={fotoPerfil}
+                      alt="Foto del administrador"
+                      className="h-11 w-11 rounded-full object-cover"
+                    />
+                    <div className="min-w-0">
+                      <h3 className="text-sm font-bold text-ink">
+                        Administrador
+                      </h3>
+                      <p className="text-xs text-green-deep">
+                        Administrador del Sistema
+                      </p>
+                    </div>
+                  </div>
 
-            {/* SEGURIDAD */}
-            {pestanaActiva === "Seguridad" && (
-              <section className="tab-pane active-pane">
-                <p>
-                  Configuración de seguridad de la cuenta.
-                </p>
-              </section>
-            )}
+                  <h3 className="mt-3 text-sm font-bold text-ink">
+                    Resumen de la cuenta
+                  </h3>
 
-            {/* NOTIFICACIONES */}
-            {pestanaActiva === "Notificaciones" && (
-              <section className="tab-pane active-pane">
-                <p>
-                  Configuración de notificaciones de la cuenta.
-                </p>
-              </section>
-            )}
+                  <p className="mt-1 text-xs leading-relaxed text-muted">
+                    Información general del perfil administrador de Coffee + Visión.
+                  </p>
 
-            {/* ACTIVIDAD RECIENTE */}
-            {pestanaActiva === "Actividad reciente" && (
-              <section className="tab-pane active-pane">
-                <p>
-                  Actividad reciente de la cuenta.
-                </p>
-              </section>
-            )}
+                  <div className="mt-3 space-y-2.5">
+                    <div>
+                      <p className="text-[11px] text-muted">Nombre completo</p>
+                      <p className="text-xs font-semibold text-ink">
+                        {nombreCompleto}
+                      </p>
+                    </div>
 
-          </form>
+                    <div>
+                      <p className="text-[11px] text-muted">Correo electrónico</p>
+                      <p className="text-xs font-semibold text-ink break-all">
+                        {formulario.correo}
+                      </p>
+                    </div>
 
-          {/* CAMBIAR FOTO */}
-          <article className="card profile-photo-upload">
+                    <div>
+                      <p className="text-[11px] text-muted">Rol asignado</p>
+                      <p className="text-xs font-semibold text-green-deep">
+                        {formulario.rol === "admin" ? "Administrador" : "Editor"}
+                      </p>
+                    </div>
 
-            <h3>
-              Cambiar foto de perfil
-            </h3>
+                    <div>
+                      <p className="text-[11px] text-muted">Teléfono de contacto</p>
+                      <p className="text-xs font-semibold text-ink">
+                        {formulario.telefono}
+                      </p>
+                    </div>
 
-            <p className="upload-instructions">
-              Formatos permitidos: JPG, PNG, WEBP.
-              Máx. 5 MB.
-            </p>
+                    <div>
+                      <p className="text-[11px] text-muted">Dirección</p>
+                      <p className="text-xs font-semibold text-ink">
+                        {formulario.direccion}
+                      </p>
+                    </div>
 
-            <figure className="avatar-large">
-              <img
-                src={fotoPerfil}
-                alt="Foto de perfil del administrador"
-              />
-            </figure>
+                    <div>
+                      <p className="text-[11px] text-muted">Ubicación</p>
+                      <p className="text-xs font-semibold text-ink">
+                        {formulario.municipio},{" "}
+                        {formulario.departamento === "cauca"
+                          ? "Cauca"
+                          : "Valle del Cauca"}, Colombia
+                      </p>
+                    </div>
+                  </div>
+                </div>
 
-            <footer className="photo-actions">
+                <div className="space-y-3 pt-3 border-t border-line mt-3">
+                  <div>
+                    <h4 className="text-sm font-bold text-ink">
+                      Estado de la cuenta
+                    </h4>
+                    <p className="mt-1 flex items-center gap-2 text-xs text-muted">
+                      <span className="h-2 w-2 rounded-full bg-green" />
+                      Cuenta activa
+                    </p>
+                    <p className="text-xs text-muted">
+                      Miembro desde: 15/01/2024
+                    </p>
+                  </div>
 
-              {/* SELECCIONAR IMAGEN */}
-              <label className="btn-upload">
-
-                <input
-                  type="file"
-                  accept="image/*"
-                  className="visually-hidden"
-                  onChange={seleccionarImagen}
-                />
-
-                <span>
-                  ↑ Seleccionar imagen
-                </span>
-
-              </label>
-
-              {/* ELIMINAR FOTO */}
-              <button
-                type="button"
-                className="btn-delete"
-                onClick={eliminarFoto}
-              >
-                Eliminar foto
-              </button>
-
-            </footer>
-
-          </article>
-
-        </section>
-
+                  <div className="border-t border-line pt-2">
+                    <h4 className="text-sm font-bold text-ink">
+                      Recomendaciones
+                    </h4>
+                    <ul className="mt-1.5 space-y-1 text-xs leading-relaxed text-muted">
+                      <li>✓ Mantén actualizados tus datos.</li>
+                      <li>✓ Utiliza un correo válido.</li>
+                    </ul>
+                  </div>
+                </div>
+              </article>
+            </aside>
+          </section>
+        </div>
       </main>
     </PlantillaPrincipal>
   );
