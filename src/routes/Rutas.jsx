@@ -7,28 +7,34 @@ import Signup from "@/pages/Signup";
 
 // Páginas del caficultor
 import DashboardCaficultor from "@/pages/DashboardCaficultor";
-import Estadisticas from "@/pages/estadisticascultivo";
 import Cultivos from "@/pages/cultivos";
-// Páginas del administrador
-
+import EstadisticasCultivo from "@/pages/estadisticascultivo";
 
 function Rutas() {
   return (
     <Routes>
-      {/* Públicas */}
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/registro" element={<Signup />} />
 
-      {/* Caficultor */}
-      <Route path="/dashboard/caficultor" element={<DashboardCaficultor />} />
-      <Route path="/caficultor/estadisticas" element={<Estadisticas />} />
-      <Route path="/caficultor/cultivos" element={<Cultivos />}
-/>
-
+      <Route
+        path="/dashboard/caficultor"
+        element={<DashboardCaficultor />}
+      />
+      <Route
+        path="/caficultor/cultivos"
+        element={<Cultivos />}
+      />
+      <Route
+        path="/caficultor/estadisticas"
+        element={<EstadisticasCultivo />}
+      />
     </Routes>
   );
 }
 
 export default Rutas;
+
+
+
 

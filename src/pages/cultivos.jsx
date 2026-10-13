@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PlantillaPrincipal from '@/plantillas/PlantillaPrincipal';
-import '@/estilos/cultivos.css';
 import cafe from '@/assets/imagenes/Cafe.webp';
 import cosecha from '@/assets/imagenes/cosecha.webp';
 import caficultor from '@/assets/imagenes/caficultor.jpg';
