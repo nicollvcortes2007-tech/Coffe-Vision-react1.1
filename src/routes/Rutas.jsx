@@ -1,15 +1,15 @@
 import { Routes, Route } from "react-router-dom";
 
 // Páginas públicas
-import Home from "@/pages/Home";
-import Login from "@/pages/Login";
-import Signup from "@/pages/Signup";
+import Home from "../pages/Home";
+import Login from "../pages/Login";
+import Signup from "../pages/Signup";
 
 // Páginas del caficultor
-import DashboardCaficultor from "@/pages/DashboardCaficultor";
+import DashboardCaficultor from "../pages/DashboardCaficultor";
 
 // Páginas del administrador
-import Dashboardadministrador from "@/pages/Dashboardadministrador";
+import Dashboardadministrador from "../pages/Dashboardadministrador";
 
 function Rutas() {
   return (
