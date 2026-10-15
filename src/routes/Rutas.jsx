@@ -16,7 +16,7 @@ import Recomendaciones from '@/pages/Recomendaciones';
 
 
 // Páginas del administrador
-import ConfiguracionAdministrador from "@/pages/ConfiguracionAdministrador";
+import ConfiguracionAdministrador from "@/components/configuracion/ConfiguracionAdministrador";
 
 function Rutas() {
   return (
@@ -28,10 +28,10 @@ function Rutas() {
 
       {/* Caficultor */}
       <Route path="/dashboard/caficultor" element={<DashboardCaficultor />} />
-      <Route path="/chatbot" element={<ChatBot/>} />
+      <Route path="/chatbot" element={<ChatBot />} />
       <Route path="/guias" element={<Guias />} />
 
-      <Route path="/inicio" element={<Inicio/>} />
+      <Route path="/inicio" element={<Inicio />} />
       <Route path="/recomendaciones" element={<Recomendaciones />} />
 
       {/* Administrador */}
@@ -41,6 +41,5 @@ function Rutas() {
     </Routes>
   );
 }
- 
+
 export default Rutas;
- 
