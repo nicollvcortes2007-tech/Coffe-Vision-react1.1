@@ -6,7 +6,7 @@ import caficultor from '@/assets/imagenes/caficultor.jpg';
 
 import BarraBusquedaGuias from '@/components/guias/BarraBusquedaGuias';
 import ListaGuias from '@/components/guias/ListaGuias';
-import { categorias, guiasPorCategoria } from '@/components/guias/datosGuia';
+import { categorias, guiasPorCategoria } from '@/components/guias/DatosGuia';
 
 import { useState } from 'react';
 
