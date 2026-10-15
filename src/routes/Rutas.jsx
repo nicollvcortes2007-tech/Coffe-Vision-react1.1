@@ -12,11 +12,13 @@ import Estadisticas from "@/pages/estadisticascultivo";
 import Guias from "@/pages/Guias";
 import Notificaciones from "@/pages/Notificaciones";
 import ChatBot from "@/pages/ChatBot";
-import Recomendaciones from "@/pages/Recomendaciones";
+import Guias from "@/pages/Guias";
 
-import DashboardAdministrador from "@/pages/Dashboardadministrador";
-import GestionDePlagas from "@/pages/gestiondeplagas";
-import PerfilAdministrador from "@/pages/Perfiladminist";
+import Inicio from '@/pages/Inicio';
+import Recomendaciones from '@/pages/Recomendaciones';
+
+
+// Páginas del administrador
 import ConfiguracionAdministrador from "@/pages/ConfiguracionAdministrador";
 
 function NoEncontrada() {
@@ -44,15 +46,10 @@ export default function Rutas() {
 
       {/* Área del caficultor */}
       <Route path="/dashboard/caficultor" element={<DashboardCaficultor />} />
-      <Route path="/inicio" element={<Inicio />} />
-      <Route path="/perfil" element={<Inicio />} />
-      <Route path="/registrar-labor" element={<RegistrarLabor />} />
-      <Route path="/cultivos" element={<GestionDeCultivos />} />
-      <Route path="/cultivos/gestion" element={<GestionDeCultivos />} />
-      <Route path="/estadisticas" element={<Estadisticas />} />
+      <Route path="/chatbot" element={<ChatBot/>} />
       <Route path="/guias" element={<Guias />} />
-      <Route path="/notificaciones" element={<Notificaciones />} />
-      <Route path="/chatbot" element={<ChatBot />} />
+
+      <Route path="/inicio" element={<Inicio/>} />
       <Route path="/recomendaciones" element={<Recomendaciones />} />
 
       {/* Área del administrador */}
@@ -66,3 +63,6 @@ export default function Rutas() {
     </Routes>
   );
 }
+ 
+export default Rutas;
+ 
