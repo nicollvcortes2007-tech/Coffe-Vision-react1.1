@@ -112,26 +112,24 @@ export default function Dashboardadministrador() {
               <h2 className="section-title" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
                 <i className="fa-solid fa-user-plus" aria-hidden="true" /> Agregar usuario
               </h2>
-              <form className="user-form" onSubmit={handleAgregarUsuario} style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
+              <form className="user-form" onSubmit={handleAgregarUsuario}>
                 <input
                   type="text"
                   placeholder="Nombre completo"
                   className="form-input"
                   value={nuevoNombre}
                   onChange={(e) => setNuevoNombre(e.target.value)}
-                  style={{ padding: '12px 16px', flex: 1, border: '1px solid #e2e8f0', borderRadius: '12px', outline: 'none', fontSize: '14px' }}
                   required
                 />
                 <select
                   className="form-select"
                   value={nuevoRol}
                   onChange={(e) => setNuevoRol(e.target.value)}
-                  style={{ padding: '12px 16px', border: '1px solid #e2e8f0', borderRadius: '12px', background: '#fff', outline: 'none', fontSize: '14px', color: '#334155' }}
                 >
                   <option value="caficultor">Caficultor</option>
                   <option value="administrador">Administrador</option>
                 </select>
-                <button type="submit" className="btn-primary" style={{ padding: '12px 28px', background: '#2e4a19', color: '#fff', border: 'none', borderRadius: '12px', cursor: 'pointer', fontWeight: '700', fontSize: '14px' }}>Guardar</button>
+                <button type="submit" className="btn-primary">Guardar</button>
               </form>
             </section>
 
@@ -188,7 +186,7 @@ export default function Dashboardadministrador() {
 
         {/* VISTA ESTADÍSTICAS */}
         {(vistaActual === 'inicio' || vistaActual === 'estadisticas') && (
-          <section style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px' }}>
+          <section style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: '24px' }}>
             
             <article style={{ background: '#fff', padding: '24px', borderRadius: '16px', boxShadow: '0 2px 8px rgba(0,0,0,0.03)' }}>
               <h2 style={{ fontSize: '16px', color: '#2d3748', marginBottom: '20px', fontWeight: '700' }}>Estadísticas Generales</h2>

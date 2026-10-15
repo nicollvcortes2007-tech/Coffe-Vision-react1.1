@@ -110,9 +110,12 @@
   .admin-main-content .charts-grid,
   .admin-main-content .user-form { grid-template-columns: minmax(0, 1fr); }
   .admin-welcome-banner { align-items: flex-start; flex-direction: column; }
+  .admin-system-health { width: 100%; }
 }
 
 @media (max-width: 480px) {
   .admin-main-content .kpi-grid { grid-template-columns: minmax(0, 1fr); }
   .admin-hero-banner { min-height: 170px; }
+  .admin-main-content .panel-header { padding: 1rem; }
+  .admin-main-content .card-panel { padding: 1rem; }
 }

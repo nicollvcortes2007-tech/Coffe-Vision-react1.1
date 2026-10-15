@@ -271,7 +271,7 @@ export default function Notificaciones() {
                 {registrosFiltrados.map((registro) => (
                   <li
                     key={registro.id}
-                    className={`w-full h-[120px] min-h-[120px] max-h-[120px] shrink-0 box-border flex items-center justify-between gap-4 p-4 border rounded bg-surface shadow-panel overflow-hidden ${
+                    className={`box-border flex min-h-[120px] w-full shrink-0 flex-col items-stretch justify-between gap-3 overflow-hidden rounded border bg-surface p-4 shadow-panel sm:h-[120px] sm:max-h-[120px] sm:flex-row sm:items-center sm:gap-4 ${
                       registro.noLeida
                         ? "border-l-4 border-l-green"
                         : "border-line"
@@ -297,7 +297,7 @@ export default function Notificaciones() {
                       </article>
                     </section>
 
-                    <aside className="shrink-0 w-[125px]">
+                    <aside className="w-full shrink-0 sm:w-[125px]">
                       {registro.noLeida && (
                         <button
                           type="button"

@@ -223,7 +223,7 @@ function ConfiguracionAdministrador() {
 
         {usuarioSeleccionado && (
           <div className="fixed inset-0 z-50 grid place-items-center bg-black/50 p-4" onMouseDown={(evento) => { if (evento.target === evento.currentTarget) setUsuarioSeleccionado(null); }}>
-            <section role="dialog" aria-modal="true" aria-labelledby="reset-pass-title" className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl">
+            <section role="dialog" aria-modal="true" aria-labelledby="reset-pass-title" className="max-h-[calc(100dvh-2rem)] w-full max-w-lg overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl sm:p-6">
               <p className="text-xs font-extrabold uppercase tracking-wider text-green-deep">Gestión de cuenta</p>
               <h3 id="reset-pass-title" className="mt-2 text-xl font-bold text-coffee">Cambiar contraseña</h3>
               <p className="mt-1 text-sm text-muted">Cuenta: {usuarioSeleccionado.nombre}</p>

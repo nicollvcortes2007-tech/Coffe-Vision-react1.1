@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "@/assets/imagenes/logo2.png";
 import cafe from "@/assets/imagenes/Cafe.webp";
@@ -21,15 +22,16 @@ const BENEFICIOS = [
 ];
 
 export default function Home() {
+  const [menuMovilAbierto, setMenuMovilAbierto] = useState(false);
   return (
     <>
-      <header className="sticky top-0 z-30 flex w-full flex-wrap items-center justify-between gap-3 border-b border-line/80 bg-white/90 px-4 py-1 shadow-sm backdrop-blur-xl sm:px-6">
+      <header className="sticky top-0 z-30 flex w-full flex-wrap items-center justify-between gap-2 border-b border-line/80 bg-white/90 px-3 py-1 shadow-sm backdrop-blur-xl sm:gap-3 sm:px-6">
         <a href="#inicio" className="flex items-center">
-          <img src={logo} alt="Coffee+visión Logo" className="h-20 w-auto object-contain" />
+          <img src={logo} alt="Coffee+visión Logo" className="h-16 w-auto object-contain sm:h-20" />
         </a>
 
-        <nav className="hidden md:block">
-          <ul className="flex gap-8 font-semibold text-ink">
+        <nav className={`${menuMovilAbierto ? "block" : "hidden"} order-3 w-full md:order-none md:block md:w-auto`}>
+          <ul className="flex flex-col gap-1 py-2 font-semibold text-ink md:flex-row md:gap-8 md:py-0">
             <li><a href="#inicio" className="transition-colors hover:text-green">Inicio</a></li>
             <li><a href="#servicios" className="transition-colors hover:text-green">Servicios</a></li>
             <li><a href="#contacto" className="transition-colors hover:text-green">Contacto</a></li>
@@ -43,6 +45,9 @@ export default function Home() {
             Registro
           </Link>
         </aside>
+        <button type="button" className="grid h-10 w-10 place-items-center rounded-lg border border-line text-coffee md:hidden" aria-label={menuMovilAbierto ? "Cerrar menú" : "Abrir menú"} aria-expanded={menuMovilAbierto} onClick={() => setMenuMovilAbierto((abierto) => !abierto)}>
+          <i className={`fa-solid ${menuMovilAbierto ? "fa-xmark" : "fa-bars"}`} aria-hidden="true" />
+        </button>
       </header>
 
       <main>

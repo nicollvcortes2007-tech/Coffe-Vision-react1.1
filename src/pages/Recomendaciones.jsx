@@ -59,8 +59,8 @@ function Recomendaciones() {
                 nombre="Caficultor"
                 rol="Finca El Paraiso"
             />
-            <main className="min-h-screen bg-[#f7f3ea] p-6 pr-9 text-[#333]">
-                <h1 className="mb-6 text-[45px] font-bold text-[#7a1f1f]">Recomendaciones</h1>
+            <main className="min-h-screen bg-[#f7f3ea] p-4 text-[#333] sm:p-6 lg:pr-9">
+                <h1 className="mb-6 text-3xl font-bold text-[#7a1f1f] sm:text-[45px]">Recomendaciones</h1>
 
                 {/* Tarjetas */}
                 <section className="mb-6 grid grid-cols-1 gap-[18px] sm:grid-cols-2 lg:grid-cols-4">
@@ -85,10 +85,10 @@ function Recomendaciones() {
 
                     {/* Evolución de plagas */}
                     <article className="rounded-xl bg-white p-6 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
-                        <h3 className="mb-4 text-[26px]">Evolución semanal de plagas y enfermedades</h3>
+                        <h3 className="mb-4 text-xl sm:text-[26px]">Evolución semanal de plagas y enfermedades</h3>
                         <section className="mb-4 flex h-[150px] items-end gap-3 border-b-2 border-l-2 border-[#ccc] p-2.5">
                             {barras.map((b, i) => (
-                                <section key={i} className={`w-[45px] rounded-t ${b.clase}`} style={{ height: b.alto }}></section>
+                                <section key={i} className={`w-full min-w-0 max-w-[45px] flex-1 rounded-t ${b.clase}`} style={{ height: b.alto }}></section>
                             ))}
                         </section>
                         <section className="ml-[5%]">

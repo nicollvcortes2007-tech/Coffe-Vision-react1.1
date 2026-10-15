@@ -1,0 +1,65 @@
+/* Ajustes compartidos para teléfonos y tabletas. */
+@media (max-width: 1050px) {
+  .admin-welcome-banner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .admin-system-health {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .admin-main-content .user-form {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cv-kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cv-lotes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cv-cultivo-hero {
+    height: auto;
+    min-height: 310px;
+  }
+
+  .cv-hero-content {
+    position: relative;
+    inset: auto;
+    max-width: 100%;
+    padding: 24px;
+  }
+
+  .cv-hero-content h1 {
+    font-size: clamp(1.8rem, 8vw, 2.4rem);
+  }
+
+  .cv-hero-stamp {
+    position: relative;
+    inset: auto;
+    display: inline-flex;
+    margin: 0 0 20px 24px;
+    font-size: 1.25rem;
+  }
+
+  .cv-section-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .cv-kpis,
+  .cv-lotes {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cv-section-head h2 {
+    font-size: 1.25rem;
+  }
+}

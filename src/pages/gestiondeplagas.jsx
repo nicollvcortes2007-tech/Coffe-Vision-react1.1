@@ -59,13 +59,13 @@ export default function GestionPlagas() {
   };
 
   return (
-    <main className="flex min-h-screen w-full bg-page font-sans text-ink">
+    <main className="flex min-h-screen w-full flex-col bg-page font-sans text-ink lg:flex-row">
       
       {/* Barra lateral unificada */}
       <Sidebar role="administrador" />
 
       {/* Contenido Principal */}
-      <section className="flex min-w-0 w-full flex-1 flex-col gap-6 px-6 py-8 lg:px-10">
+      <section className="flex min-w-0 w-full flex-1 flex-col gap-5 px-4 py-5 sm:gap-6 sm:px-6 sm:py-8 lg:px-10">
         
         {/* Cabecera Superior compartida */}
         <Topbar

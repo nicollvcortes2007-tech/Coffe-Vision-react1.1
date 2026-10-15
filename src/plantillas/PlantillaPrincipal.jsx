@@ -7,10 +7,10 @@ import Sidebar from "@/components/navegacion/Sidebar";
  */
 function PlantillaPrincipal({ role = "caficultor", children }) {
   return (
-    <div className="flex min-h-screen w-full bg-page">
+    <div className="flex min-h-screen w-full flex-col bg-page lg:flex-row">
       <Sidebar role={role} />
 
-      <main className="flex-1 min-w-0 w-full overflow-x-hidden p-4 sm:p-6 lg:p-8 bg-page">
+      <main className="min-w-0 w-full flex-1 overflow-x-hidden p-4 sm:p-6 lg:p-8 bg-page">
         {children}
       </main>
     </div>

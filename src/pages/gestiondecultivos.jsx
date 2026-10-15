@@ -4,13 +4,13 @@ import caficultor from "@/assets/imagenes/caficultor.jpg";
 
 export default function GestionDeCultivos() {
   return (
-    <main className="flex min-h-screen w-full bg-page font-sans text-ink">
+    <main className="flex min-h-screen w-full flex-col bg-page font-sans text-ink lg:flex-row">
       
       {/* Barra lateral unificada */}
       <Sidebar role="caficultor" />
 
       {/* Contenido Principal */}
-      <section className="flex min-w-0 w-full flex-1 flex-col gap-8 px-6 py-8 lg:px-10">
+      <section className="flex min-w-0 w-full flex-1 flex-col gap-6 px-4 py-5 sm:gap-8 sm:px-6 sm:py-8 lg:px-10">
         
         <Topbar 
           eyebrow="REGISTRO AGRÍCOLA" 
@@ -23,7 +23,7 @@ export default function GestionDeCultivos() {
         />
 
         {/* Tarjeta del Formulario */}
-        <article className="rounded-xl border border-line border-l-4 border-l-green bg-surface p-8 shadow-sm">
+        <article className="rounded-xl border border-line border-l-4 border-l-green bg-surface p-4 shadow-sm sm:p-8">
           <header className="mb-6">
             <h2 className="mb-1 text-2xl font-semibold text-ink">Registrar Nueva Actividad</h2>
             <p className="text-sm text-muted">Añada los detalles de la labor realizada en la finca.</p>

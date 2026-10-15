@@ -32,11 +32,11 @@ function Guias() {
                 rol="Finca El Paraiso"
             />
 
-            <section className="flex min-h-screen">
-                <main className="flex-1 p-6 pr-8">
+            <section className="flex min-h-0 min-w-0">
+                <main className="min-w-0 flex-1 p-3 sm:p-6 sm:pr-8">
                     {/* La barra de búsqueda y las pestañas */}
-                    <section className="mb-7  flex items-center gap-4 rounded-xl border border-[#e5ddc8] bg-white p-4">
-                        <article className="flex  w-72 shrink-0 items-center gap-2 rounded-full bg-[#e5ddc8] px-4 py-2.5">
+                    <section className="mb-7 flex flex-col gap-3 rounded-xl border border-[#e5ddc8] bg-white p-3 sm:flex-row sm:items-center sm:gap-4 sm:p-4">
+                        <article className="flex w-full min-w-0 items-center gap-2 rounded-full bg-[#e5ddc8] px-4 py-2.5 sm:w-72 sm:shrink-0">
                             <input
                                 type="text"
                                 placeholder="Buscar.."
@@ -66,7 +66,7 @@ function Guias() {
             {/* Modal de descripción */}
             {guiaSeleccionada && (
                 <section className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-                    <section className="w-full max-w-lg rounded-2xl bg-white p-6">
+                    <section className="max-h-[90dvh] w-full max-w-lg overflow-y-auto rounded-2xl bg-white p-4 sm:p-6">
                         <article className="mb-4 flex items-center gap-3">
                             <img src={documento} alt="Doc" className="h-10 w-10" />
                             <h2 className="text-xl font-bold text-[#6b3a1f]">{guiaSeleccionada.titulo}</h2>
