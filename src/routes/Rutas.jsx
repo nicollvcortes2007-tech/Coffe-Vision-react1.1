@@ -14,7 +14,6 @@ import ChatBot from "@/pages/ChatBot";
 import PerfilAdministrador from "@/pages/Perfiladminist";
 import Recomendaciones from "@/pages/Recomendaciones";
 
-
 // Páginas del administrador
 import ConfiguracionAdministrador from "@/pages/ConfiguracionAdministrador";
 
@@ -47,19 +46,20 @@ export default function Rutas() {
 
       {/* Área del caficultor */}
       <Route path="/dashboard/caficultor" element={<DashboardCaficultor />} />
-      <Route path="/chatbot" element={<ChatBot/>} />
+      <Route path="/inicio" element={<Inicio />} />
+      <Route path="/chatbot" element={<ChatBot />} />
       <Route path="/guias" element={<Guias />} />
-
-      <Route path="/inicio" element={<Inicio/>} />
       <Route path="/recomendaciones" element={<Recomendaciones />} />
+      <Route path="/notificaciones" element={<Notificaciones />} />
 
       {/* Área del administrador */}
       <Route path="/dashboard/administrador" element={<DashboardAdministrador />} />
       <Route path="/admin/plagas" element={<GestionDePlagas />} />
       <Route path="/admin/perfil" element={<PerfilAdministrador />} />
       <Route path="/admin/configuracion" element={<ConfiguracionAdministrador />} />
-
       <Route path="/admin/notificaciones" element={<Notificaciones />} />
+
+      {/* Ruta 404 */}
       <Route path="*" element={<NoEncontrada />} />
     </Routes>
   );
