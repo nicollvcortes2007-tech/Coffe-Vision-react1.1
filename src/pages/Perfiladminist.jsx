@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import PlantillaPrincipal from "@/plantillas/PlantillaPrincipal";
 import Topbar from "@/components/navegacion/Topbar";
@@ -121,17 +122,6 @@ export default function PerfilAdministrador() {
 
       <main className="box-border min-w-0 w-full flex-1 bg-page p-4 sm:p-5 lg:p-6">
         <div className="mx-auto w-full max-w-[1600px] space-y-4">
-
-          {/* ENCABEZADO SUPERIOR */}
-          <header className="border-b border-line pb-3">
-            <h1 className="text-2xl font-bold text-coffee">
-              Administrador
-            </h1>
-
-            <p className="mt-1 text-sm text-muted">
-              Panel de Administración
-            </p>
-          </header>
 
           {/* TÍTULO DEL PERFIL */}
           <div className="flex flex-wrap items-center justify-between gap-3">

@@ -182,17 +182,6 @@ export default function Notificaciones() {
     <PlantillaPrincipal>
       <Topbar />
 
-      {/* ENCABEZADO AGREGADO: CAFICULTOR */}
-      <div className="w-full px-6 pt-3 pb-4 border-b border-line bg-page box-border">
-        <h1 className="text-xl font-bold text-coffee">
-          Caficultor
-        </h1>
-
-        <p className="text-sm text-muted mt-1">
-          Panel de Caficultor
-        </p>
-      </div>
-
       <main className="w-full max-w-6xl mx-auto p-6 space-y-6 bg-page min-h-screen box-border">
         {/* TÍTULO */}
         <header className="space-y-1">
