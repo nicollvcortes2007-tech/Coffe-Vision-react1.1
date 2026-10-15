@@ -159,15 +159,46 @@ export default function Home() {
             <img src={cafecito} alt="Desarrollo tecnológico SENA" className="aspect-[4/3] h-full w-full object-cover" />
           </figure>
         </section>
+
+        <section id="contacto" className="bg-white px-6 py-20 sm:px-10 lg:py-24">
+          <section aria-label="Información de contacto" className="mx-auto grid max-w-7xl gap-10 rounded-[2rem] bg-white p-8 shadow-hero ring-1 ring-coffee/5 sm:p-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:p-14">
+            <article>
+              <p className="eyebrow">Estamos para ayudarte</p>
+              <h2 className="mt-2 text-3xl font-semibold tracking-tight text-coffee sm:text-4xl">Conectemos para impulsar tu cultivo</h2>
+              <p className="mt-4 max-w-2xl text-lg leading-8 text-muted">
+                ¿Tienes preguntas sobre Coffee+Visión o quieres conocer cómo puede ayudarte nuestra plataforma? Escríbenos y conversemos.
+              </p>
+              <a href="mailto:Coffee+Visión@gmail.com" className="mt-7 inline-flex items-center gap-2 rounded-xl bg-green px-6 py-3.5 font-bold text-white shadow-md transition hover:-translate-y-0.5 hover:bg-green-deep hover:shadow-lg">
+                <i className="fa-solid fa-envelope" aria-hidden="true"></i>
+                Contáctanos
+              </a>
+            </article>
+
+            <address className="grid gap-4 not-italic">
+              <a href="mailto:Coffee+Visión@gmail.com" className="flex items-center gap-4 rounded-2xl bg-[#fffefa] p-5 transition hover:bg-green-soft/50">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-green-soft text-green-deep"><i className="fa-solid fa-envelope" aria-hidden="true"></i></span>
+                <span><strong className="block text-coffee">Correo electrónico</strong><span className="text-sm text-muted">Coffee+Visión@gmail.com</span></span>
+              </a>
+              <a href="tel:+573001234567" className="flex items-center gap-4 rounded-2xl bg-[#fffefa] p-5 transition hover:bg-green-soft/50">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-green-soft text-green-deep"><i className="fa-solid fa-phone" aria-hidden="true"></i></span>
+                <span><strong className="block text-coffee">Llámanos</strong><span className="text-sm text-muted">+57 300 123 4567</span></span>
+              </a>
+              <p className="m-0 flex items-center gap-4 rounded-2xl bg-[#fffefa] p-5">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-green-soft text-green-deep"><i className="fa-solid fa-location-dot" aria-hidden="true"></i></span>
+                <span><strong className="block text-coffee">Visítanos</strong><span className="text-sm text-muted">Popayán, Cauca · SENA</span></span>
+              </p>
+            </address>
+          </section>
+        </section>
       </main>
 
-      <footer id="contacto" className="bg-[#2c1a10] px-6 py-14 text-white/80 sm:px-10">
+      <footer className="bg-[#2c1a10] px-6 py-14 text-white/80 sm:px-10">
         <section className="mx-auto grid max-w-7xl gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <article>
-            <div className="mb-2 flex items-center gap-2 text-lg font-extrabold text-white">
+            <p className="mb-2 flex items-center gap-2 text-lg font-extrabold text-white">
               <i className="fa-solid fa-mug-hot text-gold"></i>
               <span>Coffee+Visión</span>
-            </div>
+            </p>
             <p className="text-sm">Tecnología inteligente para la producción cafetera sostenible y eficiente.</p>
             <nav className="mt-4 flex gap-4 text-lg">
               <a href="#" aria-label="Facebook"><i className="fa-brands fa-facebook"></i></a>
