@@ -7,6 +7,9 @@ import Signup from "@/pages/Signup";
 import DashboardCaficultor from "@/pages/DashboardCaficultor";
 import DashboardAdministrador from "@/pages/Dashboardadministrador";
 import Inicio from "@/pages/Inicio";
+import GestionDeCultivos from "@/pages/gestiondecultivos";
+import RegistrarLabor from "@/pages/RegistrarLabor";
+import Estadisticas from "@/pages/estadisticascultivo";
 import GestionDePlagas from "@/pages/gestiondeplagas";
 import Guias from "@/pages/Guias";
 import Notificaciones from "@/pages/Notificaciones";
@@ -46,6 +49,10 @@ export default function Rutas() {
 
       {/* Área del caficultor */}
       <Route path="/dashboard/caficultor" element={<DashboardCaficultor />} />
+      <Route path="/cultivos" element={<GestionDeCultivos />} />
+      <Route path="/registrar-labor" element={<RegistrarLabor />} />
+      <Route path="/estadisticas" element={<Estadisticas />} />
+      <Route path="/perfil" element={<Inicio />} />
       <Route path="/inicio" element={<Inicio />} />
       <Route path="/chatbot" element={<ChatBot />} />
       <Route path="/guias" element={<Guias />} />
