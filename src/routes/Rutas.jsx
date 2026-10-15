@@ -50,8 +50,10 @@ export default function Rutas() {
       {/* Área del caficultor */}
       <Route path="/dashboard/caficultor" element={<DashboardCaficultor />} />
       <Route path="/cultivos" element={<GestionDeCultivos />} />
+      <Route path="/caficultor/cultivos" element={<GestionDeCultivos />} />
       <Route path="/registrar-labor" element={<RegistrarLabor />} />
       <Route path="/estadisticas" element={<Estadisticas />} />
+      <Route path="/caficultor/estadisticas" element={<Estadisticas />} />
       <Route path="/perfil" element={<Inicio />} />
       <Route path="/inicio" element={<Inicio />} />
       <Route path="/chatbot" element={<ChatBot />} />

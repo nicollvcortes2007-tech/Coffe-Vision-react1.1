@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PlantillaAuth from "@/plantillas/PlantillaAuth";
+import CampoContrasena from "@/components/comunes/CampoContrasena";
 
 const CAMPOS = [
   { id: "nombre", label: "Nombre Completo", type: "text", placeholder: "Tu nombre" },
@@ -66,30 +67,24 @@ function Signup() {
           />
         </label>
 
-        <label className="grid gap-1.5 text-sm font-semibold text-coffee">
-          Contraseña
-          <input
-            type="password"
-            required
-            minLength={8}
-            placeholder="Mínimo 8 caracteres"
-            value={form.password || ""}
-            onChange={actualizar("password")}
-            className="min-h-[46px] rounded-lg border border-line px-3 font-normal text-ink focus:border-green focus:outline-none focus:ring-2 focus:ring-green/20"
-          />
-        </label>
+        <CampoContrasena
+          id="password"
+          label="Contraseña"
+          autoComplete="new-password"
+          minLength={8}
+          placeholder="Mínimo 8 caracteres"
+          value={form.password || ""}
+          onChange={actualizar("password")}
+        />
 
-        <label className="grid gap-1.5 text-sm font-semibold text-coffee">
-          Confirmar Contraseña
-          <input
-            type="password"
-            required
-            placeholder="Repite tu contraseña"
-            value={form.confirmPassword || ""}
-            onChange={actualizar("confirmPassword")}
-            className="min-h-[46px] rounded-lg border border-line px-3 font-normal text-ink focus:border-green focus:outline-none focus:ring-2 focus:ring-green/20"
-          />
-        </label>
+        <CampoContrasena
+          id="confirmPassword"
+          label="Confirmar Contraseña"
+          autoComplete="new-password"
+          placeholder="Repite tu contraseña"
+          value={form.confirmPassword || ""}
+          onChange={actualizar("confirmPassword")}
+        />
 
         {error && <p className="text-sm font-semibold text-danger">{error}</p>}
 

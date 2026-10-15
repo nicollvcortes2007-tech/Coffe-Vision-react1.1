@@ -1,7 +1,8 @@
 
 import React, { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
 import PlantillaPrincipal from '@/plantillas/PlantillaPrincipal';
+import Topbar from '@/components/navegacion/Topbar';
+import avatar from '@/assets/imagenes/image.png';
 
 const lotes = [
   {
@@ -81,85 +82,17 @@ export default function Estadisticas() {
 
   return (
     <PlantillaPrincipal>
-      {/* Corrección visual del encabezado y fondo general */}
-      <style>{`
-        .cv-stats {
-          background-color: #f7f7f1 !important;
-          min-height: 100%;
-        }
-
-        .cv-stats .cv-stats-hero {
-          background: #f7f7f1 !important;
-          background-image: none !important;
-          border: none !important;
-          border-radius: 0 !important;
-          box-shadow: none !important;
-          color: #293728 !important;
-          padding: 24px 12px 40px !important;
-        }
-
-        .cv-stats .cv-stats-hero::before,
-        .cv-stats .cv-stats-hero::after {
-          content: none !important;
-          display: none !important;
-          background: none !important;
-          background-image: none !important;
-          box-shadow: none !important;
-        }
-
-        .cv-stats .cv-stats-hero .cv-eyebrow {
-          color: #689b35 !important;
-        }
-
-        .cv-stats .cv-stats-hero h1 {
-          color: #293728 !important;
-        }
-
-        .cv-stats .cv-stats-hero h1 em {
-          color: #80ad45 !important;
-        }
-
-        .cv-stats .cv-stats-hero p {
-          color: #526174 !important;
-        }
-
-        .cv-stats .cv-stats-hero a {
-          color: #397d19 !important;
-        }
-      `}</style>
-
       <main className="cv-stats">
-
-        {/* ENCABEZADO SIN FONDO CAFÉ */}
-        <section
-          className="cv-stats-hero"
-          style={{
-            background: '#f7f7f1',
-            backgroundImage: 'none',
-            boxShadow: 'none',
-            color: '#293728',
-          }}
-        >
-          <div className="cv-stats-hero-copy">
-            <span className="cv-eyebrow">
-              COFFEE+VISION · DATOS PARA DECIDIR
-            </span>
-
-            <h1>
-              Tu cosecha,
-              <br />
-              <em>vista con claridad.</em>
-            </h1>
-
-            <p>
-              Indicadores de producción y seguimiento sanitario
-              con periodos y fuentes identificadas.
-            </p>
-
-            <Link to="/caficultor/cultivos">
-              ← Volver a mis cultivos
-            </Link>
-          </div>
+        <section className="mb-6">
+          <Topbar
+            eyebrow="ANÁLISIS DE PRODUCCIÓN"
+            title="Estadísticas de cultivo"
+            notifTo="/notificaciones"
+            perfilTo="/perfil"
+            avatar={avatar}
+            nombre="Caficultor"
+            rol="Finca El Paraíso"
+          />
         </section>
 
         {/* PERIODO DE PRODUCCIÓN */}

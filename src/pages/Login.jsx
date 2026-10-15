@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PlantillaAuth from "@/plantillas/PlantillaAuth";
+import CampoContrasena from "@/components/comunes/CampoContrasena";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -44,17 +45,14 @@ export default function Login() {
           />
         </label>
 
-        <label className="grid gap-1.5 text-sm font-semibold text-coffee">
-          Contraseña
-          <input
-            type="password"
-            required
-            placeholder="••••••••"
-            value={form.password}
-            onChange={actualizar("password")}
-            className="min-h-[46px] rounded-lg border border-line px-3 font-normal text-ink focus:border-green focus:outline-none focus:ring-2 focus:ring-green/20"
-          />
-        </label>
+        <CampoContrasena
+          id="password"
+          label="Contraseña"
+          autoComplete="current-password"
+          placeholder="••••••••"
+          value={form.password}
+          onChange={actualizar("password")}
+        />
 
         <fieldset className="flex items-center justify-between text-sm border-0 p-0 m-0">
           <label className="flex items-center gap-2 text-muted cursor-pointer">
