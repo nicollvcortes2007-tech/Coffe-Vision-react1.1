@@ -37,7 +37,17 @@
 .admin-alert-tag { display: inline-flex; align-items: center; gap: 0.45rem; color: #9a5d00; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; }
 .admin-alert-title { margin-top: 0.65rem; color: #4e2a15; font-weight: 700; line-height: 1.4; }
 
-.admin-main-content { display: grid; min-width: 0; width: 100%; padding: 0; gap: 1.5rem; }
+.admin-main-content { display: grid; min-width: 0; width: 100%; padding: 0; gap: 2rem; }
+.admin-welcome-banner { position: relative; display: flex; min-height: 270px; align-items: center; justify-content: space-between; gap: 1.5rem; overflow: hidden; border-radius: 1rem; background-position: center; background-size: cover; padding: clamp(1.5rem, 4vw, 2rem); color: #fff; box-shadow: 0 16px 36px rgba(78, 42, 21, .15); }
+.admin-welcome-copy { position: relative; z-index: 1; max-width: 38rem; }
+.admin-welcome-eyebrow { color: #f2c66d; font-size: .8rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.admin-welcome-copy h2 { margin: .5rem 0; color: #fff; font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 750; letter-spacing: -.03em; }
+.admin-welcome-description { margin-top: .75rem; max-width: 34rem; color: rgba(255,255,255,.9); line-height: 1.6; }
+.admin-welcome-button { display: inline-flex; align-items: center; gap: .55rem; margin-top: 1.25rem; border: 1px solid rgba(255,255,255,.4); border-radius: .7rem; background: rgba(255,255,255,.16); padding: .7rem 1rem; color: #fff; font-weight: 750; cursor: pointer; backdrop-filter: blur(5px); }
+.admin-welcome-button:hover { background: rgba(255,255,255,.25); }
+.admin-system-health { position: relative; z-index: 1; display: grid; width: min(100%, 13.5rem); gap: .45rem; border: 1px solid rgba(255,255,255,.25); border-radius: 1rem; background: rgba(255,255,255,.15); padding: 1.25rem; backdrop-filter: blur(8px); }
+.admin-system-health span, .admin-system-health small { color: rgba(255,255,255,.88); }
+.admin-system-health strong { color: #fff; font-size: 2.8rem; line-height: 1; }
 .admin-hero-banner { position: relative; display: flex; min-height: 210px; align-items: center; justify-content: space-between; gap: 1rem; overflow: hidden; border-radius: 1.2rem; background: linear-gradient(105deg, rgba(44, 26, 16, .92), rgba(78, 42, 21, .58)), url("../assets/imagenes/Cafe.webp") center 55% / cover; padding: clamp(1.5rem, 4vw, 2.5rem); color: #fff; box-shadow: 0 16px 36px rgba(78, 42, 21, .15); }
 .admin-hero-banner hgroup { position: relative; z-index: 1; }
 .admin-hero-actions { position: relative; z-index: 1; display: flex; align-items: center; gap: .75rem; }
@@ -99,6 +109,7 @@
   .admin-user-badge { display: none; }
   .admin-main-content .charts-grid,
   .admin-main-content .user-form { grid-template-columns: minmax(0, 1fr); }
+  .admin-welcome-banner { align-items: flex-start; flex-direction: column; }
 }
 
 @media (max-width: 480px) {

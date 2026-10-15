@@ -1,21 +1,10 @@
 import React, { useState } from 'react';
 import PlantillaPrincipal from '@/plantillas/PlantillaPrincipal';
-import Topbar from '@/components/Dashboardadministrador/Topbar';
+import Topbar from '@/components/navegacion/Topbar';
 import { 
   kpisData, 
   usuariosIniciales 
 } from '../datos/dashboardDatos';
-import { 
-  Home, 
-  Users, 
-  FileText, 
-  BarChart2, 
-  AlertTriangle, 
-  UserPlus, 
-  Package, 
-  Bug, 
-  ShieldAlert 
-} from 'lucide-react';
 import bannerImg from '../assets/imagenes/Cafe.webp';
 import '@/estilos/dashboardadministrador.css';
 
@@ -34,13 +23,10 @@ export default function Dashboardadministrador() {
   const [usuarios, setUsuarios] = useState(usuariosIniciales);
   const [nuevoNombre, setNuevoNombre] = useState('');
   const [nuevoRol, setNuevoRol] = useState('caficultor');
-
-  const menuItems = [
-    { id: 'inicio', label: 'Inicio', icon: Home },
-    { id: 'usuarios', label: 'Usuarios', icon: Users },
-    { id: 'reportes', label: 'Reportes', icon: FileText },
-    { id: 'estadisticas', label: 'Estadísticas', icon: BarChart2 },
-  ];
+  const [usuarioPendienteEliminar, setUsuarioPendienteEliminar] = useState(null);
+  const [motivoEliminacion, setMotivoEliminacion] = useState('');
+  const [detalleEliminacion, setDetalleEliminacion] = useState('');
+  const [confirmacionEliminacion, setConfirmacionEliminacion] = useState(false);
 
   const estadisticasGeneralesLocales = [
     { etiqueta: 'Usuarios activos', porcentaje: 80 },
@@ -69,85 +55,46 @@ export default function Dashboardadministrador() {
     setNuevoNombre('');
   };
 
-  const handleEliminarUsuario = (id, nombre) => {
-    const c1 = window.confirm(`¿Estás seguro de que deseas eliminar al usuario ${nombre}?`);
-    if (!c1) return;
+  const abrirEliminacion = (usuario) => {
+    setUsuarioPendienteEliminar(usuario);
+    setMotivoEliminacion('');
+    setDetalleEliminacion('');
+    setConfirmacionEliminacion(false);
+  };
 
-    const c2 = window.confirm(`¡ADVERTENCIA! Esta acción no se puede deshacer. ¿Deseas continuar eliminando a ${nombre}?`);
-    if (!c2) return;
-
-    const c3 = window.confirm(`Confirmación final: ¿Realmente quieres proceder a eliminar a ${nombre}?`);
-    if (!c3) return;
-
-    setUsuarios(usuarios.filter((usr) => usr.id !== id));
-    alert(`El usuario ${nombre} ha sido eliminado exitosamente.`);
+  const confirmarEliminacionUsuario = (e) => {
+    e.preventDefault();
+    if (!usuarioPendienteEliminar || !motivoEliminacion || !confirmacionEliminacion) return;
+    setUsuarios((actuales) => actuales.filter((usr) => usr.id !== usuarioPendienteEliminar.id));
+    setUsuarioPendienteEliminar(null);
   };
 
   return (
     <PlantillaPrincipal role="administrador">
-      <Topbar />
+      <Topbar
+        eyebrow="Panel de administración"
+        admin
+      />
 
-      <main className="admin-main-content" style={{ padding: '24px 36px', boxSizing: 'border-box' }}>
+      <main className="admin-main-content">
         
         {/* BANNER PRINCIPAL */}
-        <section 
-          style={{ 
-            backgroundImage: `linear-gradient(rgba(45, 30, 20, 0.65), rgba(30, 20, 12, 0.8)), url(${bannerImg})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            borderRadius: '20px',
-            padding: '36px 40px',
-            color: '#fff',
-            marginBottom: '24px',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            boxShadow: '0 4px 15px rgba(0,0,0,0.06)'
-          }}
-        >
-          <header>
-            <span style={{ fontSize: '11px', textTransform: 'uppercase', letterSpacing: '1.5px', color: '#facc15', fontWeight: '700' }}>
-              PANEL ADMINISTRADOR
-            </span>
-            <h2 style={{ fontSize: '32px', margin: '8px 0 8px 0', fontWeight: '800', color: '#ffffff' }}>
-              Coffee + Vision Control
-            </h2>
-            <p style={{ margin: '0 0 20px 0', fontSize: '14px', color: '#e2e8f0', maxWidth: '480px', lineHeight: '1.4' }}>
-              Supervisa las cuentas de usuario, revisa reportes de plagas y administra la plataforma cafetera de manera eficiente.
+        <section className="admin-welcome-banner" style={{ backgroundImage: `linear-gradient(90deg, rgba(42,26,15,0.9), rgba(78,42,21,0.62)), url(${bannerImg})` }}>
+          <div className="admin-welcome-copy">
+            <p className="admin-welcome-eyebrow">Panel administrador</p>
+            <h2>Control de Coffee+Visión</h2>
+            <p className="admin-welcome-description">
+              Administra usuarios, supervisa los cultivos registrados y revisa las alertas de la plataforma.
             </p>
-            <button 
-              onClick={() => setVistaActual('usuarios')}
-              style={{
-                backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                backdropFilter: 'blur(5px)',
-                border: '1px solid rgba(255, 255, 255, 0.4)',
-                color: '#ffffff',
-                padding: '10px 20px',
-                borderRadius: '12px',
-                cursor: 'pointer',
-                fontWeight: '700',
-                fontSize: '14px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px'
-              }}
-            >
-              + Registrar labor / usuario
+            <button className="admin-welcome-button" onClick={() => setVistaActual('usuarios')}>
+              <i className="fa-solid fa-user-plus" aria-hidden="true" /> Gestionar usuarios
             </button>
-          </header>
-
-          <article style={{
-            background: 'rgba(255, 255, 255, 0.12)',
-            backdropFilter: 'blur(10px)',
-            padding: '20px 24px',
-            borderRadius: '16px',
-            border: '1px solid rgba(255, 255, 255, 0.2)',
-            minWidth: '200px'
-          }}>
-            <small style={{ fontSize: '12px', color: '#e2e8f0', display: 'block', marginBottom: '4px' }}>Salud del sistema</small>
-            <strong style={{ fontSize: '36px', fontWeight: '800', color: '#ffffff', display: 'block', lineHeight: '1' }}>94%</strong>
-            <small style={{ fontSize: '11px', color: '#cbd5e1', display: 'block', marginTop: '6px' }}>Plataforma operando con total normalidad.</small>
-          </article>
+          </div>
+          <aside className="admin-system-health">
+            <span>Estado del sistema</span>
+            <strong>94%</strong>
+            <small>La plataforma opera con normalidad.</small>
+          </aside>
         </section>
 
         {/* VISTAS DE INICIO / USUARIOS */}
@@ -163,7 +110,7 @@ export default function Dashboardadministrador() {
             {/* FORMULARIO AGREGAR USUARIO */}
             <section id="usuarios" className="card-panel" style={{ marginBottom: '24px' }}>
               <h2 className="section-title" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '16px' }}>
-                <UserPlus size={18} color="#2e4a19" /> Agregar usuario
+                <i className="fa-solid fa-user-plus" aria-hidden="true" /> Agregar usuario
               </h2>
               <form className="user-form" onSubmit={handleAgregarUsuario} style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
                 <input
@@ -217,7 +164,7 @@ export default function Dashboardadministrador() {
                           <button
                             className="btn-danger-soft"
                             style={{ padding: '6px 14px', background: '#edf2f7', color: '#718096', border: 'none', borderRadius: '8px', cursor: 'pointer', fontSize: '12px', fontWeight: '600' }}
-                            onClick={() => handleEliminarUsuario(usr.id, usr.nombre)}
+                            onClick={() => abrirEliminacion(usr)}
                           >
                             Eliminar
                           </button>
@@ -262,7 +209,7 @@ export default function Dashboardadministrador() {
 
             <article style={{ background: '#fff', padding: '24px', borderRadius: '16px', boxShadow: '0 2px 8px rgba(0,0,0,0.03)' }}>
               <h2 style={{ fontSize: '16px', color: '#2d3748', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px', fontWeight: '700' }}>
-                <ShieldAlert size={18} color="#2e4a19" /> Estadísticas de Plagas
+                <i className="fa-solid fa-shield-halved" aria-hidden="true" /> Estadísticas de Plagas
               </h2>
               <dl style={{ display: 'flex', flexDirection: 'column', gap: '16px', margin: 0 }}>
                 {estadisticasPlagasLocales.map((item, idx) => (
@@ -283,6 +230,45 @@ export default function Dashboardadministrador() {
         )}
 
       </main>
+
+      {usuarioPendienteEliminar && (
+        <div className="fixed inset-0 z-50 grid place-items-center overflow-y-auto bg-black/55 p-4" onMouseDown={(e) => { if (e.target === e.currentTarget) setUsuarioPendienteEliminar(null); }}>
+          <section role="alertdialog" aria-modal="true" aria-labelledby="admin-delete-user-title" className="my-6 w-full max-w-xl overflow-hidden rounded-2xl bg-white shadow-2xl">
+            <header className="border-b border-red-100 bg-red-50 px-6 py-5 sm:px-7">
+              <span className="grid h-11 w-11 place-items-center rounded-full bg-white text-red-700 shadow-sm"><i className="fa-solid fa-user-xmark" aria-hidden="true" /></span>
+              <p className="mt-4 text-xs font-extrabold uppercase tracking-widest text-red-700">Confirmación de eliminación</p>
+              <h2 id="admin-delete-user-title" className="mt-1 text-xl font-bold text-coffee">¿Estás seguro?</h2>
+              <p className="mt-2 text-sm leading-relaxed text-muted">Vas a eliminar la cuenta de <strong className="text-ink">{usuarioPendienteEliminar.nombre}</strong>. Esta acción no se puede deshacer.</p>
+            </header>
+            <form onSubmit={confirmarEliminacionUsuario} className="grid gap-5 p-6 sm:px-7">
+              <label htmlFor="admin-delete-reason" className="grid gap-2 text-sm font-semibold text-ink">¿Cuál es el motivo de la eliminación?
+                <select id="admin-delete-reason" required value={motivoEliminacion} onChange={(e) => setMotivoEliminacion(e.target.value)} className="min-h-11 rounded-lg border border-line bg-white px-3 font-normal outline-none focus:border-green focus:ring-2 focus:ring-green/20">
+                  <option value="">Selecciona un motivo</option>
+                  <option value="no-uso">La persona ya no utiliza el sistema</option>
+                  <option value="cambio-finca">Cambió de finca o administración</option>
+                  <option value="duplicada">La cuenta está duplicada</option>
+                  <option value="solicitud">La persona solicitó cerrar su cuenta</option>
+                  <option value="otro">Otro motivo</option>
+                </select>
+              </label>
+              {motivoEliminacion === 'otro' && (
+                <label htmlFor="admin-delete-detail" className="grid gap-2 text-sm font-semibold text-ink">Describe el motivo
+                  <textarea id="admin-delete-detail" required value={detalleEliminacion} onChange={(e) => setDetalleEliminacion(e.target.value)} rows={3} placeholder="Escribe el motivo de la eliminación" className="rounded-lg border border-line px-3 py-2 font-normal outline-none focus:border-green focus:ring-2 focus:ring-green/20" />
+                </label>
+              )}
+              <label className="flex cursor-pointer items-start gap-3 rounded-lg border border-red-100 bg-red-50/70 p-3 text-sm text-ink">
+                <input type="checkbox" required checked={confirmacionEliminacion} onChange={(e) => setConfirmacionEliminacion(e.target.checked)} className="mt-0.5 h-4 w-4 accent-red-700" />
+                <span>Confirmo que revisé la cuenta y entiendo que esta eliminación es permanente.</span>
+              </label>
+              <footer className="flex flex-wrap justify-end gap-3 border-t border-line pt-4">
+                <button type="button" onClick={() => setUsuarioPendienteEliminar(null)} className="rounded-lg border border-line bg-white px-4 py-2.5 text-sm font-semibold text-ink hover:bg-page">Cancelar</button>
+                <button type="submit" disabled={!motivoEliminacion || !confirmacionEliminacion || (motivoEliminacion === 'otro' && !detalleEliminacion.trim())} className="rounded-lg bg-red-700 px-4 py-2.5 text-sm font-bold text-white hover:bg-red-800 disabled:cursor-not-allowed disabled:opacity-50">Confirmar eliminación</button>
+              </footer>
+              <p className="text-xs leading-relaxed text-muted">La cuenta se quitará de la lista de esta sesión de demostración.</p>
+            </form>
+          </section>
+        </div>
+      )}
     </PlantillaPrincipal>
   );
 }

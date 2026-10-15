@@ -127,9 +127,6 @@ export default function PerfilAdministrador() {
         <section className="mx-auto w-full max-w-[1600px] space-y-4">
           <header className="flex flex-wrap items-center justify-between gap-3">
             <hgroup>
-              <h2 className="text-xl font-bold text-ink">
-                Mi perfil
-              </h2>
 
               <p className="mt-1 text-sm text-muted">
                 Gestiona tu información personal y configuración de la cuenta.
@@ -137,7 +134,7 @@ export default function PerfilAdministrador() {
             </hgroup>
           </header>
 
-          <section className="grid min-w-0 grid-cols-1 items-stretch gap-5 xl:grid-cols-[280px_minmax(0,1fr)_300px]">
+          <section className="admin-profile-grid grid min-w-0 grid-cols-1 items-start gap-5 xl:grid-cols-[280px_minmax(0,1fr)]">
             {/* TARJETA IZQUIERDA: FOTO Y DATOS RÁPIDOS */}
             <article className="flex flex-col justify-between h-full min-w-0 overflow-hidden rounded-xl border border-line bg-surface shadow-panel">
               <header>
@@ -215,8 +212,13 @@ export default function PerfilAdministrador() {
             </article>
 
             {/* SECCIÓN CENTRAL: FORMULARIO */}
-            <section className="flex flex-col h-full min-w-0 overflow-hidden rounded-xl border border-line bg-surface shadow-panel">
-              <form onSubmit={guardarCambios} className="flex h-full flex-col justify-between">
+            <section className="admin-profile-editor min-w-0 overflow-hidden rounded-xl border border-line bg-surface shadow-panel">
+              <header className="border-b border-line bg-white px-5 py-4">
+                <p className="eyebrow">Configuración de cuenta</p>
+                <h2 className="mt-1 text-lg font-bold text-coffee">Datos y preferencias</h2>
+                <p className="mt-1 text-sm text-muted">Actualiza tu información y administra las opciones de tu cuenta.</p>
+              </header>
+              <form onSubmit={guardarCambios}>
                 <fieldset className="border-0 p-0 m-0">
                   <legend className="sr-only">Formulario de edición de perfil</legend>
 
@@ -456,109 +458,6 @@ export default function PerfilAdministrador() {
                 </footer>
               </form>
             </section>
-
-            {/* COLUMNA DERECHA: ASIDE DE RESUMEN */}
-            <aside className="flex flex-col h-full min-w-0">
-              <article className="flex flex-col justify-between h-full rounded-xl border border-line bg-surface p-4 shadow-panel">
-                <header>
-                  <figure className="flex items-center gap-3 border-b border-line pb-3 m-0">
-                    <img
-                      src={fotoPerfil}
-                      alt="Foto del administrador"
-                      className="h-11 w-11 rounded-full object-cover"
-                    />
-                    <figcaption className="min-w-0">
-                      <h3 className="text-sm font-bold text-ink">
-                        Administrador
-                      </h3>
-                      <p className="text-xs text-green-deep">
-                        Administrador del Sistema
-                      </p>
-                    </figcaption>
-                  </figure>
-
-                  <h3 className="mt-3 text-sm font-bold text-ink">
-                    Resumen de la cuenta
-                  </h3>
-
-                  <p className="mt-1 text-xs leading-relaxed text-muted">
-                    Información general del perfil administrador de Coffee + Visión.
-                  </p>
-
-                  <dl className="mt-3 space-y-2.5">
-                    <p className="m-0">
-                      <dt className="text-[11px] text-muted">Nombre completo</dt>
-                      <dd className="text-xs font-semibold text-ink m-0">
-                        {nombreCompleto}
-                      </dd>
-                    </p>
-
-                    <p className="m-0">
-                      <dt className="text-[11px] text-muted">Correo electrónico</dt>
-                      <dd className="text-xs font-semibold text-ink break-all m-0">
-                        {formulario.correo}
-                      </dd>
-                    </p>
-
-                    <p className="m-0">
-                      <dt className="text-[11px] text-muted">Rol asignado</dt>
-                      <dd className="text-xs font-semibold text-green-deep m-0">
-                        {formulario.rol === "admin" ? "Administrador" : "Editor"}
-                      </dd>
-                    </p>
-
-                    <p className="m-0">
-                      <dt className="text-[11px] text-muted">Teléfono de contacto</dt>
-                      <dd className="text-xs font-semibold text-ink m-0">
-                        {formulario.telefono}
-                      </dd>
-                    </p>
-
-                    <p className="m-0">
-                      <dt className="text-[11px] text-muted">Dirección</dt>
-                      <dd className="text-xs font-semibold text-ink m-0">
-                        {formulario.direccion}
-                      </dd>
-                    </p>
-
-                    <p className="m-0">
-                      <dt className="text-[11px] text-muted">Ubicación</dt>
-                      <dd className="text-xs font-semibold text-ink m-0">
-                        {formulario.municipio},{" "}
-                        {formulario.departamento === "cauca"
-                          ? "Cauca"
-                          : "Valle del Cauca"}, Colombia
-                      </dd>
-                    </p>
-                  </dl>
-                </header>
-
-                <footer className="space-y-3 pt-3 border-t border-line mt-3">
-                  <section>
-                    <h4 className="text-sm font-bold text-ink">
-                      Estado de la cuenta
-                    </h4>
-                    <p className="mt-1 flex items-center gap-2 text-xs text-muted">
-                      <span className="h-2 w-2 rounded-full bg-green" />
-                      Cuenta activa
-                    </p>
-                    <time className="block text-xs text-muted">
-                      Miembro desde: 15/01/2024
-                    </time>
-                  </section>
-
-                  <section className="border-t border-line pt-2">
-                    <h4 className="text-sm font-bold text-ink">
-                      Recomendaciones
-                    </h4>
-                    <ul className="mt-1.5 space-y-1 text-xs leading-relaxed text-muted list-none p-0 m-0">
-                      <li>✓ Mantén actualizados tus datos.</li>
-                      <li>✓ Utiliza un correo válido.</li>
-                    </ul>
-                  </section>
-                </footer>
-              </article>
-            </aside>
           </section>
         </section>
       </main>
