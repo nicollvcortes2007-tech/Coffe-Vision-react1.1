@@ -1,0 +1,216 @@
+@import "tailwindcss";
+
+/* ── Fuentes autoalojadas (OFL, ver src/assets/fuentes/LICENCIA-OFL.txt) ── */
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+  src: url("../assets/fuentes/fraunces-latin-opsz.woff2") format("woff2-variations");
+}
+@font-face {
+  font-family: "Fraunces";
+  font-style: italic;
+  font-weight: 300 900;
+  font-display: swap;
+  src: url("../assets/fuentes/fraunces-latin-opsz-italic.woff2") format("woff2-variations");
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible Next";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("../assets/fuentes/atkinson-hyperlegible-next-latin.woff2") format("woff2-variations");
+}
+@font-face {
+  font-family: "Atkinson Hyperlegible Next";
+  font-style: italic;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("../assets/fuentes/atkinson-hyperlegible-next-latin-italic.woff2") format("woff2-variations");
+}
+
+/*
+  Tokens de «Pergamino de ladera» (DESIGN.md). La escala de maduración del grano es
+  también la escala de estado: hoja = al día, pintón = vigilar, cereza = actuar hoy,
+  niebla = sin datos. El estado nunca va solo en color: siempre con ícono y palabra.
+*/
+@theme {
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Atkinson Hyperlegible Next", ui-sans-serif, system-ui, sans-serif;
+
+  --color-pergamino: #f4ede1;
+  --color-papel: #fbf7f0;
+  --color-crema: #ebe1cf;
+  --color-tierra: #2b1e16;
+  --color-tierra-media: #5e4b3c;
+  --color-tierra-suave: #7a6656;
+  --color-cereza: #a3261b;
+  --color-cereza-oscura: #7e1c13;
+  --color-cereza-viva: #c8372d;
+  --color-cereza-tenue: #f6dfd9;
+  --color-hoja: #2e5b3a;
+  --color-hoja-oscura: #21452b;
+  --color-hoja-clara: #7fa36b;
+  --color-hoja-tenue: #e2ebdc;
+  --color-pinton: #c98f2e;
+  --color-pinton-texto: #8a5a12;
+  --color-pinton-tenue: #f5e6c8;
+  --color-niebla: #dde4e2;
+  --color-niebla-oscura: #4f6461;
+  --color-borde-campo: #8c7a68;
+  --color-linea: #e2d6c3;
+  --color-tostado: #1e1510;
+  --color-tostado-suave: #2c2018;
+
+  --radius-campo: 14px;
+  --shadow-papel: 0 1px 0 rgb(43 30 22 / 0.04), 0 8px 24px -12px rgb(43 30 22 / 0.18);
+  --shadow-levantado: 0 2px 0 rgb(43 30 22 / 0.05), 0 18px 40px -18px rgb(43 30 22 / 0.32);
+
+  --ease-campo: cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-aparecer: aparecer 320ms var(--ease-campo) both;
+  --animate-sello: sello 420ms var(--ease-campo) both;
+
+  @keyframes aparecer {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes sello {
+    0% {
+      opacity: 0;
+      transform: scale(1.25) rotate(-6deg);
+    }
+    60% {
+      opacity: 1;
+      transform: scale(0.96) rotate(-2deg);
+    }
+    100% {
+      transform: scale(1) rotate(-2deg);
+    }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-pergamino font-sans text-tierra antialiased;
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    font-feature-settings: "tnum" 0;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply text-tierra;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-cereza);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+  ::selection {
+    background: var(--color-pinton-tenue);
+    color: var(--color-tierra);
+  }
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+  }
+  [hidden] {
+    display: none !important;
+  }
+}
+
+@utility titular {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: 560;
+  letter-spacing: -0.015em;
+  line-height: 1.04;
+}
+@utility cifra {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+@utility rotulo {
+  @apply text-[0.8125rem] font-bold tracking-[0.08em] text-tierra-media uppercase;
+}
+@utility papel {
+  @apply rounded-[var(--radius-campo)] border border-linea bg-papel shadow-papel;
+}
+@utility campo {
+  @apply min-h-12 w-full rounded-xl border border-borde-campo bg-white px-3.5 text-[1.0625rem] text-tierra outline-none placeholder:text-tierra-suave/80;
+  @apply transition-[border-color,box-shadow] focus:border-cereza focus:ring-4 focus:ring-cereza/15;
+  @apply aria-invalid:border-cereza aria-invalid:ring-4 aria-invalid:ring-cereza/10;
+}
+@utility boton {
+  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-5 font-bold select-none;
+  @apply transition-[background-color,box-shadow,transform] active:translate-y-px disabled:cursor-not-allowed disabled:opacity-55;
+}
+@utility boton-primario {
+  @apply boton bg-cereza text-white shadow-[0_1px_0_rgb(0_0_0/0.12)] hover:bg-cereza-oscura;
+}
+@utility boton-secundario {
+  @apply boton border border-borde-campo bg-papel text-tierra hover:bg-crema;
+}
+@utility boton-hoja {
+  @apply boton bg-hoja text-white hover:bg-hoja-oscura;
+}
+@utility boton-fantasma {
+  @apply boton px-3 text-tierra-media hover:bg-crema hover:text-tierra;
+}
+
+@layer components {
+  /* Curvas de nivel: el motivo gráfico compartido con la ladera 3D. */
+  .curvas-nivel {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='320' viewBox='0 0 480 320'%3E%3Cg fill='none' stroke='%23a3261b' stroke-opacity='.11' stroke-width='1.2'%3E%3Cpath d='M-20 250c70-40 120-30 180-60s100-90 170-90 110 40 170 30'/%3E%3Cpath d='M-20 280c80-35 130-20 200-50s110-85 180-80 100 45 150 40'/%3E%3Cpath d='M-20 220c60-45 110-45 165-75s95-95 160-100 120 30 195 15'/%3E%3Cpath d='M-20 190c55-50 100-60 150-90s90-100 150-110 130 20 220 0'/%3E%3Cpath d='M-20 310c90-30 140-15 215-40s120-80 190-70 90 50 115 50'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 480px 320px;
+  }
+  .grano-papel {
+    position: relative;
+    isolation: isolate;
+  }
+  .grano-papel::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.35;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .17 0 0 0 0 .12 0 0 0 0 .09 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  body {
+    background: white;
+  }
+  .no-imprimir {
+    display: none !important;
+  }
+}
