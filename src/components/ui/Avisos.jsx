@@ -56,22 +56,22 @@ export function ProveedorAvisos({ children }) {
           <div
             key={aviso.id}
             role={aviso.tipo === "error" ? "alert" : "status"}
-            className="pointer-events-auto flex w-full max-w-md items-center gap-3 rounded-2xl bg-tostado px-4 py-3 text-papel shadow-levantado animate-aparecer"
+            className="pointer-events-auto flex w-full max-w-md items-center gap-3 rounded-lg bg-basalto px-4 py-3 text-niebla shadow-levantado animate-aparecer"
           >
             {aviso.tipo === "registrado" && (
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border-2 border-dashed border-pinton text-pinton animate-sello">
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full border-2 border-dashed border-amarillo text-amarillo animate-sello">
                 <Stamp className="h-5 w-5" aria-hidden="true" />
               </span>
             )}
             {aviso.tipo === "error" && <CircleAlert className="h-5 w-5 shrink-0 text-cereza-tenue" aria-hidden="true" />}
             <div className="min-w-0 flex-1">
               <p className="font-bold leading-snug">{aviso.texto}</p>
-              {aviso.detalle && <p className="text-sm text-papel/75">{aviso.detalle}</p>}
+              {aviso.detalle && <p className="text-sm text-niebla/75">{aviso.detalle}</p>}
             </div>
             {aviso.tipo === "deshacer" && (
               <button
                 type="button"
-                className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-papel/12 px-3 font-bold text-pinton hover:bg-papel/20"
+                className="inline-flex min-h-11 items-center gap-1.5 rounded-md bg-lamina/12 px-3 font-bold text-amarillo hover:bg-lamina/20"
                 onClick={() => {
                   aviso.alDeshacer?.();
                   quitar(aviso.id);
@@ -81,7 +81,7 @@ export function ProveedorAvisos({ children }) {
                 Deshacer
               </button>
             )}
-            <button type="button" onClick={() => quitar(aviso.id)} className="grid h-10 w-10 shrink-0 place-items-center rounded-full text-papel/70 hover:bg-papel/10" aria-label="Cerrar aviso">
+            <button type="button" onClick={() => quitar(aviso.id)} className="grid h-10 w-10 shrink-0 place-items-center rounded-full text-niebla/70 hover:bg-lamina/10" aria-label="Cerrar aviso">
               <X className="h-4 w-4" aria-hidden="true" />
             </button>
           </div>

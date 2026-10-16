@@ -65,7 +65,7 @@ export default function Precio() {
               <Campo etiqueta="Bolsa de NY" opcional>{(p) => <CampoNumero {...p} sufijo="¢/lb" valor={form.bolsaNY} alCambiar={cambiar("bolsaNY")} />}</Campo>
             </div>
             {base > 0 && (
-              <ul className="grid gap-1 rounded-xl bg-pergamino px-4 py-3 text-[0.95rem]">
+              <ul className="grid gap-1 rounded-md bg-cal px-4 py-3 text-[0.95rem]">
                 {[88, 92, 94, 96, 100].map((fr) => (
                   <li key={fr} className="flex justify-between">
                     <span>Factor {fr}</span>
@@ -74,7 +74,7 @@ export default function Precio() {
                 ))}
               </ul>
             )}
-            <p className="text-sm text-tierra-media">
+            <p className="text-sm text-grafito">
               TRM de hoy: {trm.datos ? `${cop(trm.datos.valor[0].valor)} (datos.gov.co)` : trm.cargando ? "consultando…" : "sin conexión"}. Se guarda junto al precio.
             </p>
             <button type="submit" className="boton-primario" disabled={!(base > 500000)}>
@@ -91,18 +91,18 @@ export default function Precio() {
                     {i === 0 ? <Cifra rotulo={fLarga(p.fecha)} valor={cop(p.precioCarga)} tamano="sm" detalle={`Pasilla ${cop(p.pasillaKg)}/kg${p.bolsaNY ? ` · NY ${num(p.bolsaNY)} ¢/lb` : ""}${p.trm ? ` · TRM ${cop(p.trm)}` : ""}`} /> : (
                       <>
                         <p className="cifra font-bold">{cop(p.precioCarga)}</p>
-                        <p className="text-sm text-tierra-media">{fLarga(p.fecha)} · {p.registradoPor}</p>
+                        <p className="text-sm text-grafito">{fLarga(p.fecha)} · {p.registradoPor}</p>
                       </>
                     )}
                   </div>
-                  <button type="button" className="grid h-10 w-10 place-items-center rounded-full text-tierra-media hover:bg-crema hover:text-cereza" aria-label={`Borrar el precio del ${fLarga(p.fecha)}`} onClick={() => { eliminar("precios", p.id); avisos.conDeshacer("Precio borrado", () => crear("precios", p)); }}>
+                  <button type="button" className="grid h-10 w-10 place-items-center rounded-full text-grafito hover:bg-cal-honda hover:text-cereza" aria-label={`Borrar el precio del ${fLarga(p.fecha)}`} onClick={() => { eliminar("precios", p.id); avisos.conDeshacer("Precio borrado", () => crear("precios", p)); }}>
                     <Trash2 className="h-4 w-4" aria-hidden="true" />
                   </button>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="text-tierra-media">Sin precios registrados.</p>
+            <p className="text-grafito">Sin precios registrados.</p>
           )}
         </Seccion>
       </div>

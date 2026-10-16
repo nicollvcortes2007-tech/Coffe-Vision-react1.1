@@ -10,7 +10,7 @@ vgpu sigue vigente y madura rápido: **v0.6.0 estable del 2026-10-12**, MIT, con
 
 ### 5.0 Punto de partida verificado en el repo
 
-- [H] El repo usa hoy **React ^19.3.1, Tailwind ^4.3.3 (`@tailwindcss/vite`), Vite ^8.3.4 y `lucide-react` ^1.57.0** (`/Users/jordan/Documents/Coffe-Vision-react1.1/package.json`). El brief dice React 18: hay una discrepancia que conviene corregir en los documentos.
+- [H] El repo usa hoy **React ^19.3.1, Tailwind ^4.3.3 (`@tailwindcss/vite`), Vite ^8.3.4 y `lucide-react` ^1.57.0** (`package.json`). El brief dice React 18: hay una discrepancia que conviene corregir en los documentos.
 - [H] `index.html` carga **Font Awesome 6.5.1 desde cdnjs** y 10 archivos de `src/` usan clases de Font Awesome (por ejemplo `src/pages/DashboardCaficultor.jsx` y `src/components/navegacion/Sidebar.jsx`).
 - [H] `PRODUCT.md` fija el contexto: «uso en campo, con sol directo, manos ocupadas y señal débil o nula», funciona sin conexión después de la primera visita, objetivos táctiles de 44 px o más, repo público «sin código con licencia que prohíba redistribuirlo». Menciona un `DESIGN.md` que todavía no existe.
 - [I] Consecuencias para el diseño: el tema por defecto debe ser **claro y de alto contraste**, sin dependencias de CDN (rompen el modo sin conexión) y con el 3D como capa opcional.

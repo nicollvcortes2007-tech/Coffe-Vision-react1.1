@@ -51,7 +51,7 @@ export default function FormVenta({ alTerminar }) {
         {(props) => <input {...props} className="campo" value={comprador} onChange={(evento) => setComprador(evento.target.value)} />}
       </Campo>
       {kgCps > 0 && (
-        <div className="rounded-2xl border border-linea bg-pergamino p-4 text-[0.95rem]">
+        <div className="rounded-lg border border-linea bg-cal p-4 text-[0.95rem]">
           <p>
             {num(kgCps)} kg = <strong className="cifra">{num(aCargas(kgCps))} cargas</strong> ({num(kgCps / 12.5)} @)
           </p>
@@ -61,9 +61,9 @@ export default function FormVenta({ alTerminar }) {
               <strong className="cifra">{cop(estimado)}</strong>.
             </p>
           ) : (
-            <p className="mt-1 text-tierra-media">El administrador todavía no ha registrado el precio de referencia.</p>
+            <p className="mt-1 text-grafito">El administrador todavía no ha registrado el precio de referencia.</p>
           )}
-          <a href={FUENTES.fr.url} target="_blank" rel="noreferrer" className="mt-2 inline-block text-sm text-tierra-media underline">
+          <a href={FUENTES.fr.url} target="_blank" rel="noreferrer" className="mt-2 inline-block text-sm text-grafito underline">
             Cálculo con la tabla por factor de rendimiento de la FNC
           </a>
         </div>

@@ -23,10 +23,10 @@ function Forma({ puntos }) {
   const camino = xy.map(([x, y], i) => `${i ? "L" : "M"}${x.toFixed(1)} ${y.toFixed(1)}`).join(" ") + (puntos.length > 2 ? " Z" : "");
   return (
     <svg viewBox="0 0 200 200" className="mx-auto h-44 w-44" role="img" aria-label={`Contorno con ${puntos.length} esquinas`}>
-      <rect width="200" height="200" rx="16" fill="#EBE1CF" />
-      <path d={camino} fill="#7FA36B" fillOpacity=".45" stroke="#2E5B3A" strokeWidth="2.5" strokeLinejoin="round" />
+      <rect width="200" height="200" rx="16" fill="#EBEBE6" />
+      <path d={camino} fill="#FFC21A" fillOpacity=".55" stroke="#111210" strokeWidth="2.5" strokeLinejoin="round" />
       {xy.map(([x, y], i) => (
-        <circle key={i} cx={x} cy={y} r="4.5" fill={i === xy.length - 1 ? "#A3261B" : "#2B1E16"} />
+        <circle key={i} cx={x} cy={y} r="4.5" fill={i === xy.length - 1 ? "#C3121B" : "#111210"} />
       ))}
     </svg>
   );
@@ -68,7 +68,7 @@ export default function CapturaUbicacion({ valor, areaDeclarada, alCambiar }) {
 
   return (
     <div className="grid gap-4">
-      <div role="radiogroup" aria-label="Cómo ubicar el lote" className="grid grid-cols-2 gap-2 rounded-2xl bg-crema/70 p-1">
+      <div role="radiogroup" aria-label="Cómo ubicar el lote" className="grid grid-cols-2 gap-2 rounded-lg bg-cal-honda/70 p-1">
         {[
           ["punto", "Un punto", MapPin],
           ["poligono", "El contorno", Footprints],
@@ -82,21 +82,21 @@ export default function CapturaUbicacion({ valor, areaDeclarada, alCambiar }) {
               setModo(id);
               alCambiar(null);
             }}
-            className={`flex min-h-12 items-center justify-center gap-2 rounded-xl font-bold ${modo === id ? "bg-papel text-tierra shadow-papel" : "text-tierra-media"}`}
+            className={`flex min-h-12 items-center justify-center gap-2 rounded-md font-bold ${modo === id ? "bg-lamina text-tinta shadow-placa" : "text-grafito"}`}
           >
             <Icono className="h-5 w-5" aria-hidden="true" /> {texto}
           </button>
         ))}
       </div>
 
-      <p className="text-sm text-tierra-media">
+      <p className="text-sm text-grafito">
         {modo === "punto"
           ? "Párate cerca del centro del lote y toca «Marcar aquí»."
           : "Camina el borde del lote. En cada esquina toca «Marcar esquina». Con 4 o más esquinas se calcula el área."}
         {areaDeclarada >= HA_POLIGONO && modo === "punto" && " Para lotes de 4 ha o más, los compradores piden el contorno."}
       </p>
 
-      <p className={`flex items-center gap-2 rounded-xl px-3 py-2.5 text-[0.95rem] ${precisionBuena ? "bg-hoja-tenue text-hoja-oscura" : "bg-niebla text-niebla-oscura"}`} role="status">
+      <p className={`flex items-center gap-2 rounded-md px-3 py-2.5 text-[0.95rem] ${precisionBuena ? "bg-cal-honda text-tinta" : "bg-niebla text-ceniza-honda"}`} role="status">
         <Crosshair className="h-5 w-5 shrink-0" aria-hidden="true" />
         {error ?? (lectura ? `GPS: precisión de ${Math.round(lectura.precision)} m${precisionBuena ? "" : " (espera a que baje de 15 m)"}` : "Buscando señal de GPS…")}
       </p>
@@ -107,7 +107,7 @@ export default function CapturaUbicacion({ valor, areaDeclarada, alCambiar }) {
             <MapPin className="h-5 w-5" aria-hidden="true" /> Marcar aquí
           </button>
           {valor?.tipo === "punto" && (
-            <p className="flex items-center gap-2 font-bold text-hoja">
+            <p className="flex items-center gap-2 font-bold text-tinta">
               <CircleCheck className="h-5 w-5" aria-hidden="true" /> Punto guardado: {valor.punto[1].toFixed(6)}, {valor.punto[0].toFixed(6)}
             </p>
           )}
@@ -124,7 +124,7 @@ export default function CapturaUbicacion({ valor, areaDeclarada, alCambiar }) {
             </button>
           </div>
           {puntos.length >= 3 && (
-            <p className={`font-bold ${cruzado ? "text-cereza" : "text-hoja"}`}>
+            <p className={`font-bold ${cruzado ? "text-cereza" : "text-tinta"}`}>
               {cruzado ? "El contorno se cruza: quita la última esquina y sigue el borde en orden." : `Área medida: ${num(area)} ha${areaDeclarada ? ` (declaraste ${num(areaDeclarada)} ha)` : ""}`}
             </p>
           )}

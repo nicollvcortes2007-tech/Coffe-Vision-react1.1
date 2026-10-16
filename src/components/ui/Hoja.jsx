@@ -30,7 +30,7 @@ export default function Hoja({ abierta, alCerrar, titulo, descripcion, children,
       onMouseDown={(evento) => {
         if (evento.target === ref.current) alCerrar();
       }}
-      className={`m-0 mt-auto max-h-[92dvh] w-full max-w-none overflow-hidden rounded-t-3xl bg-papel p-0 text-tierra shadow-levantado backdrop:bg-tierra/45 backdrop:backdrop-blur-[2px] sm:m-auto sm:rounded-3xl ${ancho} sm:w-[calc(100%-2rem)]`}
+      className={`m-0 mt-auto max-h-[92dvh] w-full max-w-none overflow-hidden rounded-t-lg bg-lamina p-0 text-tinta shadow-levantado backdrop:bg-tinta/45 backdrop:backdrop-blur-[2px] sm:m-auto sm:rounded-lg ${ancho} sm:w-[calc(100%-2rem)]`}
     >
       {abierta && (
         <div className="flex max-h-[92dvh] flex-col animate-aparecer">
@@ -40,7 +40,7 @@ export default function Hoja({ abierta, alCerrar, titulo, descripcion, children,
                 {titulo}
               </h2>
               {descripcion && (
-                <p id={idDescripcion} className="mt-1 text-[0.95rem] text-tierra-media">
+                <p id={idDescripcion} className="mt-1 text-[0.95rem] text-grafito">
                   {descripcion}
                 </p>
               )}

@@ -36,7 +36,7 @@ function Respuesta({ r }) {
             ),
           )}
           {r.fuente && (
-            <a href={r.fuente.url} target="_blank" rel="noreferrer" className="text-tierra-media underline">
+            <a href={r.fuente.url} target="_blank" rel="noreferrer" className="text-grafito underline">
               Fuente: {r.fuente.texto}
             </a>
           )}
@@ -90,15 +90,15 @@ export default function Asistente() {
   return (
     <>
       <EncabezadoPagina rotulo="Asistente" titulo="Pregúntale a tu finca" bajada="Responde con tus propios registros y las guías, sin internet. No es una inteligencia artificial que inventa: si no sabe, te lo dice." />
-      <section className="papel flex min-h-[60dvh] flex-col overflow-hidden" aria-label="Conversación">
+      <section className="placa flex min-h-[60dvh] flex-col overflow-hidden" aria-label="Conversación">
         <div className="flex-1 overflow-y-auto p-4 sm:p-6" aria-live="polite">
           {!mensajes.length && (
             <div className="grid place-items-center gap-4 py-8 text-center">
               <Isotipo className="h-14 w-14" />
-              <p className="max-w-md text-tierra-media">Prueba con alguna de estas preguntas:</p>
+              <p className="max-w-md text-grafito">Prueba con alguna de estas preguntas:</p>
               <div className="flex max-w-2xl flex-wrap justify-center gap-2">
                 {SUGERENCIAS.map((s) => (
-                  <button key={s} type="button" onClick={() => preguntar(s)} className="min-h-11 rounded-full border border-linea bg-pergamino px-4 text-[0.95rem] font-bold hover:border-tierra">
+                  <button key={s} type="button" onClick={() => preguntar(s)} className="min-h-11 rounded-full border border-linea bg-cal px-4 text-[0.95rem] font-bold hover:border-tinta">
                     {s}
                   </button>
                 ))}
@@ -107,18 +107,18 @@ export default function Asistente() {
           )}
           <ol className="grid gap-4">
             {mensajes.map((m, i) => (
-              <li key={i} className={m.de === "yo" ? "ml-auto max-w-[85%] rounded-2xl rounded-br-md bg-tierra px-4 py-3 text-papel" : "mr-auto flex max-w-[92%] gap-3"}>
+              <li key={i} className={m.de === "yo" ? "ml-auto max-w-[85%] rounded-lg rounded-br-md bg-tinta px-4 py-3 text-niebla" : "mr-auto flex max-w-[92%] gap-3"}>
                 {m.de === "yo" ? (
                   m.texto
                 ) : (
                   <>
                     <Isotipo className="mt-1 h-8 w-8 shrink-0" />
-                    <div className="rounded-2xl rounded-tl-md border border-linea bg-pergamino px-4 py-3">
+                    <div className="rounded-lg rounded-tl-md border border-linea bg-cal px-4 py-3">
                       <Respuesta r={m.r} />
                       {m.r.sugerencias && (
                         <div className="mt-3 flex flex-wrap gap-2">
                           {m.r.sugerencias.map((s) => (
-                            <button key={s} type="button" onClick={() => preguntar(s)} className="min-h-10 rounded-full border border-linea bg-papel px-3 text-sm font-bold">
+                            <button key={s} type="button" onClick={() => preguntar(s)} className="min-h-10 rounded-full border border-linea bg-lamina px-3 text-sm font-bold">
                               {s}
                             </button>
                           ))}
@@ -133,7 +133,7 @@ export default function Asistente() {
           <div ref={final} />
         </div>
         <form
-          className="flex items-end gap-2 border-t border-linea bg-papel p-3 sm:p-4"
+          className="flex items-end gap-2 border-t border-linea bg-lamina p-3 sm:p-4"
           onSubmit={(evento) => {
             evento.preventDefault();
             preguntar(pregunta);

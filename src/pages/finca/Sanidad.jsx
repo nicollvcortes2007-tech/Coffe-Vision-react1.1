@@ -7,7 +7,7 @@ import { useRegistro } from "@/components/registro/ContextoRegistro";
 import { Broca, Roya } from "@/components/marca/Pictogramas";
 import { useFinca } from "@/datos/useFinca";
 import { evaluarBroca, evaluarRoya, FUENTES, esSusceptible } from "@/datos/agronomia";
-import { fCorta, hace } from "@/utilidades/formato";
+import { fCorta, hace, num } from "@/utilidades/formato";
 
 function historial(muestreos, loteId, tipo) {
   return muestreos
@@ -25,19 +25,19 @@ function Tabla({ lotes, muestreos, tipo, alMuestrear }) {
         const ultimo = serie.at(-1);
         const nivel = ultimo ? (ultimo.evaluacion.nivel === "ok" ? "ok" : ultimo.evaluacion.nivel) : "sinDatos";
         return (
-          <li key={lote.id} className="rounded-2xl border border-linea bg-papel p-4">
+          <li key={lote.id} className="rounded-lg border border-linea bg-lamina p-4">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
                 <Link to={`/finca/lotes/${lote.id}`} className="titular text-xl hover:underline">
                   {lote.nombre}
                 </Link>
-                <p className="text-sm text-tierra-media">
+                <p className="text-sm text-grafito">
                   {ultimo ? `Último muestreo ${hace(ultimo.fecha)} (${fCorta(ultimo.fecha)})` : "Sin muestreos"}
                   {tipo === "roya" && esSusceptible(lote) ? " · variedad susceptible" : ""}
                 </p>
               </div>
               <div className="flex items-center gap-3">
-                {ultimo && <span className="cifra text-2xl font-bold">{ultimo.valor.toFixed(1)} %</span>}
+                {ultimo && <span className="cifra text-2xl font-bold">{num(ultimo.valor)} %</span>}
                 <Estado tipo={nivel} pequeno />
               </div>
             </div>
@@ -50,7 +50,7 @@ function Tabla({ lotes, muestreos, tipo, alMuestrear }) {
                   umbral={umbral}
                   etiquetaUmbral={`${umbral} %`}
                   alto={110}
-                  color={tipo === "broca" ? "#7FA36B" : "#8C7A68"}
+                  color={tipo === "broca" ? "#4B4D47" : "#8A8C85"}
                 />
               </div>
             )}
@@ -95,7 +95,7 @@ export default function Sanidad() {
             bajada="30 árboles por lote, la rama más cargada. Umbral de acción: 2 %; daño económico: 5 %. Se aplica solo si más de la mitad de las brocas está en A o B."
           >
             <Tabla lotes={productivos} muestreos={muestreos} tipo="broca" alMuestrear={(loteId) => abrir("muestreo-broca", { loteId })} />
-            <a href={FUENTES.broca.url} target="_blank" rel="noreferrer" className="mt-4 inline-block text-sm text-tierra-media underline">
+            <a href={FUENTES.broca.url} target="_blank" rel="noreferrer" className="mt-4 inline-block text-sm text-grafito underline">
               Fuente: {FUENTES.broca.texto}
             </a>
           </Seccion>
@@ -108,7 +108,7 @@ export default function Sanidad() {
             bajada="10 árboles × 10 ramas. Sobre el 5 % de hojas con roya se recomienda aplicación preventiva, sin importar la variedad. En variedades susceptibles, primera aplicación a los 60 días de la floración."
           >
             <Tabla lotes={productivos} muestreos={muestreos} tipo="roya" alMuestrear={(loteId) => abrir("muestreo-roya", { loteId })} />
-            <a href={FUENTES.roya.url} target="_blank" rel="noreferrer" className="mt-4 inline-block text-sm text-tierra-media underline">
+            <a href={FUENTES.roya.url} target="_blank" rel="noreferrer" className="mt-4 inline-block text-sm text-grafito underline">
               Fuente: {FUENTES.roya.texto}
             </a>
           </Seccion>

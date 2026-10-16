@@ -130,10 +130,10 @@ export default function Perfil() {
               </div>
               <Campo etiqueta="Departamento">{(p) => <input {...p} className="campo" value={datosFinca.departamento} onChange={(e) => setDatosFinca((d) => ({ ...d, departamento: e.target.value }))} />}</Campo>
               <Campo etiqueta="Dónde vendes el café" opcional>{(p) => <input {...p} className="campo" value={datosFinca.puntoCompra} onChange={(e) => setDatosFinca((d) => ({ ...d, puntoCompra: e.target.value }))} />}</Campo>
-              <div className="rounded-xl bg-pergamino px-4 py-3 text-[0.95rem]">
+              <div className="rounded-md bg-cal px-4 py-3 text-[0.95rem]">
                 {Number.isFinite(finca?.lat) ? (
                   <p className="flex items-center gap-2">
-                    <CircleCheck className="h-5 w-5 text-hoja" aria-hidden="true" /> Ubicada en {finca.lat.toFixed(4)}, {finca.lon.toFixed(4)}
+                    <CircleCheck className="h-5 w-5 text-tinta" aria-hidden="true" /> Ubicada en {finca.lat.toFixed(4)}, {finca.lon.toFixed(4)}
                     {finca.altitud ? ` · ${ent(finca.altitud)} msnm` : ""}
                   </p>
                 ) : (
@@ -161,7 +161,7 @@ export default function Perfil() {
                   <KeyRound className="h-5 w-5" aria-hidden="true" /> Cambiar contraseña
                 </button>
               </div>
-              {sesion?.vence && <p className="text-sm text-tierra-media">La sesión vence el {fLarga(sesion.vence.slice(0, 10))}.</p>}
+              {sesion?.vence && <p className="text-sm text-grafito">La sesión vence el {fLarga(sesion.vence.slice(0, 10))}.</p>}
             </form>
           </Seccion>
         </div>
@@ -169,7 +169,7 @@ export default function Perfil() {
         <div className="grid content-start gap-6">
           <Seccion titulo="Tus datos" bajada="Viven en este equipo. Si borras el navegador o cambias de celular, se pierden: descarga un respaldo.">
             <div className="grid gap-2">
-              <button type="button" className="boton-hoja justify-start" onClick={respaldar}>
+              <button type="button" className="boton-primario justify-start" onClick={respaldar}>
                 <Download className="h-5 w-5" aria-hidden="true" /> Descargar respaldo (JSON)
               </button>
               <button type="button" className="boton-secundario justify-start" onClick={() => archivo.current?.click()}>
@@ -185,8 +185,8 @@ export default function Perfil() {
                 <Download className="h-5 w-5" aria-hidden="true" /> Ubicación de los lotes (GeoJSON)
               </button>
             </div>
-            <p className="mt-4 flex items-start gap-2 text-sm text-tierra-media">
-              <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-hoja" aria-hidden="true" /> Nada de esto se envía a un servidor.{" "}
+            <p className="mt-4 flex items-start gap-2 text-sm text-grafito">
+              <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-tinta" aria-hidden="true" /> Nada de esto se envía a un servidor.{" "}
               <Link to="/privacidad" className="font-bold underline">
                 Privacidad y datos
               </Link>
@@ -195,7 +195,7 @@ export default function Perfil() {
 
           <Seccion titulo="Usar sin señal">
             {instalacion.instalada ? (
-              <p className="flex items-center gap-2 font-bold text-hoja">
+              <p className="flex items-center gap-2 font-bold text-tinta">
                 <CircleCheck className="h-5 w-5" aria-hidden="true" /> La app está instalada en este equipo.
               </p>
             ) : instalacion.puede ? (
@@ -203,12 +203,12 @@ export default function Perfil() {
                 <Smartphone className="h-5 w-5" aria-hidden="true" /> Instalar en el celular
               </button>
             ) : (
-              <p className="text-[0.95rem] text-tierra-media">Después de la primera visita la app abre sin señal. Para tenerla como aplicación, usa «Agregar a la pantalla de inicio» en el menú del navegador.</p>
+              <p className="text-[0.95rem] text-grafito">Después de la primera visita la app abre sin señal. Para tenerla como aplicación, usa «Agregar a la pantalla de inicio» en el menú del navegador.</p>
             )}
           </Seccion>
 
           <Seccion titulo="Borrar mi cuenta">
-            <p className="text-[0.95rem] text-tierra-media">Borra la cuenta, la finca, los lotes y todos los registros de este equipo. No se puede deshacer: descarga antes un respaldo.</p>
+            <p className="text-[0.95rem] text-grafito">Borra la cuenta, la finca, los lotes y todos los registros de este equipo. No se puede deshacer: descarga antes un respaldo.</p>
             <button type="button" className="boton-secundario mt-3 border-cereza text-cereza" onClick={() => setBorrar({ abierta: true, texto: "" })}>
               <Trash2 className="h-5 w-5" aria-hidden="true" /> Borrar todo
             </button>

@@ -18,7 +18,7 @@ export default function Guia({ base = "/finca/guias" }) {
       </Link>
       <p className="rotulo">{CATEGORIAS_GUIA.find((c) => c.id === g.categoria)?.nombre}</p>
       <h1 className="titular mt-2 text-[2.4rem] sm:text-[3rem]">{g.titulo}</h1>
-      <p className="mt-3 text-xl text-tierra-media">{g.resumen}</p>
+      <p className="mt-3 text-xl text-grafito">{g.resumen}</p>
       <div className="mt-8 grid gap-8">
         {g.secciones.map((s) => (
           <section key={s.titulo}>
@@ -34,18 +34,18 @@ export default function Guia({ base = "/finca/guias" }) {
           </section>
         ))}
       </div>
-      <aside className="mt-10 rounded-2xl border border-linea bg-papel p-5">
+      <aside className="mt-10 rounded-lg border border-linea bg-lamina p-5">
         <h2 className="font-bold">Fuentes</h2>
         <ul className="mt-2 grid gap-2">
           {g.fuentes.map((f) => (
             <li key={f.url}>
-              <a href={f.url} target="_blank" rel="noreferrer" className="inline-flex items-start gap-1.5 text-[0.95rem] text-tierra-media underline underline-offset-2 hover:text-tierra">
+              <a href={f.url} target="_blank" rel="noreferrer" className="inline-flex items-start gap-1.5 text-[0.95rem] text-grafito underline underline-offset-2 hover:text-tinta">
                 <ExternalLink className="mt-1 h-4 w-4 shrink-0" aria-hidden="true" /> {f.texto}
               </a>
             </li>
           ))}
         </ul>
-        <p className="mt-4 text-sm text-tierra-media">Esta guía resume con palabras propias lo publicado por Cenicafé y la FNC. No reemplaza la visita del extensionista: ante la duda, consulte al Comité de Cafeteros.</p>
+        <p className="mt-4 text-sm text-grafito">Esta guía resume con palabras propias lo publicado por Cenicafé y la FNC. No reemplaza la visita del extensionista: ante la duda, consulte al Comité de Cafeteros.</p>
       </aside>
     </article>
   );

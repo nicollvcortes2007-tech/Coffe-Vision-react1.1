@@ -64,7 +64,7 @@ export default function Costos() {
         }
       />
 
-      <div className="papel mb-6 grid gap-6 p-5 sm:grid-cols-2 sm:p-6 lg:grid-cols-4">
+      <div className="placa mb-6 grid gap-6 p-5 sm:grid-cols-2 sm:p-6 lg:grid-cols-4">
         <Cifra rotulo="Costo total" valor={cop(resumen.costoTotal)} detalle={`${resumen.costos.length} movimientos`} />
         <Cifra
           rotulo="Costo por carga"
@@ -101,7 +101,7 @@ export default function Costos() {
                 return <Proporcion key={a.id} etiqueta={a.nombre} valor={pct} referencia={ESTRUCTURA_REFERENCIA[a.id]} texto={`${num(pct)} % · ${cop(valor)}`} />;
               })}
             </div>
-            <a href={FUENTES.costos.url} target="_blank" rel="noreferrer" className="mt-4 inline-block text-sm text-tierra-media underline">
+            <a href={FUENTES.costos.url} target="_blank" rel="noreferrer" className="mt-4 inline-block text-sm text-grafito underline">
               Fuente: {FUENTES.costos.texto}
             </a>
           </Seccion>
@@ -124,18 +124,18 @@ export default function Costos() {
                 <li key={`${m.origen}-${m.id}`} className="group flex items-center gap-3 border-b border-linea/70 py-2.5">
                   <div className="min-w-0 flex-1">
                     <p className="truncate font-bold">{m.concepto}</p>
-                    <p className="text-sm text-tierra-media">
+                    <p className="text-sm text-grafito">
                       {fCorta(m.fecha)} · {nombreLote.get(m.loteId) ?? "Finca"} · {ACTIVIDADES.find((a) => a.id === m.actividad)?.nombre}
                     </p>
                   </div>
                   <span className="cifra font-bold">{cop(m.valor)}</span>
-                  <button type="button" onClick={() => borrar(m)} className="grid h-10 w-10 place-items-center rounded-full text-tierra-media opacity-70 hover:bg-crema hover:text-cereza sm:opacity-0 sm:group-hover:opacity-100 focus-visible:opacity-100" aria-label={`Borrar ${m.concepto}`}>
+                  <button type="button" onClick={() => borrar(m)} className="grid h-10 w-10 place-items-center rounded-full text-grafito opacity-70 hover:bg-cal-honda hover:text-cereza sm:opacity-0 sm:group-hover:opacity-100 focus-visible:opacity-100" aria-label={`Borrar ${m.concepto}`}>
                     <Trash2 className="h-4 w-4" aria-hidden="true" />
                   </button>
                 </li>
               ))}
             </ul>
-            {lista.length > 60 && <p className="mt-3 text-sm text-tierra-media">Se muestran 60 de {lista.length}. Descarga el CSV para verlos todos.</p>}
+            {lista.length > 60 && <p className="mt-3 text-sm text-grafito">Se muestran 60 de {lista.length}. Descarga el CSV para verlos todos.</p>}
           </Seccion>
         </div>
       )}

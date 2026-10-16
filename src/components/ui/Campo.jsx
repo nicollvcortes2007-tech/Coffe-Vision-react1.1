@@ -9,13 +9,13 @@ export default function Campo({ etiqueta, ayuda, error, children, className = ""
   const control = typeof children === "function" ? children({ id, "aria-describedby": descritoPor, "aria-invalid": error ? true : undefined }) : children;
   return (
     <div className={`grid gap-1.5 ${className}`}>
-      <label htmlFor={id} className="text-[0.95rem] font-bold text-tierra">
+      <label htmlFor={id} className="text-[0.95rem] font-bold text-tinta">
         {etiqueta}
-        {opcional && <span className="ml-1.5 font-normal text-tierra-media">(opcional)</span>}
+        {opcional && <span className="ml-1.5 font-normal text-grafito">(opcional)</span>}
       </label>
       {control}
       {ayuda && !error && (
-        <p id={idAyuda} className="text-sm text-tierra-media">
+        <p id={idAyuda} className="text-sm text-grafito">
           {ayuda}
         </p>
       )}

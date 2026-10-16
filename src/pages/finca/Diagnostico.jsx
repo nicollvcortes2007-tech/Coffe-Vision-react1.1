@@ -16,9 +16,9 @@ import { hoyISO, pct, ent } from "@/utilidades/formato";
 const MAX_FOTOS = 6;
 
 const ESTADO_TEXTO = {
-  confiado: { texto: "Muy probable", clase: "bg-cereza-tenue text-cereza-oscura ring-cereza/30" },
-  posible: { texto: "Posible", clase: "bg-pinton-tenue text-pinton-texto ring-pinton/40" },
-  incierto: { texto: "No estoy seguro", clase: "bg-niebla text-niebla-oscura ring-niebla-oscura/20" },
+  confiado: { texto: "Muy probable", clase: "bg-cereza-tenue text-cereza-honda ring-cereza/30" },
+  posible: { texto: "Posible", clase: "bg-amarillo-tenue text-amarillo-texto ring-amarillo/40" },
+  incierto: { texto: "No estoy seguro", clase: "bg-niebla text-ceniza-honda ring-ceniza-honda/20" },
 };
 
 function Resultado({ resultado, titulo }) {
@@ -28,15 +28,15 @@ function Resultado({ resultado, titulo }) {
   return (
     <div className="grid gap-3">
       <div className="flex flex-wrap items-center gap-2">
-        <span className={`rounded-full px-2.5 py-1 text-sm font-bold ring-1 ring-inset ${sana ? "bg-hoja-tenue text-hoja-oscura ring-hoja/25" : estado.clase}`}>
+        <span className={`rounded-full px-2.5 py-1 text-sm font-bold ring-1 ring-inset ${sana ? "bg-cal-honda text-tinta ring-tinta/25" : estado.clase}`}>
           {sana ? "Se ve sana" : estado.texto}
         </span>
-        {titulo && <span className="text-sm text-tierra-media">{titulo}</span>}
+        {titulo && <span className="text-sm text-grafito">{titulo}</span>}
       </div>
       {resultado.aceptada ? (
         <p className="titular text-2xl">
           {ganadora.nombre}
-          {ganadora.cientifico && <span className="block text-base font-normal italic text-tierra-media">{ganadora.cientifico}</span>}
+          {ganadora.cientifico && <span className="block text-base font-normal italic text-grafito">{ganadora.cientifico}</span>}
         </p>
       ) : (
         <p className="font-bold">{resultado.motivo ?? "No es posible decirlo con esta foto."}</p>
@@ -45,9 +45,9 @@ function Resultado({ resultado, titulo }) {
         {resultado.top.map((clase) => (
           <li key={clase.id} className="grid grid-cols-[1fr_auto] items-center gap-x-3 gap-y-1">
             <span className="text-[0.95rem]">{clase.nombre}</span>
-            <span className="cifra text-sm font-bold text-tierra-media">{pct(clase.probabilidad)}</span>
-            <span className="col-span-2 h-2 overflow-hidden rounded-full bg-crema">
-              <span className="block h-full rounded-full bg-tierra-media" style={{ width: `${Math.max(2, clase.probabilidad * 100)}%` }} />
+            <span className="cifra text-sm font-bold text-grafito">{pct(clase.probabilidad)}</span>
+            <span className="col-span-2 h-2 overflow-hidden rounded-full bg-cal-honda">
+              <span className="block h-full rounded-full bg-grafito" style={{ width: `${Math.max(2, clase.probabilidad * 100)}%` }} />
             </span>
           </li>
         ))}
@@ -173,8 +173,8 @@ export default function Diagnostico() {
                   [Maximize, "Si hay polvillo naranja, el envés de la hoja"],
                   [Hand, "Quieto un segundo para que no salga movida"],
                 ].map(([Icono, texto]) => (
-                  <li key={texto} className="flex items-center gap-3 rounded-xl bg-pergamino px-3 py-2.5">
-                    <Icono className="h-5 w-5 shrink-0 text-hoja" aria-hidden="true" />
+                  <li key={texto} className="flex items-center gap-3 rounded-md bg-cal px-3 py-2.5">
+                    <Icono className="h-5 w-5 shrink-0 text-tinta" aria-hidden="true" />
                     <span className="text-[0.95rem]">{texto}</span>
                   </li>
                 ))}
@@ -186,19 +186,19 @@ export default function Diagnostico() {
           ) : (
             <ul className="grid gap-4">
               {fotos.map((foto, indice) => (
-                <li key={foto.id} className="grid gap-4 rounded-2xl border border-linea bg-pergamino/60 p-3 sm:grid-cols-[7.5rem_1fr]">
-                  <div className="aspect-square w-full max-w-[7.5rem] overflow-hidden rounded-xl bg-crema">
+                <li key={foto.id} className="grid gap-4 rounded-lg border border-linea bg-cal/60 p-3 sm:grid-cols-[7.5rem_1fr]">
+                  <div className="aspect-square w-full max-w-[7.5rem] overflow-hidden rounded-md bg-cal-honda">
                     {foto.miniatura ? (
                       <img src={foto.miniatura} alt={`Hoja ${indice + 1}`} className="h-full w-full object-cover" />
                     ) : (
-                      <div className="grid h-full place-items-center text-tierra-media">
+                      <div className="grid h-full place-items-center text-grafito">
                         <Leaf className="h-8 w-8 animate-pulse" aria-hidden="true" />
                       </div>
                     )}
                   </div>
                   <div className="min-w-0" aria-live="polite">
                     {foto.estado === "preparando" && (
-                      <p className="font-bold text-tierra-media">{motor.estado === "cargando" ? "Preparando el modelo…" : "Analizando la hoja…"}</p>
+                      <p className="font-bold text-grafito">{motor.estado === "cargando" ? "Preparando el modelo…" : "Analizando la hoja…"}</p>
                     )}
                     {foto.estado === "error" && <p className="font-bold text-cereza">No se pudo analizar esta foto.</p>}
                     {foto.estado === "listo" && <Resultado resultado={foto.resultado} titulo={`Hoja ${indice + 1}`} />}
@@ -215,13 +215,13 @@ export default function Diagnostico() {
           )}
 
           {motor.estado === "cargando" && (
-            <p className="mt-4 flex items-center gap-2 rounded-xl bg-niebla/70 px-3 py-2.5 text-[0.95rem]" role="status">
-              <Download className="h-5 w-5 shrink-0 text-niebla-oscura" aria-hidden="true" />
+            <p className="mt-4 flex items-center gap-2 rounded-md bg-niebla/70 px-3 py-2.5 text-[0.95rem]" role="status">
+              <Download className="h-5 w-5 shrink-0 text-ceniza-honda" aria-hidden="true" />
               La primera vez se descarga el modelo (unos 10 MB). Después funciona sin señal.
             </p>
           )}
           {motor.error && (
-            <p className="mt-4 rounded-xl bg-cereza-tenue px-3 py-2.5 font-bold text-cereza-oscura" role="alert">
+            <p className="mt-4 rounded-md bg-cereza-tenue px-3 py-2.5 font-bold text-cereza-honda" role="alert">
               {motor.error}
             </p>
           )}
@@ -232,7 +232,7 @@ export default function Diagnostico() {
             <Seccion titulo={combinado ? `Resultado de ${listas.length} hojas` : "Resultado"}>
               <Resultado resultado={final} />
               <div className="mt-5 grid gap-2 border-t border-linea pt-4">
-                <button type="button" className="boton-hoja" onClick={() => setGuardar(true)}>
+                <button type="button" className="boton-primario" onClick={() => setGuardar(true)}>
                   <Save className="h-5 w-5" aria-hidden="true" /> Guardar en el lote
                 </button>
                 <Link to="/finca/sanidad" className="boton-secundario">
@@ -245,20 +245,20 @@ export default function Diagnostico() {
           )}
 
           <Seccion titulo="Qué reconoce y qué no">
-            <p className="text-[0.95rem] text-tierra-media">Reconoce en la hoja:</p>
+            <p className="text-[0.95rem] text-grafito">Reconoce en la hoja:</p>
             <ul className="mt-2 flex flex-wrap gap-1.5">
               {CLASES.filter((clase) => !clase.rechazo && !clase.desactivada).map((clase) => (
-                <li key={clase.id} className="rounded-full bg-hoja-tenue px-2.5 py-1 text-sm font-bold text-hoja-oscura">
+                <li key={clase.id} className="rounded-full bg-cal-honda px-2.5 py-1 text-sm font-bold text-tinta">
                   {clase.nombre}
                 </li>
               ))}
             </ul>
-            <p className="mt-4 text-[0.95rem] text-tierra-media">
-              <strong className="text-tierra">No reconoce</strong> la broca (está en el fruto: usa el muestreo), el ojo de gallo, la llaga macana ni las deficiencias de nutrientes.
+            <p className="mt-4 text-[0.95rem] text-grafito">
+              <strong className="text-tinta">No reconoce</strong> la broca (está en el fruto: usa el muestreo), el ojo de gallo, la llaga macana ni las deficiencias de nutrientes.
             </p>
-            <details className="mt-4 rounded-xl bg-pergamino px-3 py-2.5 text-[0.95rem]">
+            <details className="mt-4 rounded-md bg-cal px-3 py-2.5 text-[0.95rem]">
               <summary className="cursor-pointer font-bold">Sobre el modelo y sus límites</summary>
-              <div className="mt-2 grid gap-2 text-tierra-media">
+              <div className="mt-2 grid gap-2 text-grafito">
                 <p>
                   EfficientNet-B1 ajustado por ConnorLee08 (licencia Apache-2.0) con {ent(ENTRENAMIENTO.imagenes)} fotos: {ENTRENAMIENTO.fuentes}.
                 </p>
@@ -271,8 +271,8 @@ export default function Diagnostico() {
                 </a>
               </div>
             </details>
-            <p className="mt-4 flex items-start gap-2 text-sm text-tierra-media">
-              <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-hoja" aria-hidden="true" />
+            <p className="mt-4 flex items-start gap-2 text-sm text-grafito">
+              <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-tinta" aria-hidden="true" />
               La foto se analiza en tu celular: no se envía a ningún servidor.
               {enCache && " El modelo ya está guardado para usarlo sin señal."}
             </p>

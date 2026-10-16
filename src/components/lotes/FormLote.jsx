@@ -85,7 +85,7 @@ export default function FormLote({ finca, lote, alTerminar }) {
       </div>
       <Fichas etiqueta="Luz" opciones={SISTEMAS} valor={form.sistema} alCambiar={cambiar("sistema")} />
 
-      <fieldset className="grid gap-4 rounded-2xl border border-linea p-4">
+      <fieldset className="grid gap-4 rounded-lg border border-linea p-4">
         <legend className="px-1 font-bold">Edad del cafetal</legend>
         <Campo etiqueta="Fecha de siembra en el campo">
           {(props) => <input {...props} type="date" max={hoyISO()} className="campo" value={form.fechaSiembra} onChange={(evento) => cambiar("fechaSiembra")(evento.target.value)} />}
@@ -106,7 +106,7 @@ export default function FormLote({ finca, lote, alTerminar }) {
         )}
       </fieldset>
 
-      <fieldset className="grid gap-4 rounded-2xl border border-linea p-4">
+      <fieldset className="grid gap-4 rounded-lg border border-linea p-4">
         <legend className="px-1 font-bold">Densidad de siembra</legend>
         <div className="grid grid-cols-2 gap-3">
           <Campo etiqueta="Entre surcos">{(props) => <CampoNumero {...props} sufijo="m" valor={form.distSurcos} alCambiar={cambiar("distSurcos")} />}</Campo>
@@ -135,21 +135,21 @@ export default function FormLote({ finca, lote, alTerminar }) {
           ) : (
             "Escribe las distancias para calcular la densidad."
           )}
-          {recomendada && <span className="block text-sm text-tierra-media">Recomendada para {variedad(form.variedad).nombre} en la zona sur: unos {ent(recomendada)} por ha.</span>}
-          <a href={FUENTES.densidad.url} target="_blank" rel="noreferrer" className="text-sm text-tierra-media underline">
+          {recomendada && <span className="block text-sm text-grafito">Recomendada para {variedad(form.variedad).nombre} en la zona sur: unos {ent(recomendada)} por ha.</span>}
+          <a href={FUENTES.densidad.url} target="_blank" rel="noreferrer" className="text-sm text-grafito underline">
             Fuente: Cenicafé
           </a>
         </p>
       </fieldset>
 
-      <details className="rounded-2xl border border-linea p-4">
+      <details className="rounded-lg border border-linea p-4">
         <summary className="cursor-pointer font-bold">Ubicación del lote (GPS)</summary>
         <div className="mt-4">
           <CapturaUbicacion valor={form.geometria} areaDeclarada={area} alCambiar={cambiar("geometria")} />
         </div>
       </details>
 
-      <details className="rounded-2xl border border-linea p-4">
+      <details className="rounded-lg border border-linea p-4">
         <summary className="cursor-pointer font-bold">Conversión cereza a pergamino</summary>
         <div className="mt-4">
           <Campo etiqueta="Kilos de pergamino seco por kilo de cereza" ayuda="Cenicafé usa 0,20 (unos 5 kg de cereza por kg de pergamino). Ajústalo si pesas tu café.">

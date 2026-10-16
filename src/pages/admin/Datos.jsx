@@ -29,11 +29,11 @@ export default function Datos() {
       <EncabezadoPagina rotulo="Administración" titulo="Datos y respaldo" bajada="Todo vive en este navegador. Un respaldo en JSON permite pasar los datos a otro equipo." />
       <div className="grid gap-6 lg:grid-cols-2">
         <Seccion titulo="Respaldo">
-          <p className="mb-4 text-[0.95rem] text-tierra-media">
+          <p className="mb-4 text-[0.95rem] text-grafito">
             {num(total)} registros en {Object.keys(datos).length} colecciones · respaldo de {num(kb)} KB.
           </p>
           <div className="grid gap-2">
-            <button type="button" className="boton-hoja justify-start" onClick={() => descargar(`coffee-vision-respaldo-completo-${hoyISO()}.json`, exportarRespaldo())}>
+            <button type="button" className="boton-primario justify-start" onClick={() => descargar(`coffee-vision-respaldo-completo-${hoyISO()}.json`, exportarRespaldo())}>
               <Download className="h-5 w-5" aria-hidden="true" /> Descargar respaldo completo
             </button>
             <button type="button" className="boton-secundario justify-start" onClick={() => archivo.current?.click()}>
@@ -60,11 +60,11 @@ export default function Datos() {
         <Seccion titulo="Almacenamiento">
           <ul className="grid gap-3 text-[0.95rem]">
             <li className="flex items-center gap-2">
-              <HardDrive className="h-5 w-5 text-tierra-media" aria-hidden="true" />
+              <HardDrive className="h-5 w-5 text-grafito" aria-hidden="true" />
               {espacio ? `Usados ${num(espacio.usage / 1024 / 1024)} MB de ${num(espacio.quota / 1024 / 1024)} MB disponibles para este sitio.` : "El navegador no informa el espacio."}
             </li>
             <li className="flex items-center gap-2">
-              <ShieldCheck className="h-5 w-5 text-tierra-media" aria-hidden="true" />
+              <ShieldCheck className="h-5 w-5 text-grafito" aria-hidden="true" />
               {persistente ? "El navegador no borrará estos datos por falta de espacio." : "El navegador podría borrar los datos si se queda sin espacio."}
             </li>
           </ul>
@@ -83,7 +83,7 @@ export default function Datos() {
           )}
         </Seccion>
         <Seccion titulo="Datos de ejemplo" className="lg:col-span-2">
-          <p className="text-[0.95rem] text-tierra-media">Vuelve a cargar las cuatro fincas de ejemplo y las cuentas de prueba. Borra todo lo demás de este navegador.</p>
+          <p className="text-[0.95rem] text-grafito">Vuelve a cargar las cuatro fincas de ejemplo y las cuentas de prueba. Borra todo lo demás de este navegador.</p>
           <button type="button" className="boton-secundario mt-3 text-cereza" onClick={() => setReiniciar(true)}>
             <RotateCcw className="h-5 w-5" aria-hidden="true" /> Restablecer la demostración
           </button>

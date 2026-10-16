@@ -15,7 +15,7 @@ function Detalle({ finca }) {
         <ArrowLeft className="h-5 w-5" aria-hidden="true" /> Fincas
       </Link>
       <EncabezadoPagina titulo={finca.nombre} rotulo={finca.propietario}>
-        <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-tierra-media">
+        <p className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-grafito">
           <span className="inline-flex items-center gap-1.5">
             <MapPin className="h-4 w-4" aria-hidden="true" /> {[finca.vereda, finca.municipio, finca.departamento].filter(Boolean).join(", ")}
           </span>
@@ -31,7 +31,7 @@ function Detalle({ finca }) {
           )}
         </p>
       </EncabezadoPagina>
-      <div className="papel mb-6 grid gap-6 p-5 sm:grid-cols-2 sm:p-6 lg:grid-cols-4">
+      <div className="placa mb-6 grid gap-6 p-5 sm:grid-cols-2 sm:p-6 lg:grid-cols-4">
         <Cifra rotulo="Área en café" valor={num(finca.area)} unidad="ha" detalle={`${finca.lotes.length} lotes`} />
         <Cifra rotulo="Producción" valor={num(finca.resumen.produccion.cargas)} unidad="cargas" detalle={finca.area ? `${num(finca.resumen.produccion.cargas / finca.area)} cargas/ha` : null} />
         <Cifra rotulo="Costo por carga" valor={finca.resumen.costoPorCarga ? cop(finca.resumen.costoPorCarga) : "—"} detalle={`Referencia: ${cop(COSTO_REFERENCIA_CARGA)}`} />
@@ -42,10 +42,10 @@ function Detalle({ finca }) {
           <LaderaSVG lotes={finca.lotes} />
           <ul className="mt-4 grid gap-2">
             {finca.lotes.map((l) => (
-              <li key={l.id} className="flex items-center justify-between gap-3 rounded-xl bg-pergamino px-3 py-2.5">
+              <li key={l.id} className="flex items-center justify-between gap-3 rounded-md bg-cal px-3 py-2.5">
                 <span>
                   <span className="block font-bold">{l.nombre}</span>
-                  <span className="text-sm text-tierra-media">
+                  <span className="text-sm text-grafito">
                     {num(l.areaHa)} ha · {variedad(l.variedad).nombre} · {l.etapa.nombre}
                   </span>
                 </span>
@@ -60,18 +60,18 @@ function Detalle({ finca }) {
           {finca.avisos.length ? (
             <ul className="grid gap-2">
               {finca.avisos.map((a) => (
-                <li key={a.id} className="rounded-xl border border-linea p-3">
+                <li key={a.id} className="rounded-md border border-linea p-3">
                   <div className="flex flex-wrap items-center gap-2">
                     <Estado tipo={a.nivel === "info" ? "sinDatos" : a.nivel} pequeno />
-                    <span className="text-sm font-bold text-tierra-media">{a.loteNombre}</span>
+                    <span className="text-sm font-bold text-grafito">{a.loteNombre}</span>
                   </div>
                   <p className="mt-1 font-bold">{a.titulo}</p>
-                  <p className="text-[0.95rem] text-tierra-media">{a.razon}</p>
+                  <p className="text-[0.95rem] text-grafito">{a.razon}</p>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="text-tierra-media">Ningún lote pide atención.</p>
+            <p className="text-grafito">Ningún lote pide atención.</p>
           )}
         </Seccion>
       </div>
@@ -89,9 +89,9 @@ export default function Fincas() {
   return (
     <>
       <EncabezadoPagina rotulo="Administración" titulo="Fincas" bajada={`${fincas.length} fincas registradas en este equipo.`} />
-      <div className="overflow-x-auto rounded-2xl border border-linea bg-papel">
+      <div className="overflow-x-auto rounded-lg border border-linea bg-lamina">
         <table className="w-full min-w-[46rem] text-left">
-          <thead className="bg-crema/60 text-sm text-tierra-media">
+          <thead className="bg-cal-honda/60 text-sm text-grafito">
             <tr>
               <th className="px-4 py-3 font-bold">Finca</th>
               <th className="px-4 py-3 font-bold">Municipio</th>
@@ -109,7 +109,7 @@ export default function Fincas() {
                   <Link to={`/admin/fincas/${f.id}`} className="font-bold underline-offset-2 hover:underline">
                     {f.nombre}
                   </Link>
-                  <span className="block text-sm text-tierra-media">{f.propietario}</span>
+                  <span className="block text-sm text-grafito">{f.propietario}</span>
                 </td>
                 <td className="px-4 py-3">{f.municipio}</td>
                 <td className="cifra px-4 py-3">

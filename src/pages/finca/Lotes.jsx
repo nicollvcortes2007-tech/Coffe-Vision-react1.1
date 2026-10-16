@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Plus, Download, MapPin, Footprints, ChevronRight } from "lucide-react";
 import { EncabezadoPagina, Seccion, Vacio } from "@/components/ui/Pagina";
@@ -6,6 +6,8 @@ import Estado from "@/components/ui/Estado";
 import Hoja from "@/components/ui/Hoja";
 import { useAvisos } from "@/components/ui/Avisos";
 import LaderaSVG from "@/components/ladera/LaderaSVG";
+
+const LaderaViva = lazy(() => import("@/components/ladera/LaderaViva"));
 import FormLote from "@/components/lotes/FormLote";
 import { Ladera } from "@/components/marca/Pictogramas";
 import { useFinca } from "@/datos/useFinca";
@@ -53,14 +55,26 @@ export default function Lotes() {
         <Vacio Icono={Ladera} titulo="Todavía no hay lotes" texto="Crea el primero: con él empiezan los cálculos de la finca." accion={<button type="button" className="boton-primario" onClick={() => setNuevo(true)}><Plus className="h-5 w-5" aria-hidden="true" /> Nuevo lote</button>} />
       ) : (
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
-          <Seccion titulo="La ladera" bajada="Toca un lote para abrir su ficha.">
-            <LaderaSVG lotes={lotes} alSeleccionar={(id) => navegar(`/finca/lotes/${id}`)} />
-            <p className="mt-3 text-sm text-tierra-media">El dibujo ubica los lotes en orden sobre una ladera ilustrativa; la ubicación real es la del GPS.</p>
+          <Seccion titulo="La finca en 3D" bajada="El relieve real alrededor de la casa, con cada lote donde lo marcó el GPS. Toca uno para ver su altitud, pendiente y hacia dónde mira.">
+            <Suspense fallback={<div className="aspect-square w-full rounded-md bg-basalto sm:aspect-[4/3]" />}>
+              <LaderaViva
+                finca={finca}
+                lotes={lotes}
+                className="aspect-square w-full rounded-md bg-basalto sm:aspect-[4/3]"
+                alListo={(escena) => escena.enfocarFinca(0)}
+                respaldo={
+                  <>
+                    <LaderaSVG lotes={lotes} alSeleccionar={(id) => navegar(`/finca/lotes/${id}`)} />
+                    <p className="mt-3 text-sm text-grafito">El dibujo ubica los lotes en orden sobre una ladera ilustrativa; la ubicación real es la del GPS.</p>
+                  </>
+                }
+              />
+            </Suspense>
           </Seccion>
 
           <section aria-label="Lista de lotes" className="grid content-start gap-3">
             {lotes.map((lote) => (
-              <Link key={lote.id} to={`/finca/lotes/${lote.id}`} className="papel group flex items-center gap-4 p-4 transition-colors hover:border-tierra sm:p-5">
+              <Link key={lote.id} to={`/finca/lotes/${lote.id}`} className="placa group flex items-center gap-4 p-4 transition-colors hover:border-tinta sm:p-5">
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
                     <h2 className="titular text-[1.45rem]">{lote.nombre}</h2>
@@ -68,14 +82,14 @@ export default function Lotes() {
                       {lote.estadoTexto}
                     </Estado>
                   </div>
-                  <p className="mt-1 text-[0.95rem] text-tierra-media">
+                  <p className="mt-1 text-[0.95rem] text-grafito">
                     {num(lote.areaHa)} ha · {variedad(lote.variedad).nombre} · {lote.etapa.nombre}
                     {lote.etapa.cosechas ? ` (${lote.etapa.cosechas}.ª cosecha)` : ""}
                     {lote.densidad ? ` · ${ent(lote.densidad)} árb/ha` : ""}
                   </p>
                   {lote.avisos[0] && lote.estado !== "ok" && <p className="mt-1.5 text-[0.95rem] font-bold">{lote.avisos[0].titulo}</p>}
                 </div>
-                <span className="flex shrink-0 items-center gap-1 text-sm text-tierra-media">
+                <span className="flex shrink-0 items-center gap-1 text-sm text-grafito">
                   {lote.geometria ? (
                     lote.geometria.tipo === "poligono" ? (
                       <Footprints className="h-4 w-4" aria-label="Con contorno" />
@@ -88,9 +102,9 @@ export default function Lotes() {
               </Link>
             ))}
 
-            <div className="mt-2 rounded-2xl border border-linea bg-papel p-4 sm:p-5">
+            <div className="mt-2 rounded-lg border border-linea bg-lamina p-4 sm:p-5">
               <h2 className="font-bold">Ubicación para compradores</h2>
-              <p className="mt-1 text-[0.95rem] text-tierra-media">
+              <p className="mt-1 text-[0.95rem] text-grafito">
                 Desde el 30 de diciembre de 2026 la Unión Europea pide la ubicación de cada lote de donde sale el café (punto, o contorno desde 4 ha). Descarga tus lotes en GeoJSON para entregarlos si te los piden.
               </p>
               <p className="mt-2 text-sm">

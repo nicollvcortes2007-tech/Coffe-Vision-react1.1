@@ -45,7 +45,7 @@ export default function Privacidad() {
   }, []);
   return (
     <div className="min-h-dvh">
-      <header className="border-b border-linea bg-papel">
+      <header className="border-b border-linea bg-lamina">
         <div className="mx-auto flex max-w-3xl items-center justify-between px-5 py-3">
           <Link to="/" className="boton-fantasma -ml-3">
             <ArrowLeft className="h-5 w-5" aria-hidden="true" /> Inicio
@@ -56,7 +56,7 @@ export default function Privacidad() {
       <main id="contenido" className="mx-auto max-w-3xl px-5 py-12">
         <p className="rotulo">Versión del 15 de octubre de 2026</p>
         <h1 className="titular mt-3 text-[2.6rem]">Privacidad y datos</h1>
-        <p className="mt-4 text-lg text-tierra-media">En pocas palabras: tus datos se quedan en tu equipo y son tuyos.</p>
+        <p className="mt-4 text-lg text-grafito">En pocas palabras: tus datos se quedan en tu equipo y son tuyos.</p>
         <div className="mt-10 grid gap-8">
           {SECCIONES.map((seccion) => (
             <section key={seccion.titulo}>

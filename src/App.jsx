@@ -37,7 +37,7 @@ inicializarDatos();
 function Cargando() {
   return (
     <div className="grid min-h-[50dvh] place-items-center" role="status">
-      <span className="h-10 w-10 animate-spin rounded-full border-4 border-crema border-t-cereza" aria-label="Cargando" />
+      <span className="h-10 w-10 animate-spin rounded-full border-4 border-cal-honda border-t-cereza" aria-label="Cargando" />
     </div>
   );
 }
@@ -51,9 +51,9 @@ function VersionNueva() {
   }, []);
   if (!trabajador) return null;
   return (
-    <div className="fixed inset-x-4 top-4 z-[80] mx-auto flex max-w-md items-center gap-3 rounded-2xl bg-tostado px-4 py-3 text-papel shadow-levantado" role="status">
+    <div className="fixed inset-x-4 top-4 z-[80] mx-auto flex max-w-md items-center gap-3 rounded-lg bg-basalto px-4 py-3 text-niebla shadow-levantado" role="status">
       <p className="flex-1 font-bold">Hay una versión nueva de la app.</p>
-      <button type="button" className="inline-flex min-h-11 items-center gap-1.5 rounded-xl bg-papel/15 px-3 font-bold text-pinton" onClick={() => activarVersion(trabajador)}>
+      <button type="button" className="inline-flex min-h-11 items-center gap-1.5 rounded-md bg-lamina/15 px-3 font-bold text-amarillo" onClick={() => activarVersion(trabajador)}>
         <RefreshCw className="h-4 w-4" aria-hidden="true" /> Actualizar
       </button>
     </div>

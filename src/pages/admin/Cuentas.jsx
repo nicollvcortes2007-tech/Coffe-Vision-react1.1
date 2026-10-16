@@ -38,19 +38,19 @@ export default function Cuentas() {
         {lista.map((c) => {
           const propia = c.id === sesion?.id;
           return (
-            <li key={c.id} className="papel flex flex-wrap items-center gap-4 p-4">
-              <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-full font-bold ${c.rol === "administrador" ? "bg-tierra text-papel" : "bg-hoja-tenue text-hoja-oscura"}`}>
+            <li key={c.id} className="placa flex flex-wrap items-center gap-4 p-4">
+              <span className={`grid h-11 w-11 shrink-0 place-items-center rounded-full font-bold ${c.rol === "administrador" ? "bg-tinta text-niebla" : "bg-cal-honda text-tinta"}`}>
                 {c.nombre.split(" ").slice(0, 2).map((p) => p[0]).join("")}
               </span>
               <div className="min-w-0 flex-1">
                 <p className="font-bold">
-                  {c.nombre} {propia && <span className="text-sm font-normal text-tierra-media">(tú)</span>}
+                  {c.nombre} {propia && <span className="text-sm font-normal text-grafito">(tú)</span>}
                 </p>
-                <p className="truncate text-sm text-tierra-media">
+                <p className="truncate text-sm text-grafito">
                   {c.correo} · {c.rol === "administrador" ? "Administrador" : `Caficultor · ${nombreFinca(c.fincaId)}`} · creada {hace(c.creado)}
                 </p>
               </div>
-              <span className={`rounded-full px-2.5 py-1 text-sm font-bold ${c.activa ? "bg-hoja-tenue text-hoja-oscura" : "bg-niebla text-niebla-oscura"}`}>{c.activa ? "Activa" : "Desactivada"}</span>
+              <span className={`rounded-full px-2.5 py-1 text-sm font-bold ${c.activa ? "bg-cal-honda text-tinta" : "bg-niebla text-ceniza-honda"}`}>{c.activa ? "Activa" : "Desactivada"}</span>
               <div className="flex flex-wrap gap-2">
                 <button type="button" className="boton-secundario min-h-11 px-3 text-sm" onClick={() => setClave({ cuenta: c, nueva: "", error: "" })}>
                   <KeyRound className="h-4 w-4" aria-hidden="true" /> Contraseña

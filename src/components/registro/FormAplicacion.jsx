@@ -112,12 +112,12 @@ export default function FormAplicacion({ opciones, alTerminar }) {
         </Campo>
       </div>
       {carencia > 0 && (
-        <p className="flex gap-2 rounded-xl bg-cereza-tenue px-4 py-3 font-bold text-cereza-oscura">
+        <p className="flex gap-2 rounded-md bg-cereza-tenue px-4 py-3 font-bold text-cereza-honda">
           <TriangleAlert className="mt-0.5 h-5 w-5 shrink-0" aria-hidden="true" />
           No cosechar este lote hasta el {fLarga(sumarDias(form.fecha, carencia))}.
         </p>
       )}
-      <p className="text-sm text-tierra-media">
+      <p className="text-sm text-grafito">
         Son los datos que pide la Res. ICA 30021 de 2017 para el registro de aplicaciones (Buenas Prácticas Agrícolas). Costo: {cop(aNumero(form.costo) || 0)}.
       </p>
       <Pie texto="Guardar aplicación" deshabilitado={!form.loteId || !form.producto.trim()} />

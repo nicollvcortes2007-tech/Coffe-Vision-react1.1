@@ -143,14 +143,14 @@ export default function Registro() {
               <Crosshair className="h-5 w-5" aria-hidden="true" /> {buscando ? "Leyendo el GPS…" : ubicacion ? "Volver a ubicar" : "Ubicar la finca con el GPS (para el clima)"}
             </button>
             {ubicacion && (
-              <p className="flex items-center gap-2 text-[0.95rem] font-bold text-hoja" role="status">
+              <p className="flex items-center gap-2 text-[0.95rem] font-bold text-tinta" role="status">
                 <CircleCheck className="h-5 w-5" aria-hidden="true" /> Ubicada{ubicacion.altitud ? ` a ${ent(ubicacion.altitud)} m de altitud` : ""}.
               </p>
             )}
           </div>
         </fieldset>
 
-        <label className="flex cursor-pointer items-start gap-3 rounded-2xl border border-linea bg-papel p-4 text-[0.95rem]">
+        <label className="flex cursor-pointer items-start gap-3 rounded-lg border border-linea bg-lamina p-4 text-[0.95rem]">
           <input type="checkbox" className="mt-1 h-5 w-5 shrink-0 accent-cereza" checked={acepta} onChange={(evento) => setAcepta(evento.target.checked)} />
           <span>
             Autorizo guardar mis datos y los de mi finca <strong>en este equipo</strong> para llevar mi cuaderno de campo y calcular mis reportes. Puedo descargarlos o borrarlos cuando quiera.{" "}
@@ -161,14 +161,14 @@ export default function Registro() {
         </label>
 
         {error && (
-          <p role="alert" className="rounded-xl bg-cereza-tenue px-4 py-3 font-bold text-cereza-oscura">
+          <p role="alert" className="rounded-md bg-cereza-tenue px-4 py-3 font-bold text-cereza-honda">
             {error}
           </p>
         )}
         <button type="submit" className="boton-primario text-lg" disabled={enviando || !acepta || Boolean(problemaClave) || noCoinciden}>
           <UserPlus className="h-5 w-5" aria-hidden="true" /> {enviando ? "Creando…" : "Crear mi cuaderno"}
         </button>
-        <p className="text-center text-tierra-media">
+        <p className="text-center text-grafito">
           ¿Ya tienes cuaderno?{" "}
           <Link to="/acceso" className="font-bold text-cereza underline decoration-2 underline-offset-2">
             Entra

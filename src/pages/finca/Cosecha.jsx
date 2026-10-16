@@ -46,8 +46,8 @@ function Calculadora({ precio }) {
           ["Cargas", num(aCargas(cps))],
           ["Café verde", `${num(cps * FACTOR_CPS_VERDE)} kg`],
         ].map(([t, v]) => (
-          <div key={t} className="rounded-xl bg-pergamino p-3">
-            <dt className="text-sm text-tierra-media">{t}</dt>
+          <div key={t} className="rounded-md bg-cal p-3">
+            <dt className="text-sm text-grafito">{t}</dt>
             <dd className="cifra text-lg font-bold">{v}</dd>
           </div>
         ))}
@@ -55,10 +55,10 @@ function Calculadora({ precio }) {
       {valor !== null && (
         <p className="mt-3 text-lg">
           Valor estimado: <strong className="cifra">{cop(valor)}</strong>
-          <span className="block text-sm text-tierra-media">Con el precio de referencia del {fLarga(precio.fecha)}. La cooperativa descuenta el acopio y los defectos de taza.</span>
+          <span className="block text-sm text-grafito">Con el precio de referencia del {fLarga(precio.fecha)}. La cooperativa descuenta el acopio y los defectos de taza.</span>
         </p>
       )}
-      <a href={FUENTES.conversion.url} target="_blank" rel="noreferrer" className="mt-2 inline-block text-sm text-tierra-media underline">
+      <a href={FUENTES.conversion.url} target="_blank" rel="noreferrer" className="mt-2 inline-block text-sm text-grafito underline">
         Fuente: {FUENTES.conversion.texto}
       </a>
     </Seccion>
@@ -123,7 +123,7 @@ export default function Cosecha() {
         }
       />
 
-      <div className="papel mb-6 grid gap-6 p-5 sm:grid-cols-2 sm:p-6 lg:grid-cols-4">
+      <div className="placa mb-6 grid gap-6 p-5 sm:grid-cols-2 sm:p-6 lg:grid-cols-4">
         <Cifra rotulo="Cereza recogida" valor={ent(prod.kgCereza)} unidad="kg" detalle={`${ent(semanaActual.reduce((s, r) => s + r.kg, 0))} kg en los últimos 7 días`} />
         <Cifra rotulo="Pergamino seco" valor={num(prod.arrobas)} unidad="@" detalle={`${num(prod.cargas)} cargas`} fuente={FUENTES.conversion.texto} />
         <Cifra rotulo="Vendido" valor={num(aCargas(kgVendidos))} unidad="cargas" detalle={`${cop(ingresos)} · quedan ≈ ${num(Math.max(0, prod.cargas - aCargas(kgVendidos)))} cargas`} tono="hoja" />
@@ -136,13 +136,13 @@ export default function Cosecha() {
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
           <div className="grid content-start gap-6">
             <Seccion titulo="Pergamino por semana" bajada="Arrobas de café pergamino seco estimadas a partir de la cereza recogida.">
-              {serie.length ? <Barras titulo="Arrobas de pergamino por semana" datos={serie.slice(-16)} formato={(v) => ent(v)} /> : <p className="text-tierra-media">Sin recolecciones este año cafetero.</p>}
+              {serie.length ? <Barras titulo="Arrobas de pergamino por semana" datos={serie.slice(-16)} formato={(v) => ent(v)} /> : <p className="text-grafito">Sin recolecciones este año cafetero.</p>}
             </Seccion>
             <Seccion titulo="Ventas" bajada={`${ventasAnio.length} ventas en el año cafetero.`}>
               {ventasAnio.length ? (
                 <div className="overflow-x-auto">
                   <table className="w-full min-w-[34rem] text-left text-[0.95rem]">
-                    <thead className="text-sm text-tierra-media">
+                    <thead className="text-sm text-grafito">
                       <tr className="border-b border-linea">
                         <th className="py-2 pr-3 font-bold">Fecha</th>
                         <th className="py-2 pr-3 font-bold">Pergamino</th>
@@ -165,7 +165,7 @@ export default function Cosecha() {
                   </table>
                 </div>
               ) : (
-                <p className="text-tierra-media">Sin ventas registradas.</p>
+                <p className="text-grafito">Sin ventas registradas.</p>
               )}
             </Seccion>
           </div>
@@ -181,22 +181,22 @@ export default function Cosecha() {
             >
               <ul className="grid gap-2">
                 {porRecolector.map((r) => (
-                  <li key={r.nombre} className="flex items-center justify-between gap-3 rounded-xl bg-pergamino px-3 py-2.5">
+                  <li key={r.nombre} className="flex items-center justify-between gap-3 rounded-md bg-cal px-3 py-2.5">
                     <span>
                       <span className="block font-bold">{r.nombre}</span>
-                      <span className="text-sm text-tierra-media">
+                      <span className="text-sm text-grafito">
                         {r.dias} días · {ent(r.kg / Math.max(r.dias, 1))} kg/día
                       </span>
                     </span>
                     <span className="text-right">
                       <span className="cifra block font-bold">{ent(r.kg)} kg</span>
-                      <span className="cifra text-sm text-tierra-media">{cop(r.pago)}</span>
+                      <span className="cifra text-sm text-grafito">{cop(r.pago)}</span>
                     </span>
                   </li>
                 ))}
               </ul>
               {semanaActual.length > 0 && (
-                <button type="button" className="boton-hoja mt-4 w-full" onClick={compartirSemana}>
+                <button type="button" className="boton-primario mt-4 w-full" onClick={compartirSemana}>
                   <Share2 className="h-5 w-5" aria-hidden="true" /> Enviar la semana por WhatsApp
                 </button>
               )}

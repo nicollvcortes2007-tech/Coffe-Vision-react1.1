@@ -31,16 +31,16 @@ function Bienvenida({ finca }) {
           ["2", "Registra la floración", "Es la fecha que pone en marcha todos los avisos.", <button key="b" type="button" className="boton-secundario mt-3 w-full" onClick={() => abrir("floracion")}>Registrar floración</button>],
           ["3", "Anota lo que pasa", "Labores, muestreos, recolección y ventas, aunque no haya señal.", <button key="c" type="button" className="boton-secundario mt-3 w-full" onClick={() => abrir()}>Registrar</button>],
         ].map(([n, titulo, texto, accion]) => (
-          <li key={n} className="flex flex-col rounded-2xl bg-pergamino p-4">
+          <li key={n} className="flex flex-col rounded-lg bg-cal p-4">
             <span className="titular text-3xl text-cereza">{n}</span>
             <p className="mt-1 font-bold">{titulo}</p>
-            <p className="text-[0.95rem] text-tierra-media">{texto}</p>
+            <p className="text-[0.95rem] text-grafito">{texto}</p>
             <div className="mt-auto">{accion}</div>
           </li>
         ))}
       </ol>
       {!Number.isFinite(finca?.lat) && (
-        <p className="mt-4 flex items-center gap-2 text-[0.95rem] text-tierra-media">
+        <p className="mt-4 flex items-center gap-2 text-[0.95rem] text-grafito">
           <MapPin className="h-5 w-5 text-cereza" aria-hidden="true" /> Ubica la finca en{" "}
           <Link to="/finca/perfil" className="font-bold underline">
             Mi cuenta
@@ -69,7 +69,7 @@ export default function Hoy() {
   return (
     <>
       <EncabezadoPagina rotulo={`${saludo()}, ${nombre}`} titulo={finca?.nombre ?? "Mi finca"}>
-        <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-tierra-media">
+        <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-grafito">
           {ubicacion && (
             <span className="inline-flex items-center gap-1.5">
               <MapPin className="h-4 w-4" aria-hidden="true" /> {ubicacion}
@@ -92,13 +92,13 @@ export default function Hoy() {
         <Bienvenida finca={finca} />
       ) : (
         <div className="grid gap-6 xl:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]">
-          <div className="grid content-start gap-6">
+          <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] content-start gap-6">
             <section aria-labelledby="titulo-hoy">
               <div className="mb-3 flex items-baseline justify-between gap-3">
                 <h2 id="titulo-hoy" className="titular text-[1.7rem]">
                   {pendientes.length ? `Para hoy: ${pendientes.length} ${pendientes.length === 1 ? "cosa" : "cosas"}` : "Todo al día"}
                 </h2>
-                <Link to="/finca/lotes" className="text-sm font-bold text-tierra-media underline-offset-2 hover:underline">
+                <Link to="/finca/lotes" className="text-sm font-bold text-grafito underline-offset-2 hover:underline">
                   Ver lotes
                 </Link>
               </div>
@@ -114,7 +114,7 @@ export default function Hoy() {
             </section>
           </div>
 
-          <div className="grid content-start gap-6">
+          <div className="grid min-w-0 grid-cols-[minmax(0,1fr)] content-start gap-6">
             <Seccion
               titulo="La ladera"
               bajada="Cada lote con su estado. Toca uno para ver su ficha."
@@ -124,10 +124,10 @@ export default function Hoy() {
                 </button>
               }
             >
-              <div className="overflow-hidden rounded-xl">
+              <div className="overflow-hidden rounded-md">
                 {ver3d ? (
                   <Suspense fallback={<LaderaSVG lotes={lotes} />}>
-                    <LaderaViva lotes={lotes} alSeleccionar={(id) => navegar(`/finca/lotes/${id}`)} respaldo={<LaderaSVG lotes={lotes} alSeleccionar={(id) => navegar(`/finca/lotes/${id}`)} />} />
+                    <LaderaViva finca={finca} lotes={lotes} alListo={(escena) => escena.enfocarFinca(0)} alSeleccionar={(id) => navegar(`/finca/lotes/${id}`)} respaldo={<LaderaSVG lotes={lotes} alSeleccionar={(id) => navegar(`/finca/lotes/${id}`)} />} />
                   </Suspense>
                 ) : (
                   <LaderaSVG lotes={lotes} alSeleccionar={(id) => navegar(`/finca/lotes/${id}`)} />
@@ -136,7 +136,7 @@ export default function Hoy() {
               <ul className="mt-4 grid grid-cols-2 gap-2">
                 {lotes.map((lote) => (
                   <li key={lote.id}>
-                    <Link to={`/finca/lotes/${lote.id}`} className="flex min-h-12 items-center justify-between gap-2 rounded-xl bg-pergamino px-3 py-2 hover:bg-crema">
+                    <Link to={`/finca/lotes/${lote.id}`} className="flex min-h-12 items-center justify-between gap-2 rounded-md bg-cal px-3 py-2 hover:bg-cal-honda">
                       <span className="truncate font-bold">{lote.nombre}</span>
                       <Estado tipo={lote.estado} pequeno>
                         {lote.estadoTexto}
@@ -159,10 +159,10 @@ export default function Hoy() {
                 <>
                   {hoyClima && (
                     <p className="mb-3 flex items-center gap-3">
-                      <IconoTiempo codigo={hoyClima.codigo} className="h-9 w-9 text-tierra-media" />
+                      <IconoTiempo codigo={hoyClima.codigo} className="h-9 w-9 text-grafito" />
                       <span>
                         <span className="block font-bold">{describirTiempo(hoyClima.codigo).texto}</span>
-                        <span className="text-[0.95rem] text-tierra-media">
+                        <span className="text-[0.95rem] text-grafito">
                           Lluvia probable {hoyClima.probLluvia} % · humedad {hoyClima.humedad} %
                         </span>
                       </span>
@@ -172,7 +172,7 @@ export default function Hoy() {
                   <Atribucion datos={clima.datos} alActualizar={clima.actualizar} />
                 </>
               ) : (
-                <p className="text-tierra-media">{clima.cargando ? "Cargando el pronóstico…" : clima.error ?? "Sin pronóstico."}</p>
+                <p className="text-grafito">{clima.cargando ? "Cargando el pronóstico…" : clima.error ?? "Sin pronóstico."}</p>
               )}
             </Seccion>
           </div>
@@ -182,11 +182,11 @@ export default function Hoy() {
               <h2 id="titulo-cifras" className="titular text-[1.7rem]">
                 Año cafetero {anio.nombre}
               </h2>
-              <Link to="/finca/costos" className="inline-flex items-center gap-1 text-sm font-bold text-tierra-media hover:underline">
+              <Link to="/finca/costos" className="inline-flex items-center gap-1 text-sm font-bold text-grafito hover:underline">
                 Costos y ventas <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </div>
-            <div className="papel grid gap-6 p-5 sm:grid-cols-2 sm:p-6 lg:grid-cols-4">
+            <div className="placa grid gap-6 p-5 sm:grid-cols-2 sm:p-6 lg:grid-cols-4">
               <Cifra
                 rotulo="Producción"
                 valor={num(resumen.produccion.cargas)}
@@ -215,7 +215,7 @@ export default function Hoy() {
                 fuente="Suma de las ventas registradas en el año cafetero (octubre a septiembre)."
               />
             </div>
-            {recolecciones.length === 0 && <p className="mt-3 text-sm text-tierra-media">Aún no hay recolecciones registradas este año.</p>}
+            {recolecciones.length === 0 && <p className="mt-3 text-sm text-grafito">Aún no hay recolecciones registradas este año.</p>}
           </section>
         </div>
       )}

@@ -69,11 +69,11 @@ export default function FormRecoleccion({ opciones, alTerminar }) {
           <legend className="mb-1.5 text-[0.95rem] font-bold">Recolector</legend>
           <div className="flex flex-wrap gap-2">
             {trabajadores.map((t) => (
-              <button key={t.id} type="button" aria-pressed={recolector === t.nombre} onClick={() => setRecolector(t.nombre)} className={`min-h-12 rounded-xl border px-3.5 font-bold ${recolector === t.nombre ? "border-tierra bg-tierra text-papel" : "border-borde-campo bg-papel"}`}>
+              <button key={t.id} type="button" aria-pressed={recolector === t.nombre} onClick={() => setRecolector(t.nombre)} className={`min-h-12 rounded-md border px-3.5 font-bold ${recolector === t.nombre ? "border-tinta bg-tinta text-niebla" : "border-borde bg-lamina"}`}>
                 {t.nombre}
               </button>
             ))}
-            <button type="button" onClick={() => { setNuevo(true); setRecolector(""); }} className="flex min-h-12 items-center gap-2 rounded-xl border border-dashed border-borde-campo px-3.5 font-bold text-tierra-media">
+            <button type="button" onClick={() => { setNuevo(true); setRecolector(""); }} className="flex min-h-12 items-center gap-2 rounded-md border border-dashed border-borde px-3.5 font-bold text-grafito">
               <UserPlus className="h-5 w-5" aria-hidden="true" /> Otro
             </button>
           </div>
@@ -89,16 +89,16 @@ export default function FormRecoleccion({ opciones, alTerminar }) {
         {(props) => <CampoNumero {...props} sufijo="%" valor={verdes} alCambiar={setVerdes} />}
       </Campo>
       {kgCereza > 0 && (
-        <p className="rounded-xl bg-pergamino px-4 py-3 text-[0.95rem]">
+        <p className="rounded-md bg-cal px-4 py-3 text-[0.95rem]">
           ≈ <strong className="cifra">{num(aCps(kgCereza, factor))} kg</strong> de pergamino seco ({num(aArrobas(aCps(kgCereza, factor)))} @) · pago{" "}
           <strong className="cifra">{cop(kgCereza * pago)}</strong>
-          <a href={FUENTES.conversion.url} target="_blank" rel="noreferrer" className="mt-1 block text-sm text-tierra-media underline">
+          <a href={FUENTES.conversion.url} target="_blank" rel="noreferrer" className="mt-1 block text-sm text-grafito underline">
             Factor {num(factor)} kg de c.p.s. por kg de cereza (Cenicafé)
           </a>
         </p>
       )}
       {guardados.length > 0 && (
-        <p className="text-sm text-hoja" role="status">
+        <p className="text-sm text-tinta" role="status">
           Ya guardados hoy: {guardados.map((g) => `${g.nombre} (${num(g.kg)} kg)`).join(", ")}
         </p>
       )}

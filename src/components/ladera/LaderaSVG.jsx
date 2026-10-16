@@ -19,10 +19,10 @@ export const PARCELAS = [
 ];
 
 const RELLENO = {
-  ok: "#7FA36B",
-  vigilar: "#C98F2E",
-  actuar: "#C8372D",
-  sinDatos: "#DDE4E2",
+  ok: "#FFFFFF",
+  vigilar: "#FFC21A",
+  actuar: "#FF3B2F",
+  sinDatos: "#E9EAE4",
 };
 
 export default function LaderaSVG({ lotes = [], seleccionado, alSeleccionar, className = "", titulo = "Mapa de la ladera de la finca" }) {
@@ -32,28 +32,24 @@ export default function LaderaSVG({ lotes = [], seleccionado, alSeleccionar, cla
       <title id={`${id}-t`}>{titulo}</title>
       <defs>
         <linearGradient id={`${id}-cielo`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#E7ECE9" />
-          <stop offset="1" stopColor="#F4EDE1" />
+          <stop offset="0" stopColor="#ECEDE8" />
+          <stop offset="1" stopColor="#F6F6F3" />
         </linearGradient>
         <linearGradient id={`${id}-monte`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#D9CDB6" />
-          <stop offset="1" stopColor="#C9B999" />
+          <stop offset="0" stopColor="#C9CBC4" />
+          <stop offset="1" stopColor="#A9ABA2" />
         </linearGradient>
-        <pattern id={`${id}-trama`} width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-          <rect width="7" height="7" fill="#C8372D" />
-          <line x1="0" y1="0" x2="0" y2="7" stroke="#7E1C13" strokeWidth="2.6" />
-        </pattern>
-        <pattern id={`${id}-puntos`} width="8" height="8" patternUnits="userSpaceOnUse">
-          <rect width="8" height="8" fill="#C98F2E" />
-          <circle cx="4" cy="4" r="1.3" fill="#8A5A12" />
+        <pattern id={`${id}-rayado`} width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <rect width="7" height="7" fill="#FFC21A" />
+          <line x1="0" y1="0" x2="0" y2="7" stroke="#111210" strokeOpacity=".45" strokeWidth="2" />
         </pattern>
       </defs>
       <rect width="400" height="240" fill={`url(#${id}-cielo)`} />
       {/* cordillera lejana con niebla */}
-      <path d="M0 120 C60 90 90 100 140 72 S240 40 300 58 S380 70 400 60 V240 H0 Z" fill="#CBD6D2" opacity=".55" />
+      <path d="M0 120 C60 90 90 100 140 72 S240 40 300 58 S380 70 400 60 V240 H0 Z" fill="#DCDDD7" opacity=".7" />
       {/* la ladera */}
       <path d="M20 230 C70 200 120 150 175 100 S260 40 300 52 S360 90 392 160 L400 240 H0 Z" fill={`url(#${id}-monte)`} />
-      <g fill="none" stroke="#8C7A68" strokeOpacity=".45" strokeWidth="1">
+      <g fill="none" stroke="#5F615A" strokeOpacity=".35" strokeWidth="1">
         <path d="M30 226 C90 206 150 190 220 186 S330 190 392 196" />
         <path d="M44 214 C100 190 150 166 214 158 S330 162 386 176" />
         <path d="M70 200 C120 172 160 140 214 130 S320 132 380 150" />
@@ -64,18 +60,19 @@ export default function LaderaSVG({ lotes = [], seleccionado, alSeleccionar, cla
       {PARCELAS.map((parcela, indice) => {
         const lote = lotes[indice];
         if (!lote) {
-          return <path key={indice} d={parcela.d} fill="#E8DFCF" stroke="#B8A88F" strokeDasharray="3 3" strokeWidth="1" opacity=".7" />;
+          return <path key={indice} d={parcela.d} fill="#DCDDD7" stroke="#8A8C85" strokeDasharray="3 3" strokeWidth="1" opacity=".7" />;
         }
         const estado = lote.estado ?? "sinDatos";
-        const relleno = estado === "actuar" ? `url(#${id}-trama)` : estado === "vigilar" ? `url(#${id}-puntos)` : RELLENO[estado];
+        const relleno = estado === "vigilar" ? `url(#${id}-rayado)` : RELLENO[estado];
         const activo = seleccionado === lote.id;
         const contenido = (
           <>
             <path
               d={parcela.d}
               fill={relleno}
-              stroke={activo ? "#2B1E16" : "#FBF7F0"}
-              strokeWidth={activo ? 3 : 1.6}
+              stroke="#111210"
+              strokeWidth={activo ? 3 : 1.2}
+              strokeDasharray={estado === "sinDatos" ? "4 3" : undefined}
               strokeLinejoin="round"
               opacity={estado === "sinDatos" ? 0.9 : 0.92}
             />
@@ -85,8 +82,8 @@ export default function LaderaSVG({ lotes = [], seleccionado, alSeleccionar, cla
               textAnchor="middle"
               fontSize="10.5"
               fontWeight="700"
-              fill="#2B1E16"
-              stroke="#FBF7F0"
+              fill="#111210"
+              stroke="#FFFFFF"
               strokeWidth="3"
               paintOrder="stroke"
               style={{ fontFamily: "var(--font-sans)" }}

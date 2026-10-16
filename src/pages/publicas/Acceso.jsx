@@ -54,7 +54,7 @@ export default function Acceso() {
           {(props) => (
             <span className="relative block">
               <input {...props} type={ver ? "text" : "password"} autoComplete="current-password" required className="campo pr-14" value={clave} onChange={(evento) => setClave(evento.target.value)} />
-              <button type="button" onClick={() => setVer((v) => !v)} className="absolute inset-y-0 right-0 grid w-12 place-items-center text-tierra-media" aria-label={ver ? "Ocultar contraseña" : "Mostrar contraseña"} aria-pressed={ver}>
+              <button type="button" onClick={() => setVer((v) => !v)} className="absolute inset-y-0 right-0 grid w-12 place-items-center text-grafito" aria-label={ver ? "Ocultar contraseña" : "Mostrar contraseña"} aria-pressed={ver}>
                 {ver ? <EyeOff className="h-5 w-5" aria-hidden="true" /> : <Eye className="h-5 w-5" aria-hidden="true" />}
               </button>
             </span>
@@ -69,9 +69,9 @@ export default function Acceso() {
         </button>
       </form>
 
-      <section className={`mt-8 rounded-2xl border p-4 ${parametros.get("demo") ? "border-cereza bg-cereza-tenue/50" : "border-linea bg-papel"}`}>
+      <section className={`mt-8 rounded-lg border p-4 ${parametros.get("demo") ? "border-cereza bg-cereza-tenue/50" : "border-linea bg-lamina"}`}>
         <h2 className="font-bold">Probar con datos de ejemplo</h2>
-        <p className="mt-1 text-sm text-tierra-media">Una finca ficticia en Timbío, Cauca, con un año de registros. Contraseña de prueba: {CLAVE_DEMO}</p>
+        <p className="mt-1 text-sm text-grafito">Una finca ficticia en Timbío, Cauca, con un año de registros. Contraseña de prueba: {CLAVE_DEMO}</p>
         <div className="mt-3 grid gap-2">
           {DEMO.map(({ correo: demoCorreo, texto, Icono }) => (
             <button key={demoCorreo} type="button" className="boton-secundario justify-start" disabled={enviando} onClick={() => entrar({ correo: demoCorreo, clave: CLAVE_DEMO })}>
@@ -81,13 +81,13 @@ export default function Acceso() {
         </div>
       </section>
 
-      <p className="mt-6 text-center text-tierra-media">
+      <p className="mt-6 text-center text-grafito">
         ¿Primera vez?{" "}
         <Link to="/registro" className="font-bold text-cereza underline decoration-2 underline-offset-2">
           Crea tu cuaderno
         </Link>
       </p>
-      <p className="mt-4 text-center text-sm text-tierra-media">
+      <p className="mt-4 text-center text-sm text-grafito">
         Las cuentas viven en este navegador: no es un sistema de producción. Si olvidas la contraseña, el administrador de este equipo puede asignar una nueva.
       </p>
     </PlantillaPublica>

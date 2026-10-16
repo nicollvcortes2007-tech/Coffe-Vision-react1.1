@@ -43,7 +43,7 @@ export function ProveedorRegistro({ children }) {
         descripcion={definicion ? definicion.descripcion : "Se guarda en este celular, aunque no haya señal."}
       >
         {definicion ? (
-          <Suspense fallback={<p className="py-8 text-center text-tierra-media">Abriendo…</p>}>
+          <Suspense fallback={<p className="py-8 text-center text-grafito">Abriendo…</p>}>
             <definicion.Form opciones={estado.opciones} alTerminar={cerrar} />
           </Suspense>
         ) : (
@@ -54,7 +54,7 @@ export function ProveedorRegistro({ children }) {
                   <button
                     type="button"
                     onClick={() => setEstado({ abierto: true, tipo, opciones: {} })}
-                    className="flex min-h-[5.5rem] w-full flex-col items-start justify-between gap-2 rounded-2xl border border-linea bg-pergamino p-3.5 text-left font-bold transition-colors hover:border-tierra active:bg-crema"
+                    className="flex min-h-[5.5rem] w-full flex-col items-start justify-between gap-2 rounded-lg border border-linea bg-cal p-3.5 text-left font-bold transition-colors hover:border-tinta active:bg-cal-honda"
                   >
                     <Icono className="h-7 w-7 text-cereza" aria-hidden="true" />
                     <span className="leading-tight">{titulo}</span>

@@ -28,15 +28,15 @@ export default function FormFloracion({ opciones, alTerminar }) {
       <Fichas etiqueta="¿En qué lotes floreció?" multiple opciones={lotes.map((lote) => ({ id: lote.id, nombre: lote.nombre }))} valor={loteIds} alCambiar={setLoteIds} />
       <CampoFecha valor={fecha} alCambiar={setFecha} etiqueta="Día en que abrió la flor" />
       <Fichas etiqueta="¿Cómo fue?" opciones={INTENSIDADES} valor={intensidad} alCambiar={setIntensidad} />
-      <label className="flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border border-linea bg-pergamino px-4">
+      <label className="flex min-h-12 cursor-pointer items-center gap-3 rounded-md border border-linea bg-cal px-4">
         <input type="checkbox" className="h-5 w-5 accent-cereza" checked={principal} onChange={(evento) => setPrincipal(evento.target.checked)} />
         <span>
           <span className="font-bold">Es la floración principal</span>
-          <span className="block text-sm text-tierra-media">La que da la cosecha grande. Con ella se calcula el calendario.</span>
+          <span className="block text-sm text-grafito">La que da la cosecha grande. Con ella se calcula el calendario.</span>
         </span>
       </label>
 
-      <div className="rounded-2xl border border-linea bg-papel p-4">
+      <div className="rounded-lg border border-linea bg-lamina p-4">
         <p className="rotulo">Lo que viene</p>
         <ol className="mt-3 grid gap-2.5">
           {[
@@ -49,11 +49,11 @@ export default function FormFloracion({ opciones, alTerminar }) {
             .map(([dias, texto]) => (
               <li key={texto} className="grid grid-cols-[6.5rem_1fr] gap-3 text-[0.95rem]">
                 <span className="cifra font-bold">{fLarga(sumarDias(fecha, dias)).replace(/ de \d{4}$/, "")}</span>
-                <span className="text-tierra-media">{texto}</span>
+                <span className="text-grafito">{texto}</span>
               </li>
             ))}
         </ol>
-        <a href={FUENTES.fenologia.url} target="_blank" rel="noreferrer" className="mt-3 inline-block text-sm text-tierra-media underline">
+        <a href={FUENTES.fenologia.url} target="_blank" rel="noreferrer" className="mt-3 inline-block text-sm text-grafito underline">
           Fuente: Cenicafé
         </a>
       </div>

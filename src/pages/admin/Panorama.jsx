@@ -17,16 +17,16 @@ function MapaFincas({ fincas }) {
   const [minLat, maxLat, minLon, maxLon] = [Math.min(...lats), Math.max(...lats), Math.min(...lons), Math.max(...lons)];
   const x = (lon) => 40 + ((lon - minLon) / Math.max(maxLon - minLon, 0.01)) * 320;
   const y = (lat) => 200 - ((lat - minLat) / Math.max(maxLat - minLat, 0.01)) * 160;
-  const color = { actuar: "#C8372D", vigilar: "#C98F2E", ok: "#2E5B3A", sinDatos: "#4F6461" };
+  const color = { actuar: "#FF3B2F", vigilar: "#FFC21A", ok: "#FFFFFF", sinDatos: "#9A9C94" };
   return (
-    <svg viewBox="0 0 400 240" className="h-auto w-full rounded-xl bg-pergamino curvas-nivel" role="img" aria-label="Ubicación relativa de las fincas">
+    <svg viewBox="0 0 400 240" className="h-auto w-full rounded-md bg-cal" role="img" aria-label="Ubicación relativa de las fincas">
       {ubicadas.map((f) => (
         <g key={f.id}>
-          <circle cx={x(f.lon)} cy={y(f.lat)} r="11" fill={color[f.estado]} stroke="#FBF7F0" strokeWidth="3" />
-          <text x={x(f.lon)} y={y(f.lat) + 26} textAnchor="middle" fontSize="11.5" fontWeight="700" fill="#2B1E16" stroke="#F4EDE1" strokeWidth="3" paintOrder="stroke" style={{ fontFamily: "var(--font-sans)" }}>
+          <circle cx={x(f.lon)} cy={y(f.lat)} r="11" fill={color[f.estado]} stroke="#111210" strokeWidth="2" />
+          <text x={x(f.lon)} y={y(f.lat) + 26} textAnchor="middle" fontSize="11.5" fontWeight="700" fill="#111210" stroke="#F6F6F3" strokeWidth="3" paintOrder="stroke" style={{ fontFamily: "var(--font-sans)" }}>
             {f.nombre}
           </text>
-          <text x={x(f.lon)} y={y(f.lat) + 39} textAnchor="middle" fontSize="10" fill="#5E4B3C" stroke="#F4EDE1" strokeWidth="3" paintOrder="stroke" style={{ fontFamily: "var(--font-sans)" }}>
+          <text x={x(f.lon)} y={y(f.lat) + 39} textAnchor="middle" fontSize="10" fill="#4B4D47" stroke="#F6F6F3" strokeWidth="3" paintOrder="stroke" style={{ fontFamily: "var(--font-sans)" }}>
             {f.municipio}
           </text>
         </g>
@@ -54,15 +54,15 @@ export default function Panorama() {
       <EncabezadoPagina rotulo="Administración" titulo="Panorama" bajada={`Las ${fincas.length} fincas registradas en este equipo, año cafetero ${anio.nombre}.`} />
 
       {precioViejo && (
-        <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-pinton/40 bg-pinton-tenue px-4 py-3">
-          <p className="font-bold text-pinton-texto">{precio ? `El precio de referencia es del ${fLarga(precio.fecha)}.` : "Aún no hay precio de referencia."} Los caficultores lo usan para estimar sus ventas.</p>
+        <div className="mb-6 flex flex-wrap items-center justify-between gap-3 rounded-lg border border-amarillo/40 bg-amarillo-tenue px-4 py-3">
+          <p className="font-bold text-amarillo-texto">{precio ? `El precio de referencia es del ${fLarga(precio.fecha)}.` : "Aún no hay precio de referencia."} Los caficultores lo usan para estimar sus ventas.</p>
           <Link to="/admin/precio" className="boton-primario">
             <BadgeDollarSign className="h-5 w-5" aria-hidden="true" /> Registrar el precio de hoy
           </Link>
         </div>
       )}
 
-      <div className="papel mb-6 grid gap-6 p-5 sm:grid-cols-2 sm:p-6 lg:grid-cols-4">
+      <div className="placa mb-6 grid gap-6 p-5 sm:grid-cols-2 sm:p-6 lg:grid-cols-4">
         <Cifra rotulo="Fincas" valor={ent(fincas.length)} detalle={`${ent(lotes.length)} lotes · ${num(fincas.reduce((s, f) => s + f.area, 0))} ha en café`} />
         <Cifra rotulo="Para actuar hoy" valor={ent(actuar.length)} tono={actuar.length ? "cereza" : "hoja"} detalle={`En ${new Set(actuar.map((a) => a.loteId)).size} lotes`} />
         <Cifra rotulo="Broca promedio" valor={conBroca.length ? `${num(conBroca.reduce((s, f) => s + f.brocaPromedio, 0) / conBroca.length)} %` : "—"} detalle="Último muestreo de cada lote" fuente="Promedio simple del último muestreo de broca de cada finca. Umbral de acción: 2 %." />
@@ -76,10 +76,10 @@ export default function Panorama() {
               .sort((a, b) => orden[a.estado] - orden[b.estado])
               .map((f) => (
                 <li key={f.id}>
-                  <Link to={`/admin/fincas/${f.id}`} className="flex items-center gap-3 rounded-xl border border-linea bg-pergamino/60 px-4 py-3 hover:border-tierra">
+                  <Link to={`/admin/fincas/${f.id}`} className="flex items-center gap-3 rounded-md border border-linea bg-cal/60 px-4 py-3 hover:border-tinta">
                     <div className="min-w-0 flex-1">
                       <p className="font-bold">{f.nombre}</p>
-                      <p className="text-sm text-tierra-media">
+                      <p className="text-sm text-grafito">
                         <MapPin className="mr-1 inline h-3.5 w-3.5" aria-hidden="true" />
                         {f.municipio} · {f.propietario} · {f.lotes.length} lotes
                         {f.ultimaActividad ? ` · último registro ${hace(f.ultimaActividad)}` : ""}
@@ -116,7 +116,7 @@ export default function Panorama() {
                   formato={(v) => `${ent(v / 1000)}k`}
                   alto={130}
                 />
-                <p className="mt-2 text-sm text-tierra-media">
+                <p className="mt-2 text-sm text-grafito">
                   Total del departamento: {ent(eva.datos.valor.municipios.reduce((s, m) => s + m.area, 0))} ha sembradas. Fuente:{" "}
                   <a className="underline" href="https://www.datos.gov.co/Agricultura-y-Desarrollo-Rural/Evaluaciones-Agropecuarias-Municipales-EVA-2019-2025/uejq-wxrr" target="_blank" rel="noreferrer">
                     UPRA, EVA en datos.gov.co
@@ -125,7 +125,7 @@ export default function Panorama() {
                 </p>
               </>
             ) : (
-              <p className="text-tierra-media">{eva.cargando ? "Consultando datos.gov.co…" : "Sin conexión: los datos del sector aparecen cuando haya señal."}</p>
+              <p className="text-grafito">{eva.cargando ? "Consultando datos.gov.co…" : "Sin conexión: los datos del sector aparecen cuando haya señal."}</p>
             )}
           </Seccion>
         </div>

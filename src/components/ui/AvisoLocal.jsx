@@ -28,16 +28,16 @@ export default function AvisoLocal() {
     }
   };
   return (
-    <aside className="mb-5 flex items-start gap-3 rounded-2xl border border-niebla-oscura/25 bg-niebla/70 px-4 py-3 text-[0.95rem]">
-      <HardDrive className="mt-0.5 h-5 w-5 shrink-0 text-niebla-oscura" aria-hidden="true" />
-      <p className="min-w-0 flex-1 text-tierra">
+    <aside className="mb-5 flex items-start gap-3 rounded-lg border border-ceniza-honda/25 bg-niebla/70 px-4 py-3 text-[0.95rem]">
+      <HardDrive className="mt-0.5 h-5 w-5 shrink-0 text-ceniza-honda" aria-hidden="true" />
+      <p className="min-w-0 flex-1 text-tinta">
         <strong>Tus datos se guardan en este celular o computador.</strong> Funciona sin señal; descarga un respaldo de vez en cuando desde{" "}
         <Link to={sesion?.rol === "administrador" ? "/admin/datos" : "/finca/perfil"} className="font-bold underline decoration-2 underline-offset-2">
           {sesion?.rol === "administrador" ? "Datos y respaldo" : "Mi cuenta"}
         </Link>
         .
       </p>
-      <button type="button" onClick={cerrar} className="-m-1.5 grid h-10 w-10 shrink-0 place-items-center rounded-full hover:bg-papel/70" aria-label="Cerrar este aviso">
+      <button type="button" onClick={cerrar} className="-m-1.5 grid h-10 w-10 shrink-0 place-items-center rounded-full hover:bg-lamina/70" aria-label="Cerrar este aviso">
         <X className="h-4 w-4" aria-hidden="true" />
       </button>
     </aside>

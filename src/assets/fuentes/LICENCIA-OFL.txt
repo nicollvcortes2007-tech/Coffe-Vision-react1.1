@@ -1,7 +1,9 @@
-Fraunces — Copyright 2020 The Fraunces Project Authors (github.com/undercasetype/Fraunces) Fraunces-Italic[SOFT,WONK,opsz,wght].ttf: Copyright 2020 The Fraunces Project Authors (github.com/undercasetype/Fraunces)
-Atkinson Hyperlegible Next — Copyright 2020-2024 The Atkinson Hyperlegible Next Project Authors (https://github.com/googlefonts/atkinson-hyperlegible-next)
+Archivo — Copyright 2020 The Archivo Project Authors (https://github.com/Omnibus-Type/Archivo)
+Martian Mono — Copyright 2021 The Martian Mono Project Authors (https://github.com/evilmartians/mono)
+Ancizar Sans — Copyright 2014 The Ancizar Sans Project Authors (https://github.com/UNAL-OMD/UNAL-Ancizar), Universidad Nacional de Colombia
 
-Ambas fuentes se distribuyen bajo la SIL Open Font License 1.1. Archivos tomados de @fontsource-variable (subconjunto latin).
+Las tres fuentes se distribuyen bajo la SIL Open Font License 1.1. Archivos WOFF2 variables
+(subconjunto latin) tomados de Google Fonts (fonts.gstatic.com) el 2026-10-15.
 
 PREAMBLE
 The goals of the Open Font License (OFL) are to stimulate worldwide

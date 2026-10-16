@@ -1,147 +1,129 @@
-# Design System: Coffee+Visión — «Pergamino de ladera»
+# Design System: Coffee+Visión — «Ceniza y Cereza»
 
-Fuente de verdad visual del proyecto. Se compuso el 2026-10-15 a partir de la investigación de referencias (`docs/investigacion/`): 15 plataformas (vgpu en detalle) y 10 referencias del dominio cafetero. Se compone, no se clona: de cada referencia se tomó una idea concreta, nunca su paleta, su logotipo ni su código.
+Fuente de verdad visual del proyecto. Se compuso el 2026-10-15 y reemplaza a «Pergamino de ladera», que se rechazó por genérica: su crema #F4EDE1 es casi la misma paleta agro de los sitios premiados (Farm Minerals usa #F4EDE6) y su serif con itálica de color repetía el gesto de AiDEN. La investigación completa está en `docs/investigacion/` (informes 05, 06 y 07). De cada referencia se tomó una idea, nunca su paleta, su logotipo, su tipografía comercial ni su código.
 
-## Overview
+## Concepto
 
-La app es un **cuaderno de campo en papel pergamino**: titulares serif con voz editorial, cifras grandes y claras, y una ladera que se lee como mapa. Es clara a propósito: se usa a pleno sol, en un celular de gama media y con señal débil. «Pergamino» es literalmente el estado del grano que vende el caficultor (café pergamino seco) y la cereza es el color de acción.
+El café del Cauca crece sobre ceniza volcánica y madura en rojo y amarillo. La marca se lee como **un instrumento de campo**:
 
-Tres ideas sostienen todo:
+- **Basalto, de noche.** La landing y la finca 3D muestran el relieve real del terreno en grises de ceniza, con curvas de nivel como dato, niebla en los valles y luz rasante de amanecer.
+- **Cal, a pleno sol.** La app es clara y de alto contraste (tinta sobre cal: 17,35:1), porque se usa en el lote con el celular. El nombre viene de las fachadas encaladas de Popayán.
+- **Cereza y amarillo, solo como señal.** Son los colores del grano maduro y significan algo: actuar y vigilar. Nunca se usan de decoración.
+
+Tres reglas sostienen todo:
 
 1. **Primero el campo.** Registrar en segundos, con el pulgar y sin señal.
-2. **Cada número dice de dónde sale.** Cifras del gremio (kg de cereza, @ y cargas de c.p.s.) con su fuente (Cenicafé, FNC) a un toque.
-3. **El estado se lee como la maduración del grano.** Hoja = al día, pintón = vigilar, cereza = actuar hoy, niebla = sin datos.
+2. **Cada número dice de dónde sale.** Las cifras llevan su fuente (Cenicafé, FNC) a un toque.
+3. **El territorio es dato, no fondo.** Las curvas de nivel y el relieve salen de mediciones reales (SRTM); no hay curvas decorativas ni ilustraciones de stock.
 
-## Colors
+## Color
 
-Tokens en `src/estilos/app.css` (`@theme`). Contrastes WCAG 2.x calculados.
+Tokens en `src/estilos/app.css` (`@theme`). Contrastes WCAG 2.x calculados con la fórmula de luminancia relativa.
 
-### Primary
+### Cal (app)
 
-| Token | Hex | Uso |
+| Token | Hex | Uso | Contraste |
+|---|---|---|---|
+| `cal` | `#F6F6F3` | Fondo de la app | — |
+| `cal-honda` | `#EBEBE6` | Superficies hundidas, hover | — |
+| `lamina` | `#FFFFFF` | Placas (tarjetas) y campos | — |
+| `tinta` | `#111210` | Texto y acción primaria | 17,35:1 sobre cal |
+| `grafito` | `#4B4D47` | Texto secundario | 7,91:1 sobre cal |
+| `grafito-suave` | `#6B6D66` | Marcadores de posición | 4,84:1 sobre cal |
+| `linea` | `#DCDDD7` | Bordes de placa (nunca texto) | — |
+| `borde` | `#8A8C85` | Borde de campos | 3,4:1 sobre blanco |
+
+### Señal
+
+| Token | Hex | Uso | Contraste |
+|---|---|---|---|
+| `cereza` | `#C3121B` | «Actuar hoy» y destructivas en la app | 5,67:1 sobre cal; blanco encima 6,14:1 |
+| `cereza-viva` | `#FF3B2F` | «Actuar» en 3D y CTA de la landing | 5,42:1 sobre basalto |
+| `amarillo` | `#FFC21A` | «Vigilar» (siempre con tinta encima y rayado) | tinta encima 11,61:1 |
+| `amarillo-texto` | `#7A5600` | Texto de aviso sobre cal | 6,14:1 |
+| `roya` | `#FF7A1A` | Solo dentro de fotos e ilustraciones de roya | — |
+
+### Basalto (landing y 3D)
+
+| Token | Hex | Uso | Contraste |
+|---|---|---|---|
+| `basalto` | `#0E0F0C` | Fondo de la landing y del 3D | — |
+| `escoria` | `#1A1B18` | Paneles | — |
+| `niebla` | `#E9EAE4` | Texto sobre basalto, placas «al día» | 15,89:1 sobre basalto |
+| `ceniza` | `#9A9C94` | Texto secundario sobre basalto | 6,92:1 |
+
+### Estados del lote
+
+| Estado | App (Cal) | 3D (Basalto) | Segunda señal |
+|---|---|---|---|
+| Actuar hoy | placa `cereza` con texto blanco | placa `cereza-viva` | ícono de alerta y palabra |
+| Vigilar | placa `amarillo` con tinta | placa `amarillo` | **rayado diagonal**, ícono de ojo |
+| Al día | contorno de tinta sobre blanco | placa `niebla` | ícono de visto |
+| Sin datos | `niebla` con borde punteado | placa `ceniza` punteada | ícono de niebla |
+
+Con deuteranopía, el rojo cereza y el naranja roya se confunden (ΔE 2,5); por eso la alerta de «vigilar» es amarillo con rayado, y el naranja queda solo en imágenes.
+
+## Tipografía
+
+Tres familias con licencia SIL OFL 1.1, autoalojadas en WOFF2 variable (`src/assets/fuentes/`, subconjunto latin):
+
+| Familia | Origen | Rol |
 |---|---|---|
-| `cereza` | `#A3261B` | Acción primaria y «actuar hoy». Blanco encima: 7,4:1 |
-| `cereza-oscura` | `#7E1C13` | Hover y presionado de la acción |
-| `cereza-viva` | `#C8372D` | Solo gráficos y 3D (4,47:1: no para texto pequeño) |
-| `cereza-tenue` | `#F6DFD9` | Fondo de avisos de «actuar hoy» |
+| **Archivo** (wdth 62–125, wght 100–900) | Omnibus-Type, Buenos Aires | `titular-mayor`: Expanded 900 en mayúsculas para la landing y los grandes títulos. `titular`: 108 % y 780 para títulos de interfaz. `numeral`: 112 % y 760 con cifras tabulares |
+| **Martian Mono** (wdth 75–112,5, wght 100–800) | Evil Martians | `rotulo` y `lectura`: coordenadas, altitud, etiquetas técnicas, fuentes |
+| **Ancizar Sans** (wght 100–1000) | Universidad Nacional de Colombia, 2025 | Texto e interfaz de la app (17 px base) |
 
-### Secondary
+Sin serif y sin itálicas de acento. La única itálica permitida es la del nombre científico (convención botánica).
 
-| Token | Hex | Uso |
-|---|---|---|
-| `hoja` | `#2E5B3A` | Estado «al día» y acción secundaria positiva. Blanco encima: 7,85:1 |
-| `hoja-clara` | `#7FA36B` | Rellenos de gráfico |
-| `hoja-tenue` | `#E2EBDC` | Fondo de estados «al día» |
-| `pinton` | `#C98F2E` | Relleno de «vigilar» (texto encima en `tierra`) |
-| `pinton-texto` | `#8A5A12` | Texto de aviso (5,08:1) |
-| `pinton-tenue` | `#F5E6C8` | Fondo de avisos de «vigilar» |
-| `niebla` | `#DDE4E2` | Clima y «sin datos» |
+## Forma
 
-### Neutral
+- Radio de 6 px para placas, botones y campos (`--radius-placa`); 3 px para etiquetas y chips. Nada de pastillas ni tarjetas muy redondeadas.
+- Placas planas: borde `linea` de 1 px y sin sombra. La sombra `levantado` queda para hojas y avisos flotantes.
+- Botones de 48 px de alto. Primario en tinta; `boton-cereza` solo para lo que no se puede deshacer.
+- Foco visible: contorno de 3 px en tinta (amarillo sobre basalto). Campos con anillo amarillo al enfocar.
 
-| Token | Hex | Uso |
-|---|---|---|
-| `pergamino` | `#F4EDE1` | Fondo de la app |
-| `papel` | `#FBF7F0` | Tarjetas y superficies |
-| `crema` | `#EBE1CF` | Superficie hundida, hover |
-| `tierra` | `#2B1E16` | Texto principal (13,9:1 sobre pergamino) |
-| `tierra-media` | `#5E4B3C` | Texto secundario (7,1:1) |
-| `borde-campo` | `#8C7A68` | Borde de campos de formulario (3,86:1, mínimo no textual 3:1) |
-| `linea` | `#E2D6C3` | Separadores decorativos |
-| `tostado` | `#1E1510` | Únicas secciones oscuras: pie y una banda de la landing |
+## La finca en 3D
 
-### Named Rules
+`src/components/finca3d/` (three.js 0.186, WebGL2):
 
-- **El estado nunca va solo en color.** Color + ícono + palabra; en mapas, además, tramado.
-- **Nada de gris claro sobre crema.** El texto mínimo es `tierra-media`.
-- **El rojo significa «madura» y «alerta».** Por eso siempre lleva ícono y texto.
-- **Sin paletas ajenas.** Ni el verde y café planos de la versión anterior ni los de marcas de café.
+- **Relieve real**: teselas Terrarium de AWS (SRTM, 30 m) a z13, recortadas en un círculo como una muestra de suelo. La pared muestra un andisol: horizonte A, la capa de ceniza volcánica, el horizonte B rojizo y la roca.
+- **Shader propio**: gradiente de basalto a ceniza, luz rasante con laderas al sol cálidas y sombras frías, curvas cada 10 m e índice cada 50 m, niebla en los valles con jirones estáticos y la capa satelital opcional (Sentinel-2 de EOX).
+- **Lotes como placas** pintadas en una textura: sólidas, con rayado en «vigilar» y punteado en «sin datos».
+- **Exageración** `k = clamp(0,12 · ancho / desnivel, 1,2, 3)`, siempre visible en la lectura («relieve ×1,7»).
+- **Render a demanda**: solo se dibuja cuando algo se mueve. Maneja la pérdida de contexto WebGL y, sin WebGL2, dibuja el mismo relieve en 2D.
+- **Interacción**: tocar un lote abre su ficha (altitud, pendiente, hacia dónde mira, GPS); brújula, vista cenital y vuelta a la vista inicial. En la landing, la rueda desplaza la página y el dedo no queda atrapado (botón «mover la finca»).
+- **Sin señal**: el service worker guarda las teselas en `cv-relieve-v1`; la landing usa un relieve horneado (`public/finca-demo/relieve-160.png`, 50 KB).
 
-## Typography
+## Landing
 
-- **Fraunces** (OFL, eje óptico) para titulares de 24 px o más: `.titular`, peso 560, interletra −1,5 %. Nunca en la interfaz pequeña.
-- **Atkinson Hyperlegible Next** (OFL) para interfaz, cuerpo y cifras. Diseñada para lectores con baja visión.
-- Autoalojadas en `src/assets/fuentes/` (subconjunto latin, ~200 KB en total), cacheadas por el service worker. Nada desde CDN.
+Recorrido de noche sobre la finca de ejemplo («La Esperanza», ficticia, en una vereda real de Timbío):
 
-### Hierarchy
+1. **Portada**: «SEMBRADO EN CENIZA.» en Archivo Expanded detrás de la loma, que tapa la parte baja de las letras. Lectura de coordenadas y altitud bajo el cursor, leyenda que también es el menú de capas (estado, broca, roya).
+2. **Capítulos** (el 3D queda fijo y la cámara vuela): lotes, broca, roya y cosecha, con las cifras reales de la semilla y su fuente. La luz se mueve con el scroll como un amanecer. Botón «Saltar el recorrido».
+3. **Debajo, ceniza**: corte del suelo.
+4. **¿Cuánto vale tu carga?**: bloque amarillo con la calculadora del factor de rendimiento (tabla FNC) y dígitos de rodillo.
+5. **Voltea la hoja**: diagnóstico por foto, rotulado como ejemplo ilustrado.
+6. **Lo de hoy, primero**: la app en el celular.
+7. Cifras con fuente, índice de módulos, qué es y qué no es, fuentes y pie con la marca.
 
-| Rol | Tamaño | Notas |
-|---|---|---|
-| Titular de landing | `clamp(2.6rem, 7vw, 5.4rem)` | Fraunces, remate en itálica |
-| Título de página | 2–2,5 rem | Fraunces |
-| Cifra grande | 2–3 rem | Atkinson, `tabular-nums`, unidad del gremio al lado en tamaño menor |
-| Cuerpo | 17 px (1,0625 rem), interlineado 1,55 | Mínimo 16 px en toda la app |
-| Rótulo | 13 px, mayúsculas, tracking 8 % | `.rotulo`, color `tierra-media` |
+## Movimiento
 
-Las cifras usan formato es-CO («1.250 kg», «$ 2.300.000»).
+- Curva `--ease-instrumento` (lenta-rápida-lenta) para vuelos y dígitos; `--ease-salida` para apariciones (420–700 ms).
+- Nada gira solo. La entrada del 3D forma el relieve desde plano y barre una línea de escaneo una sola vez.
+- Con `prefers-reduced-motion`: sin vuelos, sin formación, sin barrido; las transiciones duran 1 ms.
 
-## Motion
+## Marca
 
-- Curva `--ease-campo` (`cubic-bezier(0.22, 1, 0.36, 1)`); entradas de 320 ms (`animate-aparecer`).
-- **Sello** (`animate-sello`): cuando se guarda un registro de campo aparece un sello «Registrado», como en un cuaderno. Menos de 450 ms.
-- Borrar siempre ofrece **deshacer** durante unos segundos en vez de una confirmación modal (excepto en acciones de administración irreversibles).
-- Con `prefers-reduced-motion` no hay animaciones ni lluvia; la ladera se pinta en un solo cuadro.
-- Ninguna información depende de una animación.
+- **Isotipo**: la cereza vista como un lente sobre el terreno. Sus curvas de nivel dibujan la loma y el punto amarillo es la casa de la finca. Sobre basalto o niebla.
+- **Logotipo**: «COFFEE+VISIÓN» en Archivo Expanded 900 con el «+» en cereza.
+- No usar «Café de Cauca» como sello ni lema: es una denominación de origen protegida. Tampoco iconografía del Eje Cafetero (el Paisaje Cultural Cafetero no incluye al Cauca) ni motivos de tejidos misak o nasa.
 
-## Layout
+## Qué evitar (separación de AiDEN)
 
-- Celular primero. En la app, **barra inferior** con cuatro destinos y un botón central **Registrar** (al alcance del pulgar). En escritorio (≥ 1024 px), barra lateral fija.
-- Objetivos táctiles de **48 × 48 px** para acciones primarias y 8 px de separación.
-- Ancho de lectura de 68 caracteres en guías.
-- La ficha de un lote mantiene siempre el mismo orden: estado → cifras → próximas acciones → línea de tiempo.
-- Lo no disponible se deshabilita con una razón visible; no se oculta.
-
-## La ladera (vgpu)
-
-Pieza 3D opcional y diferida (vgpu 0.6.0, MIT, versión fijada):
-
-- Terreno de rejilla de alturas con forma de ladera; los lotes son zonas coloreadas por estado; surcos en curva de nivel; niebla por altura; matas instanciadas con color de maduración.
-- Solo se descarga si hay `navigator.gpu`, no hay ahorro de datos y la conexión no es 2G/3G. Se monta al entrar en pantalla y limpia con `stop()`/`dispose()`.
-- **Respaldo de primera clase**: si `init()` falla (`VGPU-RING1-UNSUPPORTED`) o se pierde el dispositivo, se muestra la ladera en SVG (curvas de nivel + lotes), que es también la vista accesible.
-- El lienzo lleva `aria-hidden`; toda su información existe en la lista de lotes.
-- Diferencia con AiDEN: aquí la protagonista es **el territorio** (la ladera y sus lotes), no la planta.
-
-## Elevation & Depth
-
-Dos niveles: `shadow-papel` (tarjetas) y `shadow-levantado` (hojas y menús). El fondo lleva grano de papel muy sutil (`.grano-papel`) solo en encabezados grandes. Nada de vidrio sobre datos.
-
-## Shapes
-
-Radio de 14 px (`--radius-campo`) en tarjetas; 12 px en campos y botones; píldoras solo para estados.
-
-## Brand
-
-- Nombre: **Coffee+Visión**. Logotipo tipográfico en Fraunces con el «+» en cereza; isotipo de una cereza partida con curvas de nivel (SVG propio en `src/components/marca/`).
-- Íconos: Lucide (ISC). Pictogramas propios del café (cereza, broca, roya, pergamino, floración, ladera) en `src/components/marca/Pictogramas.jsx`. Sin emojis en la interfaz.
-- Proyecto formativo del SENA: se dice con orgullo en la landing, sin inventar clientes, cifras de uso ni testimonios.
-
-## Components
-
-- **Hoy en la finca:** lista ordenada de lo que pide acción, cada ítem con lote, razón (con su regla y fuente) y botón de acción.
-- **Ficha de lote:** pares etiqueta-valor con «Fuente: …» a un toque; línea de tiempo de labores, floraciones, muestreos, recolecciones y aplicaciones.
-- **Contador de campo:** para el muestreo de broca, botones grandes «+ sano» / «+ brocado» que se usan sin mirar la pantalla.
-- **Estado:** píldora con ícono + palabra en los cuatro tonos de maduración.
-- **Cifra:** número grande + unidad del gremio + línea de fuente.
-- **Sello «Registrado»** al guardar; **deshacer** al borrar.
-
-### Navigation
-
-- Pública: landing de una sola página con capítulos; acceso y registro; privacidad.
-- Caficultor: Hoy · Lotes · Registrar · Cosecha · Más (Clima, Diagnóstico, Costos, Guías, Asistente, Perfil).
-- Administrador: Panorama · Fincas · Cuentas · Guías · Datos.
-
-## Do's and Don'ts
-
-### Do:
-
-- Escribir en lenguaje sencillo (nivel de 6.º grado) y en las unidades del gremio.
-- Decir de dónde sale cada cifra y cuándo se actualizó el clima.
-- Marcar las estimaciones como estimaciones y la autenticación local como local.
-- Verificar en 375, 768 y 1440 px, sin errores en consola.
-
-### Don't:
-
-- No usar Font Awesome, emojis ni imágenes de stock genéricas.
-- No poner texto gris claro sobre crema ni texto pequeño en `cereza-viva`.
-- No hacer la ladera 3D obligatoria ni la vista por defecto en el celular.
-- No inventar usuarios, testimonios ni métricas de uso.
+| AiDEN o la primera propuesta | Coffee+Visión |
+|---|---|
+| DM Sans, Instrument Serif, Fraunces, Atkinson; itálicas de color | Archivo, Martian Mono y Ancizar Sans; sin itálicas |
+| Forest, moss, lime, paper; crema pergamino | Basalto, niebla, cereza y amarillo; Cal fría |
+| Escenas vivas con WebGPU; preloader de partículas | Relieve real (DEM) en WebGL2; la escena aparece al cargar |
+| Navegación por capítulos con cápsula; vidrio líquido | Leyenda del mapa como menú; paneles opacos sin desenfoque |
+| Curvas de nivel finas de fondo | Curvas solo como dato sobre el relieve real |

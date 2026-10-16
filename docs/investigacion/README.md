@@ -9,6 +9,8 @@ Cinco líneas de investigación hechas antes del rediseño, con el procedimiento
 | 3 | [IA de visión y asistente](03-ia-vision.md) | ¿Hay un modelo abierto de enfermedades del café que corra en el celular? |
 | 4 | [Normativa y datos abiertos](04-normativa-datos.md) | ¿Qué pide la norma (EUDR, BPA, Ley 1581) y qué datos se pueden leer desde el navegador? |
 | 5 | [Referencias de diseño](05-diseno.md) | Las 15 plataformas de referencia (vgpu en detalle) y 10 referencias del dominio |
+| 6 | [Terreno 3D y GPS](06-terreno-3d.md) | Fuentes de elevación y satélite con CORS (verificadas con peticiones reales), motor 3D, peso y revisión del borrador |
+| 7 | [Identidad visual propia](07-identidad-visual.md) | 24 referencias, cultura visual del Cauca, fuentes OFL y tres direcciones; se eligió «Ceniza y Cereza» |
 
 ## Lo que se concluyó
 
@@ -18,7 +20,7 @@ Cinco líneas de investigación hechas antes del rediseño, con el procedimiento
 4. **El asistente útil es el de los datos propios.** AdrIAna (Cenicafé) ya responde preguntas generales con internet; un LLM en el celular pesa de 290 MB a 1 GB. El asistente de Coffee+Visión responde sobre la finca del usuario («¿cuánto gasté en abono en La Loma?»), sin conexión, con reglas y búsqueda local en las guías.
 5. **Lo que la norma y el mercado justifican:** geolocalización del lote (punto o polígono, 6 decimales, GeoJSON WGS-84) para la cadena que exige la EUDR desde el 30-12-2026; registro de aplicaciones con número ICA y período de carencia (BPA, Res. ICA 30021/2017); consentimiento, exportación y borrado de datos (Ley 1581).
 6. **Datos abiertos que funcionan desde el navegador:** Open-Meteo (clima y altitud), datos.gov.co (TRM; área y producción de café por municipio, EVA-UPRA). El precio interno de la FNC no tiene API y sus términos prohíben extraerlo: lo escribe el administrador con la fecha y el enlace.
-7. **Dirección visual:** «Pergamino de ladera» (ver `DESIGN.md`): clara para el sol, Fraunces + Atkinson Hyperlegible Next (OFL), la cereza como color de acción y las curvas de nivel como sistema gráfico. vgpu 0.6.0 (MIT) para una ladera 3D opcional con respaldo en SVG.
+7. **Dirección visual:** «Ceniza y Cereza» (ver `DESIGN.md` e informe 07). Reemplazó a «Pergamino de ladera», que se rechazó por parecerse a AiDEN y a la paleta agro genérica. Landing de noche sobre el relieve real en 3D (three.js, WebGL2, teselas SRTM de AWS) y app clara «Cal» para el sol; Archivo, Martian Mono y Ancizar Sans (OFL); cereza y amarillo solo como señal de estado. Se descartó vgpu porque exige WebGPU y no tiene respaldo propio (informe 06).
 
 ## Qué se hizo con los módulos anteriores
 

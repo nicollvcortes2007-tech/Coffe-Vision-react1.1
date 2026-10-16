@@ -69,7 +69,7 @@ export default function FormLabor({ opciones, alTerminar }) {
       <Campo etiqueta="Notas" opcional>
         {(props) => <textarea {...props} rows={2} className="campo py-3" value={form.notas} onChange={(evento) => cambiar("notas")(evento.target.value)} />}
       </Campo>
-      <p className="rounded-xl bg-pergamino px-4 py-3 font-bold">
+      <p className="rounded-md bg-cal px-4 py-3 font-bold">
         Costo de la labor: <span className="cifra">{cop(total)}</span>
       </p>
       <Pie texto="Guardar labor" deshabilitado={!form.loteId} />

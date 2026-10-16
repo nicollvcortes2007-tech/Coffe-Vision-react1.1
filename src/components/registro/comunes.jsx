@@ -28,7 +28,7 @@ export function CampoFecha({ valor, alCambiar, etiqueta = "Fecha" }) {
 
 export function Pie({ texto = "Guardar", deshabilitado = false, secundario }) {
   return (
-    <div className="sticky -bottom-5 -mx-5 mt-2 grid gap-2 border-t border-linea bg-papel/95 px-5 pt-3 pb-1 backdrop-blur sm:-mx-6 sm:px-6">
+    <div className="sticky -bottom-5 -mx-5 mt-2 grid gap-2 border-t border-linea bg-lamina/95 px-5 pt-3 pb-1 backdrop-blur sm:-mx-6 sm:px-6">
       <button type="submit" className="boton-primario w-full text-lg" disabled={deshabilitado}>
         {texto}
       </button>
@@ -39,20 +39,20 @@ export function Pie({ texto = "Guardar", deshabilitado = false, secundario }) {
 
 export function Resultado({ nivel, titulo, cifra, texto, fuente }) {
   const estilos = {
-    ok: "border-hoja/30 bg-hoja-tenue text-hoja-oscura",
-    vigilar: "border-pinton/40 bg-pinton-tenue text-pinton-texto",
-    actuar: "border-cereza/30 bg-cereza-tenue text-cereza-oscura",
-    sinDatos: "border-niebla-oscura/20 bg-niebla text-niebla-oscura",
+    ok: "border-tinta/30 bg-cal-honda text-tinta",
+    vigilar: "border-amarillo/40 bg-amarillo-tenue text-amarillo-texto",
+    actuar: "border-cereza/30 bg-cereza-tenue text-cereza-honda",
+    sinDatos: "border-ceniza-honda/20 bg-niebla text-ceniza-honda",
   };
   return (
-    <div className={`rounded-2xl border p-4 ${estilos[nivel] ?? estilos.sinDatos}`} role="status" aria-live="polite">
+    <div className={`rounded-lg border p-4 ${estilos[nivel] ?? estilos.sinDatos}`} role="status" aria-live="polite">
       <div className="flex items-baseline justify-between gap-3">
         <p className="font-bold">{titulo}</p>
         {cifra && <p className="cifra text-3xl font-bold">{cifra}</p>}
       </div>
-      {texto && <p className="mt-1.5 text-[0.95rem] text-tierra">{texto}</p>}
+      {texto && <p className="mt-1.5 text-[0.95rem] text-tinta">{texto}</p>}
       {fuente && (
-        <a href={fuente.url} target="_blank" rel="noreferrer" className="mt-2 inline-block text-sm text-tierra-media underline underline-offset-2">
+        <a href={fuente.url} target="_blank" rel="noreferrer" className="mt-2 inline-block text-sm text-grafito underline underline-offset-2">
           Fuente: {fuente.texto}
         </a>
       )}

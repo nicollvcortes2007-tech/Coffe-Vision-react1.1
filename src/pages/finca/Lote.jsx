@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { lazy, Suspense, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, Pencil, Plus, Trash2, MapPin, Footprints, Archive } from "lucide-react";
 import { EncabezadoPagina, Seccion, Vacio } from "@/components/ui/Pagina";
@@ -19,6 +19,8 @@ import { anioCafetero, evaluarBroca, evaluarRoya, labor, variedad, SISTEMAS, DIA
 import { validarGeometria } from "@/utilidades/geo";
 import { cop, num, ent, fCorta, fLarga, hace, sumarDias, diasEntre } from "@/utilidades/formato";
 
+const LaderaViva = lazy(() => import("@/components/ladera/LaderaViva"));
+
 const COLECCION = { labor: "labores", floracion: "floraciones", muestreo: "muestreos", recoleccion: "recolecciones", aplicacion: "aplicaciones", diagnostico: "diagnosticos" };
 
 function eventos(lote, datos) {
@@ -29,7 +31,7 @@ function eventos(lote, datos) {
   for (const item of de("muestreos")) {
     const r = item.tipo === "broca" ? evaluarBroca(item) : evaluarRoya(item);
     const pct = item.tipo === "broca" ? r.infestacion : r.incidencia;
-    lista.push({ tipo: "muestreo", item, fecha: item.fecha, Icono: item.tipo === "broca" ? Broca : Roya, titulo: `Muestreo de ${item.tipo}: ${pct.toFixed(1)} %`, detalle: r.nivel === "ok" ? "Por debajo del umbral" : "Sobre el umbral", nivel: r.nivel });
+    lista.push({ tipo: "muestreo", item, fecha: item.fecha, Icono: item.tipo === "broca" ? Broca : Roya, titulo: `Muestreo de ${item.tipo}: ${num(pct)} %`, detalle: r.nivel === "ok" ? "Por debajo del umbral" : "Sobre el umbral", nivel: r.nivel });
   }
   const recolecciones = de("recolecciones");
   const porDia = new Map();
@@ -110,7 +112,7 @@ export default function Lote() {
           </>
         }
       >
-        <div className="mt-3 flex flex-wrap items-center gap-2 text-tierra-media">
+        <div className="mt-3 flex flex-wrap items-center gap-2 text-grafito">
           <Estado tipo={lote.estado}>{lote.estadoTexto}</Estado>
           <span>
             {variedad(lote.variedad).nombre}
@@ -133,7 +135,7 @@ export default function Lote() {
             </section>
           )}
 
-          <div className="papel grid gap-6 p-5 sm:grid-cols-2 sm:p-6">
+          <div className="placa grid gap-6 p-5 sm:grid-cols-2 sm:p-6">
             <Cifra rotulo="Área" valor={num(lote.areaHa)} unidad="ha" detalle={lote.densidad ? `${ent(lote.densidad)} árb/ha · unos ${ent(lote.densidad * lote.areaHa)} árboles` : "Sin densidad registrada"} fuente={FUENTES.densidad.texto} />
             <Cifra
               rotulo={`Producción ${anio.nombre}`}
@@ -144,8 +146,8 @@ export default function Lote() {
             />
             <Cifra rotulo="Costo del lote" valor={cop(costo)} detalle={prod.cargas ? `${cop(costo / prod.cargas)} por carga` : "Sin producción registrada"} fuente="Labores, recolección y aplicaciones del lote en el año cafetero. Los gastos generales de la finca no se reparten por lote." />
             <div className="grid gap-4">
-              <Cifra rotulo="Broca" tamano="sm" valor={ultimoBroca ? `${evaluarBroca(ultimoBroca.item).infestacion.toFixed(1)} %` : "—"} detalle={ultimoBroca ? `Muestreo ${hace(ultimoBroca.fecha)}` : "Sin muestreos"} tono={ultimoBroca?.nivel === "ok" ? "hoja" : ultimoBroca ? "cereza" : "tierra"} />
-              <Cifra rotulo="Roya" tamano="sm" valor={ultimoRoya ? `${evaluarRoya(ultimoRoya.item).incidencia.toFixed(1)} %` : "—"} detalle={ultimoRoya ? `Muestreo ${hace(ultimoRoya.fecha)}` : "Sin muestreos"} tono={ultimoRoya?.nivel === "ok" ? "hoja" : ultimoRoya ? "cereza" : "tierra"} />
+              <Cifra rotulo="Broca" tamano="sm" valor={ultimoBroca ? `${num(evaluarBroca(ultimoBroca.item).infestacion)} %` : "—"} detalle={ultimoBroca ? `Muestreo ${hace(ultimoBroca.fecha)}` : "Sin muestreos"} tono={ultimoBroca?.nivel === "ok" ? "hoja" : ultimoBroca ? "cereza" : "tierra"} />
+              <Cifra rotulo="Roya" tamano="sm" valor={ultimoRoya ? `${num(evaluarRoya(ultimoRoya.item).incidencia)} %` : "—"} detalle={ultimoRoya ? `Muestreo ${hace(ultimoRoya.fecha)}` : "Sin muestreos"} tono={ultimoRoya?.nivel === "ok" ? "hoja" : ultimoRoya ? "cereza" : "tierra"} />
             </div>
           </div>
 
@@ -154,18 +156,18 @@ export default function Lote() {
               <>
                 <ol className="relative grid gap-1 border-l-2 border-linea pl-5">
                   {linea.slice(0, mostrar).map((evento, indice) => (
-                    <li key={`${evento.tipo}-${evento.fecha}-${indice}`} className="group relative flex items-start gap-3 rounded-xl py-2.5 pr-1">
-                      <span className="absolute top-3.5 -left-[1.95rem] grid h-7 w-7 place-items-center rounded-full border border-linea bg-papel text-tierra-media">
+                    <li key={`${evento.tipo}-${evento.fecha}-${indice}`} className="group relative flex items-start gap-3 rounded-md py-2.5 pr-1">
+                      <span className="absolute top-3.5 -left-[1.95rem] grid h-7 w-7 place-items-center rounded-full border border-linea bg-lamina text-grafito">
                         <evento.Icono className="h-4 w-4" />
                       </span>
                       <div className="min-w-0 flex-1">
                         <p className="font-bold leading-snug">{evento.titulo}</p>
-                        <p className="text-sm text-tierra-media">
+                        <p className="text-sm text-grafito">
                           {fCorta(evento.fecha)}
                           {evento.detalle ? ` · ${evento.detalle}` : ""}
                         </p>
                       </div>
-                      <button type="button" onClick={() => borrarEvento(evento)} className="grid h-10 w-10 shrink-0 place-items-center rounded-full text-tierra-media opacity-70 hover:bg-crema hover:text-cereza focus-visible:opacity-100 sm:opacity-0 sm:group-hover:opacity-100" aria-label={`Borrar: ${evento.titulo}`}>
+                      <button type="button" onClick={() => borrarEvento(evento)} className="grid h-10 w-10 shrink-0 place-items-center rounded-full text-grafito opacity-70 hover:bg-cal-honda hover:text-cereza focus-visible:opacity-100 sm:opacity-0 sm:group-hover:opacity-100" aria-label={`Borrar: ${evento.titulo}`}>
                         <Trash2 className="h-4 w-4" aria-hidden="true" />
                       </button>
                     </li>
@@ -190,9 +192,9 @@ export default function Lote() {
                 {calendario.map(({ dias, texto, fecha }) => {
                   const pasado = diasFloracion > dias;
                   return (
-                    <li key={texto} className={`grid grid-cols-[5.5rem_1fr] gap-3 rounded-xl px-3 py-2 ${!pasado && diasFloracion + 14 >= dias ? "bg-pinton-tenue" : ""}`}>
-                      <span className={`cifra font-bold ${pasado ? "text-tierra-media line-through decoration-1" : ""}`}>{fCorta(fecha)}</span>
-                      <span className={pasado ? "text-tierra-media" : ""}>{texto}</span>
+                    <li key={texto} className={`grid grid-cols-[5.5rem_1fr] gap-3 rounded-md px-3 py-2 ${!pasado && diasFloracion + 14 >= dias ? "bg-amarillo-tenue" : ""}`}>
+                      <span className={`cifra font-bold ${pasado ? "text-grafito line-through decoration-1" : ""}`}>{fCorta(fecha)}</span>
+                      <span className={pasado ? "text-grafito" : ""}>{texto}</span>
                     </li>
                   );
                 })}
@@ -202,7 +204,7 @@ export default function Lote() {
                 <Floracion className="h-5 w-5" /> Registrar floración
               </button>
             )}
-            <a href={FUENTES.fenologia.url} target="_blank" rel="noreferrer" className="mt-3 inline-block text-sm text-tierra-media underline">
+            <a href={FUENTES.fenologia.url} target="_blank" rel="noreferrer" className="mt-3 inline-block text-sm text-grafito underline">
               Fuente: Cenicafé
             </a>
           </Seccion>
@@ -212,7 +214,7 @@ export default function Lote() {
               {["recoleccion", "muestreo-broca", "muestreo-roya", "floracion", "labor", "aplicacion"].map((tipo) => {
                 const { titulo, Icono } = TIPOS_REGISTRO[tipo];
                 return (
-                  <button key={tipo} type="button" onClick={() => abrir(tipo, { loteId: lote.id })} className="flex min-h-14 items-center gap-2 rounded-xl border border-linea bg-pergamino px-3 text-left font-bold hover:border-tierra">
+                  <button key={tipo} type="button" onClick={() => abrir(tipo, { loteId: lote.id })} className="flex min-h-14 items-center gap-2 rounded-md border border-linea bg-cal px-3 text-left font-bold hover:border-tinta">
                     <Icono className="h-5 w-5 shrink-0 text-cereza" aria-hidden="true" />
                     <span className="leading-tight">{titulo}</span>
                   </button>
@@ -222,25 +224,38 @@ export default function Lote() {
           </Seccion>
 
           <Seccion titulo="Ubicación">
+            {lote.geometria && (
+              <Suspense fallback={<div className="mb-4 aspect-square w-full rounded-md bg-basalto" />}>
+                <LaderaViva
+                  finca={datos.finca}
+                  lotes={datos.lotes}
+                  className="mb-4 aspect-square w-full rounded-md bg-basalto"
+                  controlesVisibles={false}
+                  etiquetasDe={[lote.id]}
+                  alListo={(escena) => escena.enfocarLote(lote.id, 0)}
+                  respaldo={null}
+                />
+              </Suspense>
+            )}
             {lote.geometria ? (
               <div className="grid gap-2 text-[0.95rem]">
                 <p className="flex items-center gap-2 font-bold">
-                  {lote.geometria.tipo === "poligono" ? <Footprints className="h-5 w-5 text-hoja" aria-hidden="true" /> : <MapPin className="h-5 w-5 text-hoja" aria-hidden="true" />}
+                  {lote.geometria.tipo === "poligono" ? <Footprints className="h-5 w-5 text-tinta" aria-hidden="true" /> : <MapPin className="h-5 w-5 text-tinta" aria-hidden="true" />}
                   {lote.geometria.tipo === "poligono" ? `Contorno con ${lote.geometria.puntos.length} esquinas` : `Punto GPS: ${lote.geometria.punto[1].toFixed(6)}, ${lote.geometria.punto[0].toFixed(6)}`}
                 </p>
-                <p className="text-tierra-media">Sembrado antes de 2021: {lote.antesDe2021 === "si" ? "sí" : lote.antesDe2021 === "no" ? "no" : "sin dato"}</p>
+                <p className="text-grafito">Sembrado antes de 2021: {lote.antesDe2021 === "si" ? "sí" : lote.antesDe2021 === "no" ? "no" : "sin dato"}</p>
                 {problemasGeo.map((problema) => (
-                  <p key={problema} className="font-bold text-pinton-texto">
+                  <p key={problema} className="font-bold text-amarillo-texto">
                     {problema}
                   </p>
                 ))}
               </div>
             ) : (
-              <p className="text-tierra-media">Sin ubicación. Edita el lote para marcar el punto o el contorno con el GPS.</p>
+              <p className="text-grafito">Sin ubicación. Edita el lote para marcar el punto o el contorno con el GPS.</p>
             )}
           </Seccion>
 
-          <button type="button" className="boton-fantasma justify-start text-tierra-media" onClick={() => setArchivar(true)}>
+          <button type="button" className="boton-fantasma justify-start text-grafito" onClick={() => setArchivar(true)}>
             <Archive className="h-5 w-5" aria-hidden="true" /> Archivar este lote
           </button>
         </div>

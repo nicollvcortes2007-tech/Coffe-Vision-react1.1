@@ -18,7 +18,7 @@ export function aNumero(texto) {
 export function CampoNumero({ valor, alCambiar, sufijo, prefijo, className = "", ...resto }) {
   return (
     <span className={`relative flex items-center ${className}`}>
-      {prefijo && <span className="pointer-events-none absolute left-3.5 font-bold text-tierra-media">{prefijo}</span>}
+      {prefijo && <span className="pointer-events-none absolute left-3.5 font-bold text-grafito">{prefijo}</span>}
       <input
         {...resto}
         type="text"
@@ -28,20 +28,20 @@ export function CampoNumero({ valor, alCambiar, sufijo, prefijo, className = "",
         onChange={(evento) => alCambiar(evento.target.value)}
         className={`campo cifra ${prefijo ? "pl-8" : ""} ${sufijo ? "pr-16" : ""}`}
       />
-      {sufijo && <span className="pointer-events-none absolute right-3.5 text-sm font-bold text-tierra-media">{sufijo}</span>}
+      {sufijo && <span className="pointer-events-none absolute right-3.5 text-sm font-bold text-grafito">{sufijo}</span>}
     </span>
   );
 }
 
 /* Contador de campo: botones grandes para usarlo con el pulgar y sin mirar mucho. */
 export function Contador({ etiqueta, valor, alCambiar, minimo = 0, maximo = 9999, paso = 1, tono = "tierra" }) {
-  const tonos = { tierra: "bg-tierra text-papel", cereza: "bg-cereza text-white", hoja: "bg-hoja text-white" };
+  const tonos = { tierra: "bg-tinta text-niebla", cereza: "bg-cereza text-white", hoja: "bg-tinta text-white" };
   const cambiar = (delta) => alCambiar(Math.min(maximo, Math.max(minimo, (Number(valor) || 0) + delta)));
   return (
     <div className="grid gap-1.5">
       <span className="text-[0.95rem] font-bold">{etiqueta}</span>
       <div className="grid grid-cols-[3.5rem_1fr_3.5rem] items-stretch gap-2">
-        <button type="button" onClick={() => cambiar(-paso)} className="grid h-14 place-items-center rounded-xl border border-borde-campo bg-papel text-tierra active:bg-crema" aria-label={`Restar a ${etiqueta}`}>
+        <button type="button" onClick={() => cambiar(-paso)} className="grid h-14 place-items-center rounded-md border border-borde bg-lamina text-tinta active:bg-cal-honda" aria-label={`Restar a ${etiqueta}`}>
           <Minus className="h-6 w-6" aria-hidden="true" />
         </button>
         <input
@@ -55,7 +55,7 @@ export function Contador({ etiqueta, valor, alCambiar, minimo = 0, maximo = 9999
           }}
           className="campo cifra h-14 text-center text-2xl font-bold"
         />
-        <button type="button" onClick={() => cambiar(paso)} className={`grid h-14 place-items-center rounded-xl ${tonos[tono]} active:opacity-80`} aria-label={`Sumar a ${etiqueta}`}>
+        <button type="button" onClick={() => cambiar(paso)} className={`grid h-14 place-items-center rounded-md ${tonos[tono]} active:opacity-80`} aria-label={`Sumar a ${etiqueta}`}>
           <Plus className="h-6 w-6" aria-hidden="true" />
         </button>
       </div>
@@ -79,8 +79,8 @@ export function Fichas({ opciones, valor, alCambiar, etiqueta, multiple = false 
               if (!multiple) return alCambiar(opcion.id);
               alCambiar(activo(opcion.id) ? valor.filter((v) => v !== opcion.id) : [...valor, opcion.id]);
             }}
-            className={`min-h-12 rounded-xl border px-3.5 font-bold transition-colors ${
-              activo(opcion.id) ? "border-tierra bg-tierra text-papel" : "border-borde-campo bg-papel text-tierra hover:bg-crema"
+            className={`min-h-12 rounded-md border px-3.5 font-bold transition-colors ${
+              activo(opcion.id) ? "border-tinta bg-tinta text-niebla" : "border-borde bg-lamina text-tinta hover:bg-cal-honda"
             }`}
           >
             {opcion.nombre}

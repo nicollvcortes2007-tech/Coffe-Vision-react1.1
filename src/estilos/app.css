@@ -2,96 +2,109 @@
 
 /* ── Fuentes autoalojadas (OFL, ver src/assets/fuentes/LICENCIA-OFL.txt) ── */
 @font-face {
-  font-family: "Fraunces";
+  font-family: "Archivo";
   font-style: normal;
-  font-weight: 300 900;
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
   font-display: swap;
-  src: url("../assets/fuentes/fraunces-latin-opsz.woff2") format("woff2-variations");
+  src: url("../assets/fuentes/archivo-latin.woff2") format("woff2-variations");
 }
 @font-face {
-  font-family: "Fraunces";
-  font-style: italic;
-  font-weight: 300 900;
-  font-display: swap;
-  src: url("../assets/fuentes/fraunces-latin-opsz-italic.woff2") format("woff2-variations");
-}
-@font-face {
-  font-family: "Atkinson Hyperlegible Next";
+  font-family: "Martian Mono";
   font-style: normal;
-  font-weight: 200 800;
+  font-weight: 100 800;
+  font-stretch: 75% 112.5%;
   font-display: swap;
-  src: url("../assets/fuentes/atkinson-hyperlegible-next-latin.woff2") format("woff2-variations");
+  src: url("../assets/fuentes/martian-mono-latin.woff2") format("woff2-variations");
 }
 @font-face {
-  font-family: "Atkinson Hyperlegible Next";
-  font-style: italic;
-  font-weight: 200 800;
+  font-family: "Ancizar Sans";
+  font-style: normal;
+  font-weight: 100 1000;
   font-display: swap;
-  src: url("../assets/fuentes/atkinson-hyperlegible-next-latin-italic.woff2") format("woff2-variations");
+  src: url("../assets/fuentes/ancizar-sans-latin.woff2") format("woff2-variations");
 }
 
 /*
-  Tokens de «Pergamino de ladera» (DESIGN.md). La escala de maduración del grano es
-  también la escala de estado: hoja = al día, pintón = vigilar, cereza = actuar hoy,
-  niebla = sin datos. El estado nunca va solo en color: siempre con ícono y palabra.
+  «Ceniza y Cereza» (DESIGN.md). Dos temas con la misma semántica:
+  - Cal: la app, clara y de alto contraste para leer a pleno sol.
+  - Basalto: la landing y la finca 3D, de noche, sobre el relieve real.
+  Estados del lote: cereza = actuar, amarillo = vigilar, tinta/niebla = al día,
+  ceniza = sin datos. Nunca solo color: siempre ícono, palabra y, en alertas, rayado.
 */
 @theme {
-  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
-  --font-sans: "Atkinson Hyperlegible Next", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Archivo", "Arial Black", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Ancizar Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Martian Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
-  --color-pergamino: #f4ede1;
-  --color-papel: #fbf7f0;
-  --color-crema: #ebe1cf;
-  --color-tierra: #2b1e16;
-  --color-tierra-media: #5e4b3c;
-  --color-tierra-suave: #7a6656;
-  --color-cereza: #a3261b;
-  --color-cereza-oscura: #7e1c13;
-  --color-cereza-viva: #c8372d;
-  --color-cereza-tenue: #f6dfd9;
-  --color-hoja: #2e5b3a;
-  --color-hoja-oscura: #21452b;
-  --color-hoja-clara: #7fa36b;
-  --color-hoja-tenue: #e2ebdc;
-  --color-pinton: #c98f2e;
-  --color-pinton-texto: #8a5a12;
-  --color-pinton-tenue: #f5e6c8;
-  --color-niebla: #dde4e2;
-  --color-niebla-oscura: #4f6461;
-  --color-borde-campo: #8c7a68;
-  --color-linea: #e2d6c3;
-  --color-tostado: #1e1510;
-  --color-tostado-suave: #2c2018;
+  /* Cal (app) */
+  --color-cal: #f6f6f3;
+  --color-cal-honda: #ebebe6;
+  --color-lamina: #ffffff;
+  --color-tinta: #111210;
+  --color-grafito: #4b4d47;
+  --color-grafito-suave: #6b6d66;
+  --color-linea: #dcddd7;
+  --color-borde: #8a8c85;
 
-  --radius-campo: 14px;
-  --shadow-papel: 0 1px 0 rgb(43 30 22 / 0.04), 0 8px 24px -12px rgb(43 30 22 / 0.18);
-  --shadow-levantado: 0 2px 0 rgb(43 30 22 / 0.05), 0 18px 40px -18px rgb(43 30 22 / 0.32);
+  /* Cereza y amarillo cereza: los dos colores del grano maduro */
+  --color-cereza: #c3121b;
+  --color-cereza-honda: #8e0c13;
+  --color-cereza-viva: #ff3b2f;
+  --color-cereza-tenue: #fce4e2;
+  --color-amarillo: #ffc21a;
+  --color-amarillo-texto: #7a5600;
+  --color-amarillo-tenue: #fff1c2;
 
-  --ease-campo: cubic-bezier(0.22, 1, 0.36, 1);
-  --animate-aparecer: aparecer 320ms var(--ease-campo) both;
-  --animate-sello: sello 420ms var(--ease-campo) both;
+  /* Basalto (landing y 3D) */
+  --color-basalto: #0e0f0c;
+  --color-escoria: #1a1b18;
+  --color-escoria-clara: #2a2b27;
+  --color-niebla: #e9eae4;
+  --color-ceniza: #9a9c94;
+  --color-ceniza-honda: #5f615a;
+  --color-roya: #ff7a1a;
+  --color-agua: #4ea3d9;
+
+  --radius-placa: 6px;
+  --shadow-placa: 0 1px 0 rgb(17 18 16 / 0.04);
+  --shadow-levantado: 0 24px 48px -24px rgb(14 15 12 / 0.55), 0 0 0 1px rgb(14 15 12 / 0.06);
+
+  --ease-instrumento: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-salida: cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-aparecer: aparecer 420ms var(--ease-salida) both;
+  --animate-sello: sello 520ms var(--ease-salida) both;
+  --animate-barrido: barrido 2.6s var(--ease-instrumento) infinite alternate;
 
   @keyframes aparecer {
     from {
       opacity: 0;
-      transform: translateY(6px);
+      transform: translateY(8px);
     }
     to {
       opacity: 1;
       transform: none;
     }
   }
+  @keyframes barrido {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(100%);
+    }
+  }
   @keyframes sello {
     0% {
       opacity: 0;
-      transform: scale(1.25) rotate(-6deg);
+      transform: scale(1.3);
     }
     60% {
       opacity: 1;
-      transform: scale(0.96) rotate(-2deg);
+      transform: scale(0.96);
     }
     100% {
-      transform: scale(1) rotate(-2deg);
+      transform: scale(1);
     }
   }
 }
@@ -102,28 +115,34 @@
     text-rendering: optimizeLegibility;
   }
   body {
-    @apply bg-pergamino font-sans text-tierra antialiased;
+    @apply bg-cal font-sans text-tinta antialiased;
     font-size: 1.0625rem;
     line-height: 1.55;
-    font-feature-settings: "tnum" 0;
   }
   h1,
   h2,
   h3 {
-    @apply text-tierra;
+    @apply text-tinta;
     text-wrap: balance;
   }
   p {
     text-wrap: pretty;
   }
   :focus-visible {
-    outline: 3px solid var(--color-cereza);
+    outline: 3px solid var(--color-tinta);
     outline-offset: 2px;
-    border-radius: 6px;
+    border-radius: 4px;
+  }
+  .tema-basalto :focus-visible {
+    outline-color: var(--color-amarillo);
+  }
+  /* En las superficies de basalto los títulos toman el color de su sección. */
+  .tema-basalto :is(h1, h2, h3) {
+    color: inherit;
   }
   ::selection {
-    background: var(--color-pinton-tenue);
-    color: var(--color-tierra);
+    background: var(--color-amarillo);
+    color: var(--color-tinta);
   }
   input,
   select,
@@ -134,64 +153,199 @@
   [hidden] {
     display: none !important;
   }
+  /* Los hijos de una grilla pueden encogerse: una gráfica ancha no estira la columna. */
+  .grid > * {
+    min-width: 0;
+  }
 }
 
+/* Titular de interfaz: Archivo ancho, sin itálicas ni remates. */
 @utility titular {
   font-family: var(--font-display);
-  font-optical-sizing: auto;
-  font-weight: 560;
-  letter-spacing: -0.015em;
-  line-height: 1.04;
+  font-stretch: 108%;
+  font-weight: 780;
+  letter-spacing: -0.012em;
+  line-height: 1.02;
+}
+/* Titular «brutal»: Archivo Expanded 900 en mayúsculas. */
+@utility titular-mayor {
+  font-family: var(--font-display);
+  font-stretch: 125%;
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  line-height: 0.86;
+  text-transform: uppercase;
 }
 @utility cifra {
   font-variant-numeric: tabular-nums lining-nums;
 }
-@utility rotulo {
-  @apply text-[0.8125rem] font-bold tracking-[0.08em] text-tierra-media uppercase;
+/* Número grande de la app: kg, % de broca, lluvia. */
+@utility numeral {
+  font-family: var(--font-display);
+  font-stretch: 112%;
+  font-weight: 760;
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
 }
-@utility papel {
-  @apply rounded-[var(--radius-campo)] border border-linea bg-papel shadow-papel;
+/* Lectura de instrumento: coordenadas, altitud, etiquetas técnicas. */
+@utility rotulo {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  line-height: 1.35;
+  text-transform: uppercase;
+  color: var(--color-grafito);
+}
+@utility lectura {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+}
+@utility placa {
+  @apply rounded-[var(--radius-placa)] border border-linea bg-lamina;
 }
 @utility campo {
-  @apply min-h-12 w-full rounded-xl border border-borde-campo bg-white px-3.5 text-[1.0625rem] text-tierra outline-none placeholder:text-tierra-suave/80;
-  @apply transition-[border-color,box-shadow] focus:border-cereza focus:ring-4 focus:ring-cereza/15;
-  @apply aria-invalid:border-cereza aria-invalid:ring-4 aria-invalid:ring-cereza/10;
+  @apply min-h-12 w-full rounded-[var(--radius-placa)] border-[1.5px] border-borde bg-white px-3.5 text-[1.0625rem] text-tinta outline-none placeholder:text-grafito-suave;
+  @apply transition-[border-color,box-shadow] focus:border-tinta focus:ring-4 focus:ring-amarillo/70;
+  @apply aria-invalid:border-cereza aria-invalid:ring-4 aria-invalid:ring-cereza/15;
 }
 @utility boton {
-  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-5 font-bold select-none;
-  @apply transition-[background-color,box-shadow,transform] active:translate-y-px disabled:cursor-not-allowed disabled:opacity-55;
+  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-[var(--radius-placa)] px-5 font-bold select-none;
+  @apply transition-[background-color,color,box-shadow,transform] duration-150 active:translate-y-px disabled:cursor-not-allowed disabled:opacity-50;
 }
 @utility boton-primario {
-  @apply boton bg-cereza text-white shadow-[0_1px_0_rgb(0_0_0/0.12)] hover:bg-cereza-oscura;
+  @apply boton bg-tinta text-cal hover:bg-escoria-clara;
+}
+@utility boton-cereza {
+  @apply boton bg-cereza text-white hover:bg-cereza-honda;
 }
 @utility boton-secundario {
-  @apply boton border border-borde-campo bg-papel text-tierra hover:bg-crema;
-}
-@utility boton-hoja {
-  @apply boton bg-hoja text-white hover:bg-hoja-oscura;
+  @apply boton border-[1.5px] border-tinta bg-lamina text-tinta hover:bg-cal-honda;
 }
 @utility boton-fantasma {
-  @apply boton px-3 text-tierra-media hover:bg-crema hover:text-tierra;
+  @apply boton px-3 text-grafito hover:bg-cal-honda hover:text-tinta;
+}
+/* Rayado diagonal: segunda señal (además del color) para vigilar y actuar. */
+@utility rayado {
+  background-image: repeating-linear-gradient(135deg, rgb(17 18 16 / 0.14) 0 2px, transparent 2px 8px);
 }
 
 @layer components {
-  /* Curvas de nivel: el motivo gráfico compartido con la ladera 3D. */
-  .curvas-nivel {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='320' viewBox='0 0 480 320'%3E%3Cg fill='none' stroke='%23a3261b' stroke-opacity='.11' stroke-width='1.2'%3E%3Cpath d='M-20 250c70-40 120-30 180-60s100-90 170-90 110 40 170 30'/%3E%3Cpath d='M-20 280c80-35 130-20 200-50s110-85 180-80 100 45 150 40'/%3E%3Cpath d='M-20 220c60-45 110-45 165-75s95-95 160-100 120 30 195 15'/%3E%3Cpath d='M-20 190c55-50 100-60 150-90s90-100 150-110 130 20 220 0'/%3E%3Cpath d='M-20 310c90-30 140-15 215-40s120-80 190-70 90 50 115 50'/%3E%3C/g%3E%3C/svg%3E");
-    background-size: 480px 320px;
+  /* Finca 3D: etiquetas ancladas al terreno y controles sobre el lienzo. */
+  .etiqueta-lote {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.28rem 0.5rem 0.28rem 0.4rem;
+    border-radius: 3px;
+    background: rgb(14 15 12 / 0.86);
+    color: var(--color-niebla);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    box-shadow: 0 0 0 1px rgb(233 234 228 / 0.14);
   }
-  .grano-papel {
+  .etiqueta-lote::before {
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 1px;
+    background: var(--color-niebla);
+  }
+  .etiqueta-lote[data-estado="actuar"]::before {
+    background: var(--color-cereza-viva);
+  }
+  .etiqueta-lote[data-estado="vigilar"]::before {
+    background: var(--color-amarillo);
+  }
+  .etiqueta-lote[data-estado="sinDatos"]::before {
+    background: var(--color-ceniza);
+  }
+  .etiqueta-lote[data-activo="true"] {
+    background: var(--color-niebla);
+    color: var(--color-basalto);
+  }
+  .etiqueta-casa {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.28rem 0.5rem;
+    border-radius: 3px;
+    background: var(--color-amarillo);
+    color: var(--color-basalto);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .control-3d {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 4px;
+    background: rgb(26 27 24 / 0.9);
+    color: var(--color-niebla);
+    box-shadow: 0 0 0 1px rgb(233 234 228 / 0.14);
+    transition: background-color 150ms, color 150ms;
+  }
+  .control-3d:hover {
+    background: var(--color-escoria-clara);
+  }
+  .control-3d-activo,
+  .control-3d-activo:hover {
+    background: var(--color-niebla);
+    color: var(--color-basalto);
+  }
+  .lectura-3d {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: 4px;
+    background: rgb(14 15 12 / 0.82);
+    color: var(--color-niebla);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+    box-shadow: 0 0 0 1px rgb(233 234 228 / 0.12);
+  }
+  .atribucion-3d {
+    font-size: 0.6875rem;
+    line-height: 1.3;
+    color: rgb(233 234 228 / 0.72);
+  }
+  .atribucion-3d a {
+    text-decoration: underline;
+    text-decoration-color: rgb(233 234 228 / 0.3);
+    text-underline-offset: 2px;
+  }
+
+  /* Grano mínimo contra el banding de los degradados oscuros. */
+  .grano {
     position: relative;
     isolation: isolate;
   }
-  .grano-papel::after {
+  .grano::after {
     content: "";
     position: absolute;
     inset: 0;
-    z-index: -1;
+    z-index: 1;
     pointer-events: none;
-    opacity: 0.35;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .17 0 0 0 0 .12 0 0 0 0 .09 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  /* Retícula de coordenadas: líneas reales del marco, nunca texto encima. */
+  .reticula {
+    background-image: linear-gradient(to right, rgb(233 234 228 / 0.06) 1px, transparent 1px), linear-gradient(to bottom, rgb(233 234 228 / 0.06) 1px, transparent 1px);
+    background-size: 25% 25%;
   }
 }
 

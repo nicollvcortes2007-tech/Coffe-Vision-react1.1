@@ -10,6 +10,11 @@ const PRECARGA = __PRECARGA__;
 const CACHE_APP = `cv-app-${VERSION}`;
 const CACHE_IA = "cv-ia-v1";
 const CACHE_EXTRA = "cv-extra";
+const CACHE_RELIEVE = "cv-relieve-v1";
+const MAXIMO_RELIEVE = 80;
+// Teselas de relieve y satélite de la finca 3D (CORS abierto): se guardan para verla sin señal.
+const esTesela = (url) =>
+  (url.hostname === "s3.amazonaws.com" && url.pathname.startsWith("/elevation-tiles-prod/")) || url.hostname === "tiles.maps.eox.at" || url.hostname === "tiles.mapterhorn.com";
 const MAXIMO_EXTRA = 60;
 
 self.addEventListener("install", (evento) => {
@@ -40,6 +45,10 @@ self.addEventListener("fetch", (evento) => {
   const { request } = evento;
   if (request.method !== "GET") return;
   const url = new URL(request.url);
+  if (esTesela(url)) {
+    evento.respondWith(teselaGuardada(request));
+    return;
+  }
   if (url.origin !== self.location.origin || url.pathname === "/sw.js") return;
   if (request.mode === "navigate") {
     evento.respondWith(navegacion(request));
@@ -77,6 +86,19 @@ async function recurso(request) {
     await cache.put(request, respuesta.clone());
     const claves = await cache.keys();
     await Promise.all(claves.slice(0, Math.max(0, claves.length - MAXIMO_EXTRA)).map((clave) => cache.delete(clave)));
+  }
+  return respuesta;
+}
+
+async function teselaGuardada(request) {
+  const cache = await caches.open(CACHE_RELIEVE);
+  const guardada = await cache.match(request);
+  if (guardada) return guardada;
+  const respuesta = await fetch(request);
+  if (respuesta.ok && respuesta.type === "cors") {
+    await cache.put(request, respuesta.clone());
+    const claves = await cache.keys();
+    await Promise.all(claves.slice(0, Math.max(0, claves.length - MAXIMO_RELIEVE)).map((clave) => cache.delete(clave)));
   }
   return respuesta;
 }
