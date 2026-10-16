@@ -46,7 +46,7 @@ function Tabla({ lotes, muestreos, tipo, alMuestrear }) {
                 <Barras
                   titulo={`Historial de ${tipo} en ${lote.nombre}`}
                   datos={serie.slice(-8).map((p) => ({ etiqueta: fCorta(p.fecha), valor: Number(p.valor.toFixed(1)) }))}
-                  formato={(v) => `${v}`}
+                  formato={num}
                   umbral={umbral}
                   etiquetaUmbral={`${umbral} %`}
                   alto={110}

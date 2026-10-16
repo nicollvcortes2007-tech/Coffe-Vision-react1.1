@@ -15,7 +15,7 @@ export default function Barras({ datos, alto = 160, formato = num, umbral, etiqu
   return (
     <figure className="relative m-0">
       <div className="overflow-x-auto">
-        <svg viewBox={`0 0 ${ancho} ${alto + 34}`} className="h-auto w-full min-w-[18rem]" role="img" aria-labelledby={`${id}-t`}>
+        <svg viewBox={`0 -18 ${ancho} ${alto + 52}`} className="h-auto w-full min-w-[18rem]" role="img" aria-labelledby={`${id}-t`}>
           <title id={`${id}-t`}>{titulo}</title>
           <line x1="0" x2={ancho} y1={alto} y2={alto} stroke="#DCDDD7" />
           {datos.map((d, i) => {
@@ -25,7 +25,7 @@ export default function Barras({ datos, alto = 160, formato = num, umbral, etiqu
               <g key={`${d.etiqueta}-${i}`}>
                 <rect x={x} y={y(d.valor)} width={barra} height={Math.max(alto - y(d.valor), d.valor > 0 ? 2 : 0)} rx="2" fill={d.color ?? (sobre ? colorSobre : color)} />
                 {d.valor > 0 && (
-                  <text x={x + barra / 2} y={y(d.valor) - 6} textAnchor="middle" fontSize="11" fontWeight="700" fill="#111210" style={{ fontFamily: "var(--font-mono)" }}>
+                  <text x={x + barra / 2} y={y(d.valor) - 6} textAnchor="middle" fontSize="11.5" fontWeight="700" fill="#111210" style={{ fontFamily: "var(--font-sans)", fontVariantNumeric: "tabular-nums" }}>
                     {formato(d.valor)}
                   </text>
                 )}
@@ -38,7 +38,7 @@ export default function Barras({ datos, alto = 160, formato = num, umbral, etiqu
           {umbral !== undefined && (
             <g>
               <line x1="0" x2={ancho} y1={y(umbral)} y2={y(umbral)} stroke="#C3121B" strokeDasharray="5 4" strokeWidth="1.5" />
-              <text x={ancho - 4} y={y(umbral) - 5} textAnchor="end" fontSize="11" fontWeight="700" fill="#C3121B" style={{ fontFamily: "var(--font-mono)" }}>
+              <text x={ancho - 4} y={y(umbral) - 5} textAnchor="end" fontSize="11.5" fontWeight="700" fill="#C3121B" style={{ fontFamily: "var(--font-sans)" }}>
                 {etiquetaUmbral}
               </text>
             </g>
